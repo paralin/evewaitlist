@@ -1,0 +1,22 @@
+{
+  "name": "evewaitlist",
+  "private": true,
+  "version": "0.0.0",
+  "description": "A waitlist app for EVE fleets",
+  "keywords": [
+    "eve",
+    "waitlist",
+    "app"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    ".meteor/local/bower",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "pnotify": "~2.0.1"
+  }
+}

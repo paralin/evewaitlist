@@ -1,0 +1,30 @@
+@import "mixins.import.less";
+
+#splash {
+    .hvalign;
+    text-align: center;
+    width: 500px;
+
+    .splashImage {
+        .halign;
+
+        background-image: url(/images/ship.jpg);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        width: 500px;
+        height: 100px;
+        margin-bottom: 5px;
+    }
+
+    .splashText {
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    .splashButtons {
+        .halign;
+        margin-top:15px;
+        width: 300px;
+    }
+}

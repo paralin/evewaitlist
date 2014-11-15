@@ -1,0 +1,49 @@
+<template name="browserClient">
+{{#if currentUser}}
+{{>browserPage}}
+{{else}}
+{{>browserLogin}}
+{{/if}}
+</template>
+<template name="browserLogin">
+<div id="splash">
+    <div class="splashImage"></div>
+    <!--<div class="splashText">{{_ "splash"}}</div>-->
+    <div class="splashText">
+        <i class="mdi-av-play-circle-outline"></i>
+        EVE Online Fleet Waitlist
+    </div>
+    <div class="splashButtons">
+        <form class="form-horizontal" role="form">
+            <div class="form-group">
+                <label for="userInput" class="col-sm-3 control-label">Username</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="userInput" placeholder="">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password" class="col-sm-3 control-label">Password</label>
+                <div class="col-sm-9">
+                    <input type="password" class="form-control" id="password" placeholder="">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-2">
+                    <button type="submit" class="btn btn-default">Sign in</button>
+                </div>
+                <div class="col-sm-offset-1 col-sm-2">
+                    <button id="register" class="btn btn-default">Register</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</template>
+<template name="browserPage">
+<div class="row" style="height: 100%">
+    <div class="col-lg-6 center-block" style="float:none" id="noCharacters">
+        <h1>You have not linked an in-game character to this account.</h1>
+        <button class="signout btn btn-danger">Sign Out</button>
+    </div>
+</div>
+</template>
