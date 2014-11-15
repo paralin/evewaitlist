@@ -6,9 +6,11 @@
 meteor-platform
 autopublish
 insecure
-mizzao:bootstrap-3
 coffeescript
 less
 mquandalle:bower
 accounts-password
+mizzao:bootstrap-3
+linto:fontawesome
+natestrauser:animate-css
 

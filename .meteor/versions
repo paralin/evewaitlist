@@ -29,6 +29,7 @@ jquery@1.0.1
 json@1.0.1
 launch-screen@1.0.0
 less@1.0.11
+linto:fontawesome@4.2.2
 livedata@1.0.11
 localstorage@1.0.1
 logging@1.0.5
@@ -40,6 +41,7 @@ mizzao:bootstrap-3@3.3.0
 mobile-status-bar@1.0.1
 mongo@1.0.8
 mquandalle:bower@0.1.11
+natestrauser:animate-css@3.1.2
 npm-bcrypt@0.7.7
 observe-sequence@1.0.3
 ordered-dict@1.0.1
