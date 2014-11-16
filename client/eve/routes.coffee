@@ -1,0 +1,27 @@
+@Pages =
+  waitlist:
+    title: "Waitlist"
+    template: "waitlist"
+  logifits:
+    title: "Logistics Fits"
+    template: "fits"
+    subscriptions: ["fits"]
+  hybridfits:
+    title: "Hybrid Fits"
+    template: "fits"
+    subscriptions: ["fits"]
+  projfits:
+    title: "Projectile Fits"
+    template: "fits"
+    subscriptions: ["fits"]
+  lazerfits:
+    title: "Lazer Fits"
+    template: "fits"
+    subscriptions: ["fits"]
+  missilefits:
+    title: "Missile Fits"
+    template: "fits"
+    subscriptions: ["fits"]
+  insurance:
+    title: "Insurance Guide"
+    template: "insurance"

@@ -35,20 +35,20 @@
   background: #ffffff;
 }
 .theme-default #main-navbar .navbar-header a {
-  color: #555555;
+  color: #000000;
 }
 .theme-default #main-navbar .navbar-brand {
-  color: #555555;
+  color: #000000;
 }
 .theme-default #main-navbar .navbar-toggle,
 .theme-default #main-navbar #main-menu-toggle {
-  color: #555555;
+  color: #000000;
 }
 .theme-default #main-navbar #main-menu-toggle {
   background: #f8f8f8;
 }
 .theme-default #main-navbar #main-menu-toggle .fa:before {
-  color: #555555;
+  color: #000000;
 }
 .theme-default #main-navbar .navbar-collapse {
   border-top: 1px solid #f1f1f1;
@@ -59,7 +59,7 @@
 .theme-default #main-navbar .dropdown > a,
 .theme-default #main-navbar .dropdown-menu > li > a,
 .theme-default #main-navbar .nav > li > a {
-  color: #555555;
+  color: #000000;
 }
 .theme-default #main-navbar li + li,
 .theme-default #main-navbar .nav + .nav,
@@ -71,7 +71,7 @@
   border-top: 1px solid #dfdfdf;
   margin-top: -1px;
   background: #f6f6f6;
-  color: #555555;
+  color: #000000;
 }
 .theme-default #main-navbar form.navbar-form {
   -webkit-box-shadow: none;
@@ -83,7 +83,7 @@
   color: #999999;
 }
 .theme-default #main-navbar form.navbar-form .form-control:focus {
-  color: #555555;
+  color: #000000;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
@@ -106,7 +106,7 @@
     border-right: 1px solid #f1f1f1;
   }
   .theme-default #main-navbar .navbar-nav > li > a {
-    color: #555555;
+    color: #000000;
   }
   .theme-default #main-navbar .navbar-nav > li > a:hover,
   .theme-default #main-navbar .navbar-nav > li.active > a,
@@ -132,7 +132,7 @@
     background-color: #f1f1f1;
   }
   .theme-default #main-navbar .dropdown-menu > li > a {
-    color: #555555;
+    color: #000000;
   }
   .theme-default #main-navbar .dropdown-menu > li > a:hover {
     background: #f1f1f1;
@@ -167,7 +167,7 @@
     border-bottom-left-radius: 3px;
   }
   .theme-default #main-navbar .widget-messages-alt .message-subject {
-    color: #555555 !important;
+    color: #000000 !important;
   }
   .theme-default #main-navbar .widget-messages-alt .message-description {
     color: #aaa;
@@ -281,10 +281,6 @@
 .theme-default.right-to-left #main-menu .navigation a:after {
   left: auto;
   right: 0;
-}
-.theme-default #main-navbar .navbar-brand div,
-.theme-default .demo-logo {
-  background: #1d89cf;
 }
 .theme-default #main-navbar .navbar-header a {
   text-transform: uppercase;

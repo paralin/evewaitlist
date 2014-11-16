@@ -1,3 +1,3 @@
 Template.body.helpers
   isEve: ->
-    Session.get "eveClient"
+    true or Session.get "eveClient"

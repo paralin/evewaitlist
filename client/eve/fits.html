@@ -1,0 +1,34 @@
+<template name="fits">
+<div class="row">
+    {{#each ships}}
+    <div class="col-lg-6">
+        <div class="panel panel-warning" id="dashboard-recent">
+            <div class="panel-heading">
+                <span class="panel-title">{{ship}} Fits</span>
+            </div> <!-- / .panel-heading -->
+            <div class="tab-content" title="">
+                <!-- Without padding -->
+                <div class="widget-comments panel-body tab-pane no-padding fade active in" id="dashboard-recent-comments" title="">
+                    <div class="panel-padding no-padding-vr">
+                        <!-- Panel padding, without vertical padding -->
+                        {{#each fits}}
+                        <div class="comment">
+                            <img src="https://image.eveonline.com/Render/{{shipid}}_128.png" alt="Ship Picture" class="comment-avatar fitLabel"/>
+                            <div class="comment-body">
+                                <div class="comment-by">
+                                    <a href="" title="" class="fitLabel">{{label}}</a>
+                                </div>
+                                <div class="comment-text">
+                                    {{{description}}}
+                                </div>
+                            </div> <!-- / .comment-body -->
+                        </div> <!-- / .comment -->
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</div>
+</template>
