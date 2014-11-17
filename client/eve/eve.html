@@ -1,4 +1,5 @@
 <template name="eveClient">
+{{#if hasTrust}}
 <div class="theme-default main-menu-animated" style="width: 100%;height:100%">
 
     <div id="main-wrapper">
@@ -80,5 +81,19 @@
         </div>
     </div>
 
+</div>
+{{else}}
+{{>requestTrust}}
+{{/if}}
+</template>
+<template name="requestTrust">
+<div style="width: 100%;height:100%;padding:20px">
+    <h1>This site needs trust to work.</h1>
+    Trust allows the system to view basic information about your character: where you are, what ship you are in. The FC can view this information in realtime while the page is open in your ingame browser. The system can't see anything about you without trust, so you need to accept to continue.<br><br>
+    Just click the button and hit "trust website":<br>
+    <button class="requestTrustButton btn btn-success">Request Trust</button>
+    <br><br>
+    <h3>If nothing comes up...</h3>
+    It is possible you clicked "Ignore Always" before. To fix this, go to Options - Trusted Sites and remove the ignored entry for this site, then click the button again.
 </div>
 </template>
