@@ -1,5 +1,5 @@
 @Characters = new Mongo.Collection "characters"
-
+###
 CharacterSchema = new SimpleSchema
     charId:
         type: String
@@ -51,5 +51,11 @@ CharacterSchema = new SimpleSchema
         index: true
     lastActiveTime:
         type: Number
-
-Characters.attachSchema CharacterSchema
+    roles:
+      type: [String]
+      optional: true
+    fits:
+      type: [Object]
+      optional: true
+###
+#Characters.attachSchema CharacterSchema

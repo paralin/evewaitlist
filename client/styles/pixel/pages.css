@@ -1349,7 +1349,6 @@ html body.page-signup {
   padding-left: 36px;
   padding-right: 0;
   position: relative;
-  margin-bottom: 40px;
 }
 .tl-entry:before,
 .tl-entry:after {
@@ -1443,8 +1442,7 @@ html body.page-signup {
     margin-left: -70px;
   }
   .tl-entry {
-    margin-left: 100px;
-    margin-bottom: 20px;
+    margin-left: 120px;
   }
   .tl-time {
     left: auto;

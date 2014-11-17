@@ -25,3 +25,10 @@
   insurance:
     title: "Insurance Guide"
     template: "insurance"
+  eventlog:
+    title: "Event Log"
+    template: "events"
+    canView: ->
+      character = Characters.findOne()
+      character? and character.roles? and _.contains character.roles, "events"
+    subscriptions: ["eventlog"]

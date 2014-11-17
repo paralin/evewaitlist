@@ -12,3 +12,6 @@ Meteor.publishComposite "igbdata", (hostHash)->
 
 Meteor.publish "fits", ->
   Fits.find()
+
+Meteor.publish "eventlog", ->
+  EventLog.find({}) 

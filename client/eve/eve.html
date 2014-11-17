@@ -33,6 +33,11 @@
                             <li>
                                 <a href="#" class="gotoLink" page-target="insurance">Insurance</a>
                             </li>
+                            {{#if canView "eventlog"}}
+                            <li>
+                                <a href="#" class="gotoLink" page-target="eventlog">Event Log</a>
+                            </li>
+                            {{/if}}
                         </ul>
 
                         <div class="right clearfix">

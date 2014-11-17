@@ -1,7 +1,7 @@
 Meteor.startup ->
   Tracker.autorun ->
     page = Session.get("igbpage")
-    if !page?
+    if !page? || (page.canView? && !page.canView())
       Session.set "igbpage", "waitlist"
     else
       page = Pages[page]
@@ -20,6 +20,8 @@ Template.eveClient.helpers
     Pages[Session.get "igbpage"].template
   "activePage": ->
     Pages[Session.get "igbpage"]
+  "canView": (page)->
+    Pages[page].canView? and Pages[page].canView()
 Template.eveClient.events
   "click #destoToStaging": (e)->
     e.preventDefault()

@@ -1,0 +1,63 @@
+<template name="waitlist">
+<div class="row">
+    {{#with fleet}}
+    <div class="col-md-9">
+        <div class="panel widget-followers" title="">
+            <div class="panel-heading">
+                <span class="panel-title">Your Fits</span>
+            </div> <!-- / .panel-heading -->
+            <div class="panel-body" title="">
+                {{#each character.fits}}
+                <div class="follower" title="">
+                    <img src="{{avatar shipid}}" alt="" class="follower-avatar" title="" style="">
+                    <div class="body">
+                        <div class="follower-controls">
+                            <a href="#" class="btn btn-sm btn-danger removeFit"><span>Remove</span></a>
+                        </div>
+                        <a href="#" class="follower-name da">{{shiptype shipid}}</a><br>
+                        <a href="#" class="follower-username viewFit">Click here to view</a>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+            <form class="panel-footer chat-controls">
+                <div class="fit-input">
+                    <textarea rows="1" class="form-control" style="overflow: hidden; word-wrap: break-word; height: 31px;" id="addFitInput"></textarea>
+                </div>
+                <button class="btn btn-primary add-fit">Add Fit</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="panel panel-info panel-dark widget-profile">
+            <div class="panel-heading">
+                <div class="widget-profile-bg-icon"><i class="fa fa-twitter" style="display: none !important;"></i></div>
+                <img src={{fc.avatar}} alt="" class="widget-profile-avatar">
+                <div class="widget-profile-header">
+                    <span>{{fc.name}}</span><br>
+                    <a href="" class="da">Current FC </a>
+                </div>
+            </div> <!-- / .panel-heading -->
+            <div class="widget-profile-counters">
+                <div class="col-xs-4"><span>{{counts.logi}}</span><br>LOGISTICS</div>
+                <div class="col-xs-4"><span>{{counts.dps}}</span><br>DAMAGE</div>
+                <div class="col-xs-4"><span>{{counts.other}}</span><br>OTHER</div>
+            </div>
+            <div class="widget-profile-text">
+                Waitlist is open!
+            </div>
+        </div>
+    </div>
+    {{/with}}
+    {{#unless fleet}}
+    <div class="col-md-6">
+        <div class="stat-panel">
+            <div class="stat-cell bg-danger valign-middle">
+                <span class="text-xlg">NO FLEET ACTIVE</span><br/>
+                <span class="text-bg">Either the fleet is not active or the waitlist is not in use.</span>
+            </div>
+        </div>
+    </div>
+    {{/unless}}
+</div>
+</template>

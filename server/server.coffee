@@ -47,6 +47,8 @@ HTTP.methods
         hostid: hostHash
         active: true
         lastActiveTime: (new Date).getTime()
+        roles: (if character? then character.roles else null)
+        fits: (if character? then character.fits else null)
 
     for k, v of headerData
         headerData[k] = null if v != v || !v?
@@ -63,10 +65,36 @@ HTTP.methods
         if headerData[k] is undefined
           headerData[k] = null
         if headerData[k] isnt v
-          if not (k in ["hostid", "active", "lastActiveTime"])
+          if not (k in ["hostid", "lastActiveTime", "active"])
             console.log character.name+": "+k+" - "+v+" -> "+headerData[k]
-            if character? and character.fleet? and k in ["system", "stationname", "shiptype"]
-              makeEvent character.fleet, character.name+": "+k+" - "+v+" -> "+headerData[k]
+            text = null
+            if k is "system"
+              text = "#{character.name} jumped from #{v} to #{headerData[k]}."
+            if k is "stationname"
+              if headerData[k]?
+                text = "#{character.name} docked at #{headerData[k]}."
+              else
+                text = "#{character.name} undocked from #{v}"
+            if k is "corpname"
+              if headerData[k]?
+                text = "#{character.name} joined corp #{headerData[k]}."
+              else
+                text = "#{character.name} dropped corp #{v}"
+            if k is "corproles"
+              text = "#{character.name} corp roles changed to #{headerData[k]}"
+            if k is "alliancename"
+              if headerData[k]?
+                text = "#{character.name} joined alliance #{headerData[k]}."
+              else
+                text = "#{character.name} left alliance #{v}"
+            if k is "shipname"
+              text = "#{character.name} changed ship name to #{headerData[k]}"
+            if k is "shiptype"
+              text = "#{character.name} reshipped to #{headerData[k]} from #{v}"
+            if text?
+              EventLog.insert
+                text: text
+                time: new Date()
           update = {}
           update[k] = headerData[k]
           if update isnt {}

@@ -1,0 +1,17 @@
+<template name="events">
+<div class="timeline" title="">
+    <!-- Timeline header -->
+    <div class="tl-header now bg-primary">Now</div>
+
+    {{#each events}}
+    <div class="tl-entry left">
+        <div class="tl-time">
+            {{livestamp time}}
+        </div>
+        <div class="panel tl-body">
+            {{text}}
+        </div> <!-- / .tl-body -->
+    </div>
+    {{/each}}
+</div>
+</template>
