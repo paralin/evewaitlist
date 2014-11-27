@@ -6,3 +6,4 @@ Meteor.startup ->
   PNotify.prototype.options.nonblock = true
   PNotify.prototype.options.closer = false
   PNotify.prototype.options.sticker = false
+  PNotify.prototype.options.styling = "bootstrap2"

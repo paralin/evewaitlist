@@ -11,6 +11,9 @@
                     <img src="{{avatar shipid}}" alt="" class="follower-avatar" title="" style="">
                     <div class="body">
                         <div class="follower-controls">
+                            {{#unless primary}}
+                                <a href="#" class="btn btn-sm btn-primary makePrimary"><span>Make Primary</span></a>
+                            {{/unless}}
                             <a href="#" class="btn btn-sm btn-danger removeFit"><span>Remove</span></a>
                         </div>
                         <a href="#" class="follower-name da">{{shiptype shipid}}</a><br>

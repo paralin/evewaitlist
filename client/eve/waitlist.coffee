@@ -22,6 +22,13 @@ Template.waitlist.helpers
     char.waitlist? and char.waitlist is @_id
 
 Template.waitlist.events
+  "click .makePrimary": (e)->
+    e.preventDefault()
+    Meteor.call "setPrimary", Session.get("hostHash"), @fid, (err)->
+      $.pnotify
+        title: "Can't Make Primary"
+        text: err.reason
+        type: "error"
   "click .joinWaitlist": (e)->
     e.preventDefault()
     Meteor.call "joinWaitlist", Session.get("hostHash"), @_id, (err)->

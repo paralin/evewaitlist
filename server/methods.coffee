@@ -13,7 +13,7 @@ Meteor.methods
       throw new Meteor.Error "error", "The server does not know about your character."
     char.fits = [] if !char.fits?
     if _.findWhere(char.fits, {dna: dna})?
-      throw new Meteor.Error "error", "This fit is already in your list of fits."
+      throw new Meteor.Error "error", "You already have that exact fit in your fit list."
     char.fits.push {dna: dna, shipid: id, fid: Random.id(), primary: char.fits.length==0}
     Characters.update {_id: char._id}, {$set: {fits: char.fits}}
   delFit: (hash, fid)->
@@ -27,11 +27,26 @@ Meteor.methods
     if !fit?
       throw new Meteor.Error "error", "Can't find the fit you want to delete"
     char.fits = _.without char.fits, fit
+    char.fits[0].primary = true if fit.primary and char.fits.length > 0
     update = {fits: char.fits}
     if char.fits.length is 0
       update["waitlist"] = null
     Characters.update {_id: char._id}, {$set: update}
     updateCounts(char.waitlist)
+  setPrimary: (hash, id)->
+    check hash, String
+    check id, String
+    char = Characters.findOne({hostid: hash})
+    if !char?
+      throw new Meteor.Error "error", "The server does not know about your character."
+    fit = _.findWhere char.fits, {fid: id}
+    if !fit?
+      throw new Meteor.Error "error", "Can't find the fit you want to make primary."
+    for fi in char.fits
+      fi.primary = fi is fit
+    Characters.update {_id: char._id}, {$set: {fits: char.fits}}
+    if char.waitlist?
+      updateCounts(char.waitlist)
   joinWaitlist: (hash, id)->
     check hash, String
     check id, String
