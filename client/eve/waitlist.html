@@ -1,7 +1,6 @@
 <template name="waitlist">
 <div class="row">
-    {{#with fleet}}
-    <div class="col-md-9">
+    <div class="col-md-8">
         <div class="panel widget-followers" title="">
             <div class="panel-heading">
                 <span class="panel-title">Your Fits</span>
@@ -28,33 +27,56 @@
             </form>
         </div>
     </div>
-    <div class="col-md-3">
-        <div class="panel panel-info panel-dark widget-profile">
-            <div class="panel-heading">
+    {{#with fleet}}
+    <div class="col-sm-4 col-md-4 col-lg-4">
+        <div class="panel panel-info panel-dark widget-profile stat-panel">
+            <div class="panel-heading" id="fcName" style="cursor: pointer">
                 <div class="widget-profile-bg-icon"><i class="fa fa-twitter" style="display: none !important;"></i></div>
                 <img src={{fc.avatar}} alt="" class="widget-profile-avatar">
                 <div class="widget-profile-header">
                     <span>{{fc.name}}</span><br>
                     <a href="" class="da">Current FC </a>
                 </div>
-            </div> <!-- / .panel-heading -->
-            <div class="widget-profile-counters">
-                <div class="col-xs-4"><span>{{counts.logi}}</span><br>LOGISTICS</div>
-                <div class="col-xs-4"><span>{{counts.dps}}</span><br>DAMAGE</div>
-                <div class="col-xs-4"><span>{{counts.other}}</span><br>OTHER</div>
             </div>
-            <div class="widget-profile-text">
-                Waitlist is open!
+            <div class="stat-row">
+                <div class="stat-counters bordered no-border-t text-center">
+                    <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
+                        <span class="text-bg"><strong>{{counts.logi}}</strong></span><br>
+                        <span class="text-xs">LOGISTICS</span>
+                    </div>
+                    <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
+                        <span class="text-bg"><strong>{{counts.dps}}</strong></span><br>
+                        <span class="text-xs">DAMAGE</span>
+                    </div>
+                    <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
+                        <span class="text-bg"><strong>{{counts.other}}</strong></span><br>
+                        <span class="text-xs">OTHER</span>
+                    </div>
+                </div>
+            </div>
+            <div class="stat-row">
+                <!-- Success background, small padding, vertically aligned text -->
+                {{#if inwaitlist}}
+                <a href="#" class="stat-cell bg-danger padding-sm valign-middle leaveWaitlist">
+                    <i class="fa fa-ban pull-right"></i>
+                    Leave waitlist
+                </a>
+                {{else}}
+                <a href="#" class="stat-cell bg-success padding-sm valign-middle joinWaitlist">
+                    <i class="fa fa-check pull-right"></i>
+                    Join waitlist
+                </a>
+                {{/if}}
             </div>
         </div>
     </div>
     {{/with}}
     {{#unless fleet}}
-    <div class="col-md-6">
+    <div class="col-sm-4 col-md-4 col-lg-4">
         <div class="stat-panel">
             <div class="stat-cell bg-danger valign-middle">
-                <span class="text-xlg">NO FLEET ACTIVE</span><br/>
-                <span class="text-bg">Either the fleet is not active or the waitlist is not in use.</span>
+                <span class="text-xlg">INACTIVE</span><br/>
+                <span class="text-bg">The waitlist is not in use.</span>
             </div>
         </div>
     </div>

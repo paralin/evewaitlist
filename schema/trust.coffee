@@ -1,10 +1,9 @@
 @TrustStatus = new Meteor.Collection "truststat"
 
 TrustSchema = new SimpleSchema
-    ident:
-        type: String
-        index: true
-    status:
-        type: Boolean
+  _id:
+    type: String
+  status:
+    type: Boolean
 
 TrustStatus.attachSchema TrustSchema

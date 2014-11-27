@@ -9,13 +9,11 @@ Meteor.startup ->
         for sub in page.subscriptions
           Meteor.subscribe sub
 Template.eveClient.helpers
-  "trust": ->
-    JSON.stringify Characters.findOne()
   "character": ->
-    Characters.findOne()
+    Characters.findOne({hostid: Session.get("hostHash")})
   "avatar": (character)->
     "" if !character?
-    "https://image.eveonline.com/Character/#{character.charId}_64.jpg"
+    "https://image.eveonline.com/Character/#{character._id}_64.jpg"
   "activeTemplate": ->
     Pages[Session.get "igbpage"].template
   "activePage": ->

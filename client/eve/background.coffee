@@ -12,6 +12,8 @@ Meteor.startup ->
     hash = Session.get("hostHash")
     Meteor.subscribe "igbdata", hash
 
+  Meteor.subscribe "waitlists"
+
   Tracker.autorun ->
     trustStatus = TrustStatus.findOne()
     hasTrust = trustStatus? && trustStatus.status
@@ -21,7 +23,7 @@ Meteor.startup ->
   updateRequest = ()->
     HTTP.get webAddress+"background/update", {headers: {ident: Session.get("hostHash")}}, (err, res)->
       if err?
-        console.log "Error trying to update the server with our status, "+err
+        console.log err
         return
   setInterval(updateRequest, 3000)
   updateRequest()

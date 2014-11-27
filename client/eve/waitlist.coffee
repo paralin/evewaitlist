@@ -1,29 +1,43 @@
 Template.waitlist.helpers
   "fleet": ->
+    wait = Waitlists.findOne()
+    return if !wait?
+    commander = Characters.findOne({_id: wait.commander})
     {
-      counts:
-        logi: 3
-        dps: 6
-        other: 9
+      _id: wait._id
+      counts: wait.stats
       fc:
-        name: "Skyrider Deathknight"
-        avatar: "https://image.eveonline.com/Character/93684586_128.jpg"
+        name: commander.name
+        avatar: "https://image.eveonline.com/Character/#{commander._id}_128.jpg"
+        id: commander._id
     }
-  "fits": ->
-    [
-      {
-        dna: "11985:2048;1:1541;1:31366;1:16487;2:2281;1:1964;1:31796;1:3608;4:12058;1:31932;1:2301;1:2488;5::"
-        shipid: 11985
-      }
-    ]
   "shiptype": (id)->
     typeids[id]
   "avatar": (id)->
     "https://image.eveonline.com/Render/#{id}_128.png"
   "character": ->
-    Characters.findOne()
+    Characters.findOne({hostid: Session.get("hostHash")})
+  "inwaitlist": ->
+    char = Characters.findOne({hostid: Session.get("hostHash")})
+    char.waitlist? and char.waitlist is @_id
 
 Template.waitlist.events
+  "click .joinWaitlist": (e)->
+    e.preventDefault()
+    Meteor.call "joinWaitlist", Session.get("hostHash"), @_id, (err)->
+      $.pnotify
+        title: "Can't Join Waitlist"
+        text: err.reason
+        type: "error"
+  "click .leaveWaitlist": (e)->
+    e.preventDefault()
+    Meteor.call "leaveWaitlist", Session.get("hostHash"), @_id, (err)->
+      $.pnotify
+        title: "Can't Leave Waitlist"
+        text: err.reason
+        type: "error"
+  "click #fcName": (e)->
+    CCPEVE.showInfo 1377, @fc.id
   "click .viewFit": (e)->
     e.preventDefault()
     CCPEVE.showFitting @dna
@@ -38,7 +52,9 @@ Template.waitlist.events
         return
   "click .add-fit": (e)->
     e.preventDefault()
-    dna = filterDna $("#addFitInput").val()
+    field = $("#addFitInput")
+    dna = filterDna field.val()
+    field.val(dna)
     Meteor.call "addFit", Session.get("hostHash"), dna, (err, res)->
       if err?
         $.pnotify
