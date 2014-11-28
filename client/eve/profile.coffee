@@ -17,6 +17,19 @@ Template.profile.helpers
     char = Characters.findOne {_id: Session.get("profilechar")}
     return false if !char? or !char.roles?
     @_id in char.roles
+  "props": ->
+    char = Characters.findOne {_id: Session.get("profilechar")}
+    desc = []
+    return desc if !char?
+    for k, v of CharactersDesc
+      val = {n: v}
+      if char[k]?
+        val.v = char[k]
+      else
+        val.v = "None"
+      desc.push val
+    desc
+
 Template.profile.events
   "click .viewFit": (e)->
     e.preventDefault()

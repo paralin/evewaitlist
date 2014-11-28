@@ -16,7 +16,16 @@
         <a href="#" disabled={{banDisabled}} class="btn btn-success"><i class="fa fa-check"></i>&nbsp;&nbsp;Not Banned</a>&nbsp;&nbsp;
         {{/if}}
       </div>
-
+      <div class="panel panel-transparent" style="padding-bottom: 0; margin-bottom: 0">
+        <div class="panel-heading">
+          <span class="panel-title">Current Data</span>
+        </div>
+        <div class="list-group" style="padding-top:10px;">
+          {{#each props}}
+          <a href="#" class="list-group-item" style="padding-top:0;padding-bottom:0;margin-top:0;margin-bottom:0"><strong>{{n}}:</strong> {{v}}</a>
+          {{/each}}
+        </div>
+      </div>
       <div class="panel panel-transparent profile-skills">
         <div class="panel-heading">
           <span class="panel-title">Roles</span>

@@ -1,7 +1,7 @@
 <template name="admin">
 <div class="row">
   {{#with incursion}}
-  <div class="col-md-4">
+  <div class="col-sm-4 col-md-4 col-lg-4">
     <div class="panel panel-primary panel-dark widget-profile">
       <div class="panel-heading">
         <div class="widget-profile-bg-icon"><i class="fa fa-location-arrow"></i></div>
@@ -16,24 +16,71 @@
     </div>
   </div>
   {{/with}}
+  {{#with fleet}}
+  <div class="col-sm-4 col-md-4 col-lg-4">
+      <div class="panel panel-info panel-dark widget-profile stat-panel">
+          <div class="panel-heading" id="fcName" style="cursor: pointer">
+              <div class="widget-profile-bg-icon"><i class="fa fa-twitter" style="display: none !important;"></i></div>
+              <img src={{fc.avatar}} alt="" class="widget-profile-avatar">
+              <div class="widget-profile-header">
+                  <span>{{fc.name}}</span><br>
+                  <a href="" class="da">Current FC </a>
+              </div>
+          </div>
+          <div class="stat-row">
+              <div class="stat-counters bordered no-border-t text-center">
+                  <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
+                      <span class="text-bg"><strong>{{counts.logi}}</strong></span><br>
+                      <span class="text-xs">LOGISTICS</span>
+                  </div>
+                  <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
+                      <span class="text-bg"><strong>{{counts.dps}}</strong></span><br>
+                      <span class="text-xs">DAMAGE</span>
+                  </div>
+                  <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
+                      <span class="text-bg"><strong>{{counts.other}}</strong></span><br>
+                      <span class="text-xs">OTHER</span>
+                  </div>
+              </div>
+          </div>
+          <div class="stat-row">
+              <!-- Success background, small padding, vertically aligned text -->
+              <a href="#" class="stat-cell bg-danger padding-sm valign-middle closeWaitlist">
+                  <i class="fa fa-ban pull-right"></i>
+                  Close waitlist
+              </a>
+          </div>
+      </div>
+  </div>
+  {{/with}}
+  {{#unless fleet}}
+  <div class="col-sm-4 col-md-4 col-lg-4">
+      <div class="stat-panel">
+          <div class="stat-cell bg-danger valign-middle">
+              <span class="text-xlg">INACTIVE</span><br/>
+              <span class="text-bg">The waitlist is not in use.</span>
+          </div>
+      </div>
+  </div>
+  {{/unless}}
 </div>
 <div class="row">
-  <div class="panel widget-threads" title="" style="padding-bottom: 10px">
-    <div class="panel-heading">
-      <span class="panel-title"><i class="panel-title-icon fa fa-comments-o"></i>All Characters</span>
-    </div> <!-- / .panel-heading -->
-    <div class="panel-body" title="">
-      {{#each characters}}
-      <div class="thread">
-        <img src="https://image.eveonline.com/Character/{{_id}}_128.jpg" alt="" class="thread-avatar">
-        <div class="thread-body">
-          <span class="thread-time">{{{corpInfo}}}</span>
-          <a href="#" class="thread-title gotoprofile">{{name}}</a>
-          <div class="thread-info">with a <a href="#" class="showshiptype">{{shiptype}}</a> in <a href="#" class="showsystem">{{system}}</a></div>
+    <div class="panel widget-threads" title="" style="padding-bottom: 10px">
+        <div class="panel-heading">
+            <span class="panel-title"><i class="panel-title-icon fa fa-comments-o"></i>All Characters</span>
+        </div> <!-- / .panel-heading -->
+        <div class="panel-body" title="">
+            {{#each characters}}
+            <div class="thread">
+                <img src="https://image.eveonline.com/Character/{{_id}}_128.jpg" alt="" class="thread-avatar">
+                <div class="thread-body">
+                    <span class="thread-time">{{{corpInfo}}}</span>
+                    <a href="#" class="thread-title gotoprofile">{{name}}</a>
+                    <div class="thread-info">with a <a href="#" class="showshiptype">{{shiptype}}</a> in <a href="#" class="showsystem">{{system}}</a></div>
+                </div>
+            </div>
+            {{/each}}
         </div>
-      </div>
-      {{/each}}
     </div>
-  </div>
 </div>
 </template>

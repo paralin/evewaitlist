@@ -65,4 +65,15 @@ CharacterSchema = new SimpleSchema
   regionid:
     type: Number
 
+@CharactersDesc =
+  name: "Name"
+  shipname: "Ship Name"
+  shiptype: "Ship"
+  corpname: "Corporation"
+  corproles: "Roles"
+  alliancename: "Alliance"
+  stationname: "Station"
+  system: "System"
+  regionname: "Region"
+
 Characters.attachSchema CharacterSchema

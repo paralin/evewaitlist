@@ -10,6 +10,18 @@ Template.admin.helpers
     if @allianceid?
       info += "<br/>of <a href=\"javascript:CCPEVE.showInfo(16159, #{@allianceid})\">#{@alliancename}</a>"
     info
+  "fleet": ->
+    wait = Waitlists.findOne()
+    return if !wait?
+    commander = Characters.findOne({_id: wait.commander})
+    {
+      _id: wait._id
+      counts: wait.stats
+      fc:
+        name: commander.name
+        avatar: "https://image.eveonline.com/Character/#{commander._id}_128.jpg"
+        id: commander._id
+    }
 
 Template.admin.events
   "click .setCurrentSystem": ->
@@ -29,3 +41,11 @@ Template.admin.events
     e.preventDefault()
     Session.set "profilechar", @_id
     Session.set "igbpage", "profile"
+  "click .closeWaitlist": (e)->
+    e.preventDefault()
+    Meteor.call "adminCloseWaitlist", Session.get("hostHash"), (err)->
+      if err?
+        $.pnotify
+          title: "Can't Close Waitlist"
+          text: err.reason
+          type: "error"

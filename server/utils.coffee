@@ -23,3 +23,8 @@ dps = [17740, 17736, 24690, 641, 17728, 17738, 17732, 639, 24694, 32305, 643, 17
       else
         counts.other++
   Waitlists.update({_id: waitlist}, {$set: {stats: counts}})
+@closeWaitlist = (waitlist)->
+  return if !waitlist?
+  return if waitlist.finished
+  console.log "Closing waitlist #{waitlist._id}"
+  Waitlists.update {_id: waitlist._id}, {$set: {finished: true}}

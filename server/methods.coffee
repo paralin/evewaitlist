@@ -124,3 +124,14 @@ Meteor.methods
     else
       return
     Characters.update {_id: tchar._id}, {$set: {roles: tchar.roles}}
+  adminCloseWaitlist: (hash)->
+    check hash, String
+    char = Characters.findOne({hostid: hash})
+    if !char?
+      throw new Meteor.Error "error", "The server does not know about your character."
+    unless char.roles? and "admin" in char.roles
+      throw new Meteor.Error "error", "You are not authorized to perform this action."
+    waitlist = Waitlists.findOne({finished: false})
+    if !waitlist?
+      throw new Meteor.Error "error", "There is no active waitlist."
+    closeWaitlist waitlist

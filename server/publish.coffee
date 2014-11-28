@@ -11,7 +11,7 @@ Meteor.publishComposite "igbdata", (hostHash)->
 
 Meteor.publishComposite "waitlists", ->
   find: ->
-    Waitlists.find {}
+    Waitlists.find {finished: false}, {limit: 1}
   children: [
     {
       find: (waitlist)->
@@ -34,6 +34,7 @@ Meteor.publish "admin", (hostHash)->
   char = Characters.findOne {hostid: hostHash}
   return [] unless char? and char.roles? and "admin" in char.roles
   Characters.find {}, {fields: {hostid: 0, lastActiveTime: 0}}
+
 Meteor.publish "profile", (hostHash, charId)->
   check hostHash, String
   check charId, Number

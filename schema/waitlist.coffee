@@ -14,5 +14,8 @@ WaitSchema = new SimpleSchema
     type: String
   stats:
     type: StatsSchema
+  finished:
+    type: Boolean
+    index: true
 
 Waitlists.attachSchema WaitSchema
