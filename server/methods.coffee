@@ -159,3 +159,25 @@ Meteor.methods
     if !uchar?
       throw new Meteor.Error "error", "Cannot find the character."
     Characters.update {_id: uchar._id}, {$set: {banned: false}, $unset: {roles: ""}}
+  closeWaitlist: (hash)->
+    check hash, String
+    char = Characters.findOne({hostid: hash})
+    if !char?
+      throw new Meteor.Error "error", "The server does not know about your character."
+    waitlist = Waitlists.findOne({finished: false})
+    if !waitlist?
+      throw new Meteor.Error "error", "There is no active waitlist."
+    unless char.roles? and "command" in char.roles and waitlist.commander is char._id
+      throw new Meteor.Error "error", "You are not authorized to perform this action."
+    closeWaitlist waitlist
+  openWaitlist: (hash)->
+    check hash, String
+    char = Characters.findOne({hostid: hash})
+    if !char?
+      throw new Meteor.Error "error", "The server does not know about your character."
+    unless char.roles? and (("command" in char.roles) or ("admin" in char.roles))
+      throw new Meteor.Error "error", "You are not an admin or a fleet commander."
+    waitlist = Waitlists.findOne({finished: false})
+    if waitlist?
+      throw new Meteor.Error "error", "There is already an active waitlist."
+    openWaitlist char

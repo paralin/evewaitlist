@@ -17,5 +17,7 @@ WaitSchema = new SimpleSchema
   finished:
     type: Boolean
     index: true
+  used:
+    type: Boolean
 
 Waitlists.attachSchema WaitSchema

@@ -54,4 +54,4 @@
     template: "command"
     canView: ->
       character = Session.get "me"
-      character? and character.roles? and ((_.contains character.roles, "manager") or (_.contains character.roles, "commander"))
+      character? and character.roles? and (("manager" in character.roles) or ("command" in character.roles))

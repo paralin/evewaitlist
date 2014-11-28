@@ -1,0 +1,58 @@
+<template name="command">
+<div class="row">
+  {{#with fleet}}
+  <div class="col-sm-4 col-md-4 col-lg-4">
+      <div class="panel panel-info panel-dark widget-profile stat-panel">
+          <div class="panel-heading" id="fcName" style="cursor: pointer">
+              <div class="widget-profile-bg-icon"><i class="fa fa-twitter" style="display: none !important;"></i></div>
+              <img src={{fc.avatar}} alt="" class="widget-profile-avatar">
+              <div class="widget-profile-header">
+                  <span>{{fc.name}}</span><br>
+                  <a href="" class="da">Current FC </a>
+              </div>
+          </div>
+          <div class="stat-row">
+              <div class="stat-counters bordered no-border-t text-center">
+                  <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
+                      <span class="text-bg"><strong>{{counts.logi}}</strong></span><br>
+                      <span class="text-xs">LOGISTICS</span>
+                  </div>
+                  <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
+                      <span class="text-bg"><strong>{{counts.dps}}</strong></span><br>
+                      <span class="text-xs">DAMAGE</span>
+                  </div>
+                  <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
+                      <span class="text-bg"><strong>{{counts.other}}</strong></span><br>
+                      <span class="text-xs">OTHER</span>
+                  </div>
+              </div>
+          </div>
+          <div class="stat-row">
+            <a href="#" class="stat-cell bg-danger padding-sm valign-middle closeWaitlist" disabled={{nisCommander}}>
+                  <i class="fa fa-ban pull-right"></i>
+                  Close waitlist
+              </a>
+          </div>
+      </div>
+  </div>
+  {{/with}}
+  {{#unless fleet}}
+  <div class="col-sm-4 col-md-4 col-lg-4">
+      <div class="panel panel-danger panel-dark widget-profile stat-panel">
+          <div class="panel-heading">
+              <div class="widget-profile-header">
+                  <span>Waitlist Inactive</span><br>
+                  <a href="" class="da"></a>
+              </div>
+          </div>
+          <div class="stat-row">
+              <a href="#" class="stat-cell bg-success padding-sm valign-middle openWaitlist">
+                  <i class="fa fa-check pull-right"></i>
+                  Open waitlist as FC
+              </a>
+          </div>
+      </div>
+  </div>
+  {{/unless}}
+</div>
+</template>

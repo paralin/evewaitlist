@@ -22,9 +22,22 @@ dps = [17740, 17736, 24690, 641, 17728, 17738, 17732, 639, 24694, 32305, 643, 17
         counts.dps++
       else
         counts.other++
-  Waitlists.update({_id: waitlist}, {$set: {stats: counts}})
+  Waitlists.update({_id: waitlist}, {$set: {stats: counts, used: true}})
 @closeWaitlist = (waitlist)->
   return if !waitlist?
   return if waitlist.finished
   console.log "Closing waitlist #{waitlist._id}"
-  Waitlists.update {_id: waitlist._id}, {$set: {finished: true}}
+  if !waitlist.used
+    Waitlists.remove {_id: waitlist._id}
+  else
+    Waitlists.update {_id: waitlist._id}, {$set: {finished: true}}
+@openWaitlist = (char)->
+  return if !char?
+  Waitlists.insert
+    commander: char._id
+    finished: false
+    stats:
+      logi: 0
+      other: 0
+      dps: 0
+    used: false
