@@ -92,9 +92,9 @@
               <div class="body">
                 <div class="follower-controls">
                   {{#if hasRole}}
-                  <button href="#" class="btn btn-sm btn-success da" disabled={{protected}}><i class="fa fa-check"></i><span>&nbsp;&nbsp;Has Role</span></button>
+                  <button href="#" class="btn btn-sm btn-success da removeRole" disabled={{protected}} cid="{{../_id}}"><i class="fa fa-check"></i><span>&nbsp;&nbsp;Has Role</span></button>
                   {{else}}
-                  <button href="#" class="btn btn-sm btn-danger da" disabled={{protected}}><i class="fa fa-ban"></i><span>&nbsp;&nbsp;Does Not Have</span></button>
+                  <button href="#" class="btn btn-sm btn-danger da addRole" disabled={{protected}} cid="{{../_id}}"><i class="fa fa-ban"></i><span>&nbsp;&nbsp;Does Not Have</span></button>
                   {{/if}}
                 </div>
                 <a href="#" class="follower-name da">{{name}}</a><br>

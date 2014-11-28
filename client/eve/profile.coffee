@@ -21,3 +21,19 @@ Template.profile.events
   "click .viewFit": (e)->
     e.preventDefault()
     CCPEVE.showFitting @dna
+  "click .addRole": (e)->
+    e.preventDefault()
+    Meteor.call "addRole", Session.get("hostHash"), $(e.currentTarget).attr("cid"), @_id, (err)->
+      if err?
+        $.pnotify
+          title: "Can't Add Role"
+          text: err.reason
+          type: "error"
+  "click .removeRole": (e)->
+    e.preventDefault()
+    Meteor.call "removeRole", Session.get("hostHash"), $(e.currentTarget).attr("cid"), @_id, (err)->
+      if err?
+        $.pnotify
+          title: "Can't Remove Role"
+          text: err.reason
+          type: "error"

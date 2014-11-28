@@ -76,3 +76,51 @@ Meteor.methods
     unless char.roles? and "admin" in char.roles
       throw new Meteor.Error "error", "You are not authorized to perform this action."
     Settings.update {_id: "incursion"}, {$set: {sysid: char.systemid, sysname: char.system}}
+  addRole: (hash, cid, role)->
+    check hash, String
+    check cid, String
+    check role, String
+    ro = Roles.findOne {_id: role}
+    if !ro?
+      throw new Meteor.Error "error", "There is no role by that ID."
+    if ro.protected
+      throw new Meteor.Error "error", "You cannot update that role through the web UI."
+    char = Characters.findOne {hostid: hash}
+    if !char?
+      throw new Meteor.Error "error", "The server does not know about your character."
+    unless char.roles? and "admin" in char.roles
+      throw new Meteor.Error "error", "You are not authorized to perform this action."
+    tchar = Characters.findOne {_id: cid}
+    if !tchar?
+      throw new Meteor.Error "error", "Can't find the character you want to update."
+    if !tchar.roles?
+      tchar.roles = [ro._id]
+    else if !(ro._id in tchar.roles)
+      tchar.roles.push ro._id
+    else
+      return
+    Characters.update {_id: tchar._id}, {$set: {roles: tchar.roles}}
+  removeRole: (hash, cid, role)->
+    check hash, String
+    check cid, String
+    check role, String
+    ro = Roles.findOne {_id: role}
+    if !ro?
+      throw new Meteor.Error "error", "There is no role by that ID."
+    if ro.protected
+      throw new Meteor.Error "error", "You cannot update that role through the web UI."
+    char = Characters.findOne {hostid: hash}
+    if !char?
+      throw new Meteor.Error "error", "The server does not know about your character."
+    unless char.roles? and "admin" in char.roles
+      throw new Meteor.Error "error", "You are not authorized to perform this action."
+    tchar = Characters.findOne {_id: cid}
+    if !tchar?
+      throw new Meteor.Error "error", "Can't find the character you want to update."
+    if !tchar.roles?
+      tchar.roles = []
+    else if (ro._id in tchar.roles)
+      tchar.roles = _.without tchar.roles, ro._id
+    else
+      return
+    Characters.update {_id: tchar._id}, {$set: {roles: tchar.roles}}
