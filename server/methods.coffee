@@ -145,6 +145,8 @@ Meteor.methods
     uchar = Characters.findOne {_id: cid}
     if !uchar?
       throw new Meteor.Error "error", "Cannot find the character."
+    if uchar.roles? and "admin" in uchar.roles
+      throw new Meteor.Error "error", "You cannot ban an admin."
     Characters.update {_id: uchar._id}, {$set: {banned: true}, $unset: {roles: ""}}
   unbanCharacter: (hash, cid)->
     check hash, String
