@@ -25,24 +25,27 @@ Template.waitlist.events
   "click .makePrimary": (e)->
     e.preventDefault()
     Meteor.call "setPrimary", Session.get("hostHash"), @fid, (err)->
-      $.pnotify
-        title: "Can't Make Primary"
-        text: err.reason
-        type: "error"
+      if err?
+        $.pnotify
+          title: "Can't Make Primary"
+          text: err.reason
+          type: "error"
   "click .joinWaitlist": (e)->
     e.preventDefault()
     Meteor.call "joinWaitlist", Session.get("hostHash"), @_id, (err)->
-      $.pnotify
-        title: "Can't Join Waitlist"
-        text: err.reason
-        type: "error"
+      if err?
+        $.pnotify
+          title: "Can't Join Waitlist"
+          text: err.reason
+          type: "error"
   "click .leaveWaitlist": (e)->
     e.preventDefault()
     Meteor.call "leaveWaitlist", Session.get("hostHash"), @_id, (err)->
-      $.pnotify
-        title: "Can't Leave Waitlist"
-        text: err.reason
-        type: "error"
+      if err?
+        $.pnotify
+          title: "Can't Leave Waitlist"
+          text: err.reason
+          type: "error"
   "click #fcName": (e)->
     CCPEVE.showInfo 1377, @fc.id
   "click .viewFit": (e)->

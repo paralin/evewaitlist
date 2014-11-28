@@ -1,0 +1,112 @@
+<template name="profile">
+{{#with character}}
+<div class="page-profile" style="width: 100%;height: 100%">
+  <div class="profile-full-name">
+    <span class="text-semibold">{{name}}</span>'s profile
+  </div>
+  <div class="profile-row">
+    <div class="left-col">
+      <div class="profile-block">
+        <div class="panel profile-photo">
+          <img src="https://image.eveonline.com/Character/{{_id}}_128.jpg" alt="">
+        </div><br>
+        {{#if banned}}
+        <a href="#" disabled={{banDisabled}} class="btn btn-danger"><i class="fa fa-ban"></i>&nbsp;&nbsp;Banned</a>&nbsp;&nbsp;
+        {{else}}
+        <a href="#" disabled={{banDisabled}} class="btn btn-success"><i class="fa fa-check"></i>&nbsp;&nbsp;Not Banned</a>&nbsp;&nbsp;
+        {{/if}}
+      </div>
+
+      <div class="panel panel-transparent profile-skills">
+        <div class="panel-heading">
+          <span class="panel-title">Roles</span>
+        </div>
+        <div class="panel-body">
+          {{#each roles}}
+          <span class="label label-primary">{{this}}</span>
+          {{/each}}
+          {{#if noRoles}}
+          <span class="label label-success">No Roles</span>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+
+    <div class="right-col">
+
+      <hr class="profile-content-hr no-grid-gutter-h">
+
+      <div class="profile-content">
+
+        <ul id="profile-tabs" class="nav nav-tabs"><li class="dropdown pull-right tabdrop hide"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-bars"></i> <b class="caret"></b></a><ul class="dropdown-menu"></ul></li>
+          <li class="active">
+            <a href="#profile-tabs-board" data-toggle="tab">Fits</a>
+          </li>
+          <li>
+            <a href="#profile-tabs-activity" data-toggle="tab">Timeline</a>
+          </li>
+          <li>
+            <a href="#profile-tabs-followers" data-toggle="tab">Roles</a>
+          </li>
+        </ul>
+
+        <div class="tab-content tab-content-bordered panel-padding">
+          <div class="widget-followers tab-pane panel no-padding no-border fade in active" id="profile-tabs-board">
+            <div class="panel-body" title="">
+              {{#each fits}}
+              <div class="follower" title="">
+                <img src="{{avatar shipid}}" alt="" class="follower-avatar" title="" style="">
+                <div class="body">
+                  <div class="follower-controls">
+                    {{#if primary}}
+                    <button href="#" class="btn btn-sm btn-primary" disabled><span>Primary</span></button>
+                    {{else}}
+                    <button href="#" class="btn btn-sm btn-danger" disabled><span>Not Primary</span></button>
+                    {{/if}}
+                  </div>
+                  <a href="#" class="follower-name da">{{shiptype shipid}}</a><br>
+                  <a href="#" class="follower-username viewFit">Click here to view</a>
+                </div>
+              </div>
+              {{/each}}
+            </div>
+          </div> <!-- / .tab-pane -->
+          <div class="tab-pane fade" id="profile-tabs-activity">
+            <div class="timeline">
+              <div class="tl-header now">Now</div>
+              {{#each events}}
+              <div class="tl-entry left">
+                <div class="tl-time">
+                  {{livestamp time}}
+                </div>
+                <div class="panel tl-body">
+                  {{text}}
+                </div> <!-- / .tl-body -->
+              </div>
+              {{/each}}
+            </div>
+          </div> <!-- / .tab-pane -->
+          <div class="tab-pane fade widget-followers" id="profile-tabs-followers" style="padding-bottom: 20px">
+            {{#each allroles}}
+            <div class="follower">
+              <div class="body">
+                <div class="follower-controls">
+                  {{#if hasRole}}
+                  <button href="#" class="btn btn-sm btn-success da" disabled={{protected}}><i class="fa fa-check"></i><span>&nbsp;&nbsp;Has Role</span></button>
+                  {{else}}
+                  <button href="#" class="btn btn-sm btn-danger da" disabled={{protected}}><i class="fa fa-ban"></i><span>&nbsp;&nbsp;Does Not Have</span></button>
+                  {{/if}}
+                </div>
+                <a href="#" class="follower-name da">{{name}}</a><br>
+                <a href="#" class="follower-username da">{{description}}</a>
+              </div>
+            </div>
+            {{/each}}
+          </div>
+        </div> <!-- / .tab-content -->
+      </div>
+    </div>
+  </div>
+</div>
+{{/with}}
+</template>

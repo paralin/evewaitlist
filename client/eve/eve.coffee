@@ -8,11 +8,12 @@ Meteor.startup ->
       if page.subscriptions?
         for sub in page.subscriptions
           Meteor.subscribe sub
+      page.onView() if page.onView?
 Template.eveClient.helpers
   "character": ->
     Characters.findOne({hostid: Session.get("hostHash")})
   "avatar": (character)->
-    "" if !character?
+    return "" if !character?
     "https://image.eveonline.com/Character/#{character._id}_64.jpg"
   "activeTemplate": ->
     Pages[Session.get "igbpage"].template
@@ -25,7 +26,7 @@ Template.eveClient.helpers
 Template.eveClient.events
   "click #destoToStaging": (e)->
     e.preventDefault()
-    CCPEVE.setDestination 30000142
+    CCPEVE.setDestination Settings.findOne({_id: "incursion"}).sysid
   "click #joinChatChannel": (e)->
     e.preventDefault()
     CCPEVE.joinChannel "The Valhalla Project"

@@ -60,5 +60,9 @@ CharacterSchema = new SimpleSchema
   fits:
     type: [FitSchema]
     optional: true
+  regionname:
+    type: String
+  regionid:
+    type: Number
 
 Characters.attachSchema CharacterSchema

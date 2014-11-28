@@ -32,3 +32,20 @@
       character = Characters.findOne({hostid: Session.get("hostHash")})
       character? and character.roles? and _.contains character.roles, "events"
     subscriptions: ["eventlog"]
+  admin:
+    title: "Admin"
+    template: "admin"
+    canView: ->
+      character = Characters.findOne({hostid: Session.get("hostHash")})
+      character? and character.roles? and _.contains character.roles, "admin"
+    onView: ->
+      Meteor.subscribe "admin", Session.get("hostHash")
+  profile:
+    title: "Character Profile"
+    template: "profile"
+    canView: ->
+      character = Characters.findOne({hostid: Session.get("hostHash")})
+      character? and character.roles? and _.contains character.roles, "admin"
+    onView: ->
+      Meteor.subscribe "admin", Session.get("hostHash")
+      Meteor.subscribe "profile", Session.get("hostHash"), parseInt Session.get("profilechar")

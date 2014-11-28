@@ -23,7 +23,7 @@ HTTP.methods
 
     #parse the new data
     charid = headers["eve_charid"]+""
-    if !charid?
+    if !charid? or parseInt(charid) != parseInt(charid)
       @setStatusCode 500
       return "Your EVE client is submitting invalid data."
 
@@ -33,6 +33,8 @@ HTTP.methods
       name: headers["eve_charname"]
       system: headers["eve_solarsystemname"]
       systemid: parseInt headers["eve_solarsystemid"]
+      regionname: headers["eve_regionname"]
+      regionid: parseInt headers["eve_regionid"]
       stationname: headers["eve_stationname"]
       stationid: parseInt headers["eve_stationid"]
       corpname: headers["eve_corpname"]
@@ -50,6 +52,7 @@ HTTP.methods
       lastActiveTime: (new Date).getTime()
       roles: (if character? then character.roles else null)
       fits: (if character? then character.fits else null)
+      banned: (if character? then character.banned else null) || false
 
     for k, v of headerData
       headerData[k] = null if v != v || !v?
@@ -61,6 +64,7 @@ HTTP.methods
       EventLog.insert
         text: headerData.name+" opened the app for the first time."
         time: new Date()
+        charid: parseInt charid
     else
       #loop over keys, look for changes
       update = {}
@@ -98,6 +102,7 @@ HTTP.methods
             EventLog.insert
               text: text
               time: new Date()
+              charid: parseInt charid
       if Object.keys(update).length
         Characters.update {_id: headerData._id}, {$set: update}
     return "Success"

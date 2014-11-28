@@ -5,7 +5,7 @@ Meteor.publishComposite "igbdata", (hostHash)->
     {
       find: (trust)->
         return if !(trust? and trust.status)
-        Characters.find {hostid: hostHash}, {limit: 1, fields: {active: 0}}
+        Characters.find {hostid: hostHash}, {limit: 1, fields: {active: 0, lastActiveTime: 0}}
     }
   ]
 
@@ -25,3 +25,18 @@ Meteor.publish "fits", ->
 
 Meteor.publish "eventlog", ->
   EventLog.find({})
+
+Meteor.publish null, ->
+  [Settings.find({}), Roles.find({})]
+
+Meteor.publish "admin", (hostHash)->
+  check hostHash, String
+  char = Characters.findOne {hostid: hostHash}
+  return [] unless char? and char.roles? and "admin" in char.roles
+  Characters.find {}, {fields: {hostid: 0, lastActiveTime: 0}}
+Meteor.publish "profile", (hostHash, charId)->
+  check hostHash, String
+  check charId, Number
+  char = Characters.findOne {hostid: hostHash}
+  return [] unless char? and char.roles? and "admin" in char.roles
+  EventLog.find {charid: charId}

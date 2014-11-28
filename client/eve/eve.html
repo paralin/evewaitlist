@@ -39,14 +39,21 @@
                                 <a href="#" class="gotoLink" page-target="eventlog">Event Log</a>
                             </li>
                             {{/if}}
+                            {{#if canView "admin"}}
+                            <li>
+                                <a href="#" class="gotoLink" page-target="admin">Admin</a>
+                            </li>
+                            {{/if}}
                         </ul>
 
                         <div class="right clearfix">
                             <ul class="nav navbar-nav pull-right right-navbar-nav">
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle user-menu" data-toggle="dropdown">
+                                        {{#if character}}
                                         <img src="{{avatar character}}" alt="">
                                         <span>{{character.name}}</span>
+                                        {{/if}}
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li><a href="" id="destoToStaging"><i class="dropdown-icon"></i>&nbsp;&nbsp;Set Destination to Staging</a></li>
@@ -76,7 +83,9 @@
                 </div>
             </div>
 
+            {{#if character}}
             {{>Template.dynamic template=activeTemplate}}
+            {{/if}}
 
         </div>
     </div>

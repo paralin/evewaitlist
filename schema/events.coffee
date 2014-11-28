@@ -7,5 +7,9 @@ EventSchema = new SimpleSchema
   time:
     type: Date
     label: "The time of the event"
+  charid:
+    type: Number
+    label: "The character ID"
+    index: true
 
 EventLog.attachSchema EventSchema

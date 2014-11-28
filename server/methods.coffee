@@ -68,3 +68,11 @@ Meteor.methods
     if char.waitlist?
       Characters.update {_id: char._id}, {$set: {waitlist: null}}
       updateCounts(char.waitlist)
+  setCurrentSystem: (hash)->
+    check hash, String
+    char = Characters.findOne({hostid: hash})
+    if !char?
+      throw new Meteor.Error "error", "The server does not know about your character."
+    unless char.roles? and "admin" in char.roles
+      throw new Meteor.Error "error", "You are not authorized to perform this action."
+    Settings.update {_id: "incursion"}, {$set: {sysid: char.systemid, sysname: char.system}}
