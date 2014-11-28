@@ -11,9 +11,9 @@
           <img src="https://image.eveonline.com/Character/{{_id}}_128.jpg" alt="">
         </div><br>
         {{#if banned}}
-        <a href="#" disabled={{banDisabled}} class="btn btn-danger"><i class="fa fa-ban"></i>&nbsp;&nbsp;Banned</a>&nbsp;&nbsp;
+        <a href="#" disabled={{banDisabled}} class="btn btn-danger unbanCharacter"><i class="fa fa-ban"></i>&nbsp;&nbsp;Banned</a>&nbsp;&nbsp;
         {{else}}
-        <a href="#" disabled={{banDisabled}} class="btn btn-success"><i class="fa fa-check"></i>&nbsp;&nbsp;Not Banned</a>&nbsp;&nbsp;
+        <a href="#" disabled={{banDisabled}} class="btn btn-success banCharacter"><i class="fa fa-check"></i>&nbsp;&nbsp;Not Banned</a>&nbsp;&nbsp;
         {{/if}}
       </div>
       <div class="panel panel-transparent" style="padding-bottom: 0; margin-bottom: 0">

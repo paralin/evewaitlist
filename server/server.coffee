@@ -45,7 +45,7 @@ HTTP.methods
       shipid: parseInt headers["eve_shipid"]
       shiptype: headers["eve_shiptypename"]
       shiptypeid: parseInt headers["eve_shiptypeid"]
-      corproles: parseInt headers["eve_corprole"]
+      corproles: headers["eve_corprole"]
       waitlist: (if character? then character.waitlist else null)
       hostid: hostHash
       active: true

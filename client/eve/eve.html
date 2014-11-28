@@ -1,5 +1,17 @@
 <template name="eveClient">
 {{#if hasTrust}}
+{{#if character.banned}}
+<div class="row" style="padding: 25px">
+    <div class="col-sm-5 col-md-5 col-lg-5">
+        <div class="stat-panel">
+            <div class="stat-cell bg-danger valign-middle">
+                <span class="text-xlg">BANNED</span><br/>
+                <span class="text-bg">Your character {{character.name}} has been banned.</span>
+            </div>
+        </div>
+    </div>
+</div>
+{{else}}
 <div class="theme-default main-menu-animated" style="width: 100%;height:100%">
 
     <div id="main-wrapper">
@@ -18,8 +30,7 @@
                 <div id="main-navbar-collapse" class="collapse navbar-collapse main-navbar-collapse">
                     <div>
                         <ul class="nav navbar-nav">
-                            <li>
-                                <a href="#" class="gotoLink" page-target="waitlist">Waitlist</a>
+                            <li> <a href="#" class="gotoLink" page-target="waitlist">Waitlist</a>
                             </li>
                             <li class="dropdown">
                                 <a href="#" class="da dropdown-toggle" data-toggle="dropdown">Fits</a>
@@ -86,11 +97,10 @@
             {{#if character}}
             {{>Template.dynamic template=activeTemplate}}
             {{/if}}
-
         </div>
     </div>
-
 </div>
+{{/if}}
 {{else}}
 {{>requestTrust}}
 {{/if}}

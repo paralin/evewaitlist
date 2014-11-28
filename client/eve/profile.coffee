@@ -50,3 +50,19 @@ Template.profile.events
           title: "Can't Remove Role"
           text: err.reason
           type: "error"
+  "click .banCharacter": (e)->
+    e.preventDefault()
+    Meteor.call "banCharacter", Session.get("hostHash"), @_id, (err)->
+      if err?
+        $.pnotify
+          title: "Can't Ban Character"
+          text: err.reason
+          type: "error"
+  "click .unbanCharacter": (e)->
+    e.preventDefault()
+    Meteor.call "unbanCharacter", Session.get("hostHash"), @_id, (err)->
+      if err?
+        $.pnotify
+          title: "Can't Unban Character"
+          text: err.reason
+          type: "error"

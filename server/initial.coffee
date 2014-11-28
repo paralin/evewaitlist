@@ -26,4 +26,4 @@ if Roles.find().count() < 5
   Roles.insert
     _id: "manager"
     description: "Can be added as a fleet manager to invite and decline members."
-    name: "Booster"
+    name: "Fleet Manager"

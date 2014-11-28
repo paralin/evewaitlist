@@ -23,6 +23,7 @@ Template.eveClient.helpers
     Pages[page].canView? and Pages[page].canView()
   "hasTrust": ->
     Session.get("hasTrust")
+
 Template.eveClient.events
   "click #destoToStaging": (e)->
     e.preventDefault()
@@ -35,6 +36,7 @@ Template.eveClient.events
     Session.set "igbpage", e.currentTarget.attributes["page-target"].value
   "click .da": (e)->
     e.preventDefault()
+
 Template.requestTrust.events
   "click .requestTrustButton": ->
     pathArray = window.location.href.split '/'

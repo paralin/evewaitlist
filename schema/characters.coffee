@@ -13,6 +13,8 @@ CharacterSchema = new SimpleSchema
     type: String
   system:
     type: String
+  banned:
+    type: Boolean
   systemid:
     type: Number
   stationname:
