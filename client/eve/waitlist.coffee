@@ -16,9 +16,9 @@ Template.waitlist.helpers
   "avatar": (id)->
     "https://image.eveonline.com/Render/#{id}_128.png"
   "character": ->
-    Characters.findOne({hostid: Session.get("hostHash")})
+    Session.get "me"
   "inwaitlist": ->
-    char = Characters.findOne({hostid: Session.get("hostHash")})
+    char = Session.get "me"
     char.waitlist? and char.waitlist is @_id
 
 Template.waitlist.events

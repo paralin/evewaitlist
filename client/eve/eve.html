@@ -45,6 +45,11 @@
                             <li>
                                 <a href="#" class="gotoLink" page-target="insurance">Insurance</a>
                             </li>
+                            {{#if canView "command"}}
+                            <li>
+                                <a href="#" class="gotoLink" page-target="command">Command</a>
+                            </li>
+                            {{/if}}
                             {{#if canView "eventlog"}}
                             <li>
                                 <a href="#" class="gotoLink" page-target="eventlog">Event Log</a>

@@ -49,3 +49,7 @@ Template.admin.events
           title: "Can't Close Waitlist"
           text: err.reason
           type: "error"
+  "click #fcName": (e)->
+    CCPEVE.showInfo 1377, @fc.id
+  "click #sysName": (e)->
+    CCPEVE.showInfo 5, @sysid

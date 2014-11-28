@@ -29,14 +29,14 @@
     title: "Event Log"
     template: "events"
     canView: ->
-      character = Characters.findOne({hostid: Session.get("hostHash")})
+      character = Session.get "me"
       character? and character.roles? and _.contains character.roles, "events"
     subscriptions: ["eventlog"]
   admin:
     title: "Admin"
     template: "admin"
     canView: ->
-      character = Characters.findOne({hostid: Session.get("hostHash")})
+      character = Session.get "me"
       character? and character.roles? and _.contains character.roles, "admin"
     onView: ->
       Meteor.subscribe "admin", Session.get("hostHash")
@@ -44,8 +44,14 @@
     title: "Character Profile"
     template: "profile"
     canView: ->
-      character = Characters.findOne({hostid: Session.get("hostHash")})
+      character = Session.get "me"
       character? and character.roles? and _.contains character.roles, "admin"
     onView: ->
       Meteor.subscribe "admin", Session.get("hostHash")
       Meteor.subscribe "profile", Session.get("hostHash"), parseInt Session.get("profilechar")
+  command:
+    title: "Waitlist Command"
+    template: "command"
+    canView: ->
+      character = Session.get "me"
+      character? and character.roles? and ((_.contains character.roles, "manager") or (_.contains character.roles, "commander"))

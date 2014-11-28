@@ -1,5 +1,8 @@
 Meteor.startup ->
   Tracker.autorun ->
+    char = Characters.findOne({hostid: Session.get("hostHash")})
+    Session.set "me", char
+  Tracker.autorun ->
     page = Session.get("igbpage")
     if !page? || (page.canView? && !page.canView())
       Session.set "igbpage", "waitlist"
@@ -11,7 +14,7 @@ Meteor.startup ->
       page.onView() if page.onView?
 Template.eveClient.helpers
   "character": ->
-    Characters.findOne({hostid: Session.get("hostHash")})
+    Session.get "me"
   "avatar": (character)->
     return "" if !character?
     "https://image.eveonline.com/Character/#{character._id}_64.jpg"
