@@ -58,6 +58,9 @@ Template.command.events
   "click #boosterName": (e)->
     if @booster?
       CCPEVE.showInfo 1377, @booster.id
+  "click #managerName": (e)->
+    if @manager?
+      CCPEVE.showInfo 1377, @manager.id
   "click .closeWaitlist": (e)->
     Meteor.call "closeWaitlist", Session.get("hostHash"), (err)->
       if err?
