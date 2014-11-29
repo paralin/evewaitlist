@@ -24,7 +24,7 @@ Meteor.publishComposite "command", (hash)->
   find: ->
     char = Characters.findOne {hostid: hash}
     return [] if !char?
-    Waitlists.find {commander: char._id}, {limit: 1}
+    Waitlists.find {commander: char._id, finished: false}, {limit: 1}
   children: [
     {
       find: (waitlist)->

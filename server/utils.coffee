@@ -25,6 +25,7 @@
   return if !waitlist?
   return if waitlist.finished
   console.log "Closing waitlist #{waitlist._id}"
+  Characters.update {}, {$set: {waitlist: null}}, {multi: true}
   if !waitlist.used
     Waitlists.remove {_id: waitlist._id}
   else

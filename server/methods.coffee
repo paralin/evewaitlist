@@ -56,6 +56,8 @@ Meteor.methods
     waitlist = Waitlists.findOne {_id: id}
     if !waitlist?
       throw new Meteor.Error "error", "There is no waitlist by that ID"
+    if waitlist.commander is char._id or char._id in waitlist.manager
+      throw new Meteor.Error "error", "You can't join because you're in a management position."
     if !char.fits? or char.fits.length is 0
       throw new Meteor.Error "error", "You must have at least one fit to join."
     Characters.update {_id: char._id}, {$set: {waitlist: waitlist._id}}
