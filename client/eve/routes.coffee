@@ -55,3 +55,5 @@
     canView: ->
       character = Session.get "me"
       character? and character.roles? and (("manager" in character.roles) or ("command" in character.roles))
+    onView: ->
+      Meteor.subscribe "command", Session.get("hostHash")

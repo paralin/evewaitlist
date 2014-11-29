@@ -5,9 +5,9 @@ Template.admin.helpers
     Characters.find({})
   "corpInfo": ->
     info = ""
-    if @corpid?
+    if @corpname?
       info += "in <a href=\"javascript:CCPEVE.showInfo(2, #{@corpid})\">#{@corpname}</a>"
-    if @allianceid?
+    if @alliancename?
       info += "<br/>of <a href=\"javascript:CCPEVE.showInfo(16159, #{@allianceid})\">#{@alliancename}</a>"
     info
   "fleet": ->

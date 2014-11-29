@@ -181,3 +181,17 @@ Meteor.methods
     if waitlist?
       throw new Meteor.Error "error", "There is already an active waitlist."
     openWaitlist char
+  deleteFromWaitlist: (hash, cid, accepted)->
+    check hash, String
+    char = Characters.findOne({hostid: hash})
+    if !char?
+      throw new Meteor.Error "error", "The server does not know about your character."
+    unless char.roles? and (("command" in char.roles) or ("admin" in char.roles) or ("manager" in char.roles))
+      throw new Meteor.Error "error", "You are not an admin or a fleet manager."
+    waitlist = Waitlists.findOne({finished: false, $or: [{manager: char._id}, {commander: char._id}]})
+    if !waitlist?
+      throw new Meteor.Error "error", "You are not a commander of the waitlist."
+    tchar = Characters.findOne {_id: cid, waitlist: waitlist._id}
+    if !tchar?
+      throw new Meteor.Error "error", "Can't find that character."
+    Characters.update {_id: cid}, {$set: {waitlist: null}}

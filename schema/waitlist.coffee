@@ -19,5 +19,7 @@ WaitSchema = new SimpleSchema
     index: true
   used:
     type: Boolean
+  manager:
+    type: [String]
 
 Waitlists.attachSchema WaitSchema

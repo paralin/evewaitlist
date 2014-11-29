@@ -1,5 +1,3 @@
-logi = [11978, 11985]
-dps = [17740, 17736, 24690, 641, 17728, 17738, 17732, 639, 24694, 32305, 643, 17636, 28710, 638]
 @updateCounts = (waitlist)->
   return if !waitlist?
   chars = Characters.find({waitlist: waitlist}).fetch()
@@ -41,3 +39,4 @@ dps = [17740, 17736, 24690, 641, 17728, 17738, 17732, 639, 24694, 32305, 643, 17
       other: 0
       dps: 0
     used: false
+    manager: []

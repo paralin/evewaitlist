@@ -1,7 +1,7 @@
 <template name="command">
 <div class="row">
   {{#with fleet}}
-  <div class="col-sm-4 col-md-4 col-lg-4">
+  <div class="col-sm-4 col-md-4 col-lg-3">
       <div class="panel panel-info panel-dark widget-profile stat-panel">
           <div class="panel-heading" id="fcName" style="cursor: pointer">
               <div class="widget-profile-bg-icon"><i class="fa fa-twitter" style="display: none !important;"></i></div>
@@ -54,5 +54,76 @@
       </div>
   </div>
   {{/unless}}
+</div>
+<div class="row">
+  <div class="col-sm-6 col-md-4 col-lg-4">
+    <div class="panel widget-followers">
+      <div class="panel-heading">
+        <span class="panel-title"><i class="panel-title-icon fa fa-fire-extinguisher"></i>Logistics</span>
+      </div> <!-- / .panel-heading -->
+      <div class="panel-body">
+        {{#each char 0}}
+        <div class="follower">
+          <img src="https://image.eveonline.com/Character/{{_id}}_256.jpg" alt="" class="follower-avatar">
+          <div class="body">
+            <div class="follower-controls">
+              <a href="#" class="btn btn-sm btn-danger delWaitlist"><i class="fa fa-ban"></i></a>
+              <a href="#" class="btn btn-sm btn-danger delMail"><i class="fa fa-envelope"></i></a>
+              <a href="#" class="btn btn-sm btn-success sendInv"><i class="fa fa-check"></i></a>
+            </div>
+            <a href="#" class="follower-name">{{name}}</a><br>
+            <a href="#" class="follower-username">in a {{getFitShiptype}}</a>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-4 col-lg-4">
+    <div class="panel widget-followers">
+      <div class="panel-heading">
+        <span class="panel-title"><i class="panel-title-icon fa fa-fire"></i>Damage</span>
+      </div> <!-- / .panel-heading -->
+      <div class="panel-body">
+        {{#each char 1}}
+        <div class="follower">
+          <img src="https://image.eveonline.com/Character/{{_id}}_256.jpg" alt="" class="follower-avatar">
+          <div class="body">
+            <div class="follower-controls">
+              <a href="#" class="btn btn-sm btn-danger delWaitlist"><i class="fa fa-ban"></i></a>
+              <a href="#" class="btn btn-sm btn-danger delMail"><i class="fa fa-envelope"></i></a>
+              <a href="#" class="btn btn-sm btn-success sendInv"><i class="fa fa-check"></i></a>
+            </div>
+            <a href="#" class="follower-name">{{name}}</a><br>
+            <a href="#" class="follower-username">in a {{getFitShiptype}}</a>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-12 col-md-4 col-lg-4">
+    <div class="panel widget-followers">
+      <div class="panel-heading">
+        <span class="panel-title"><i class="panel-title-icon fa fa-question"></i>Other</span>
+      </div> <!-- / .panel-heading -->
+      <div class="panel-body">
+        {{#each char 2}}
+        <div class="follower">
+          <img src="https://image.eveonline.com/Character/{{_id}}_256.jpg" alt="" class="follower-avatar">
+          <div class="body">
+            <div class="follower-controls">
+              <a href="#" class="btn btn-sm btn-danger delWaitlist"><i class="fa fa-ban"></i></a>
+              <a href="#" class="btn btn-sm btn-danger delMail"><i class="fa fa-envelope"></i></a>
+              <a href="#" class="btn btn-sm btn-success sendInv"><i class="fa fa-check"></i></a>
+            </div>
+            <a href="#" class="follower-name">{{name}}</a><br>
+            <a href="#" class="follower-username">in a {{getFitShiptype}}</a>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
 </div>
 </template>

@@ -1,37 +1,7 @@
 <template name="waitlist">
 <div class="row">
-    <div class="col-sm-8 col-md-8 col-lg-8">
-        <div class="panel widget-followers" title="">
-            <div class="panel-heading">
-                <span class="panel-title">Your Fits</span>
-            </div> <!-- / .panel-heading -->
-            <div class="panel-body" title="">
-                {{#each character.fits}}
-                <div class="follower" title="">
-                    <img src="{{avatar shipid}}" alt="" class="follower-avatar" title="" style="">
-                    <div class="body">
-                        <div class="follower-controls">
-                            {{#unless primary}}
-                                <a href="#" class="btn btn-sm btn-primary makePrimary"><span>Make Primary</span></a>
-                            {{/unless}}
-                            <a href="#" class="btn btn-sm btn-danger removeFit"><span>Remove</span></a>
-                        </div>
-                        <a href="#" class="follower-name da">{{shiptype shipid}}</a><br>
-                        <a href="#" class="follower-username viewFit">Click here to view</a>
-                    </div>
-                </div>
-                {{/each}}
-            </div>
-            <form class="panel-footer chat-controls">
-                <div class="fit-input">
-                    <textarea rows="1" class="form-control" style="overflow: hidden; word-wrap: break-word; height: 31px;" id="addFitInput"></textarea>
-                </div>
-                <button class="btn btn-primary add-fit">Add Fit</button>
-            </form>
-        </div>
-    </div>
     {{#with fleet}}
-    <div class="col-sm-4 col-md-4 col-lg-4">
+    <div class="col-sm-4 col-md-4 col-lg-3">
         <div class="panel panel-info panel-dark widget-profile stat-panel">
             <div class="panel-heading" id="fcName" style="cursor: pointer">
                 <div class="widget-profile-bg-icon"><i class="fa fa-twitter" style="display: none !important;"></i></div>
@@ -75,7 +45,7 @@
     </div>
     {{/with}}
     {{#unless fleet}}
-    <div class="col-sm-4 col-md-4 col-lg-4">
+    <div class="col-sm-4 col-md-4 col-lg-5">
         <div class="stat-panel">
             <div class="stat-cell bg-danger valign-middle">
                 <span class="text-xlg">INACTIVE</span><br/>
@@ -84,5 +54,35 @@
         </div>
     </div>
     {{/unless}}
+    <div class="col-sm-8 col-md-8 col-lg-9">
+        <div class="panel widget-followers" title="">
+            <div class="panel-heading">
+                <span class="panel-title">Your Fits</span>
+            </div> <!-- / .panel-heading -->
+            <div class="panel-body" title="">
+                {{#each character.fits}}
+                <div class="follower" title="">
+                    <img src="{{avatar shipid}}" alt="" class="follower-avatar" title="" style="">
+                    <div class="body">
+                        <div class="follower-controls">
+                            {{#unless primary}}
+                            <a href="#" class="btn btn-sm btn-primary makePrimary"><span>Make Primary</span></a>
+                            {{/unless}}
+                            <a href="#" class="btn btn-sm btn-danger removeFit"><span>Remove</span></a>
+                        </div>
+                        <a href="#" class="follower-name da">{{shiptype shipid}}</a><br>
+                        <a href="#" class="follower-username viewFit">Click here to view</a>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+            <form class="panel-footer chat-controls">
+                <div class="fit-input">
+                    <textarea rows="1" class="form-control" style="overflow: hidden; word-wrap: break-word; height: 31px;" id="addFitInput"></textarea>
+                </div>
+                <button class="btn btn-primary add-fit">Add Fit</button>
+            </form>
+        </div>
+    </div>
 </div>
 </template>
