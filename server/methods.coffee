@@ -56,7 +56,7 @@ Meteor.methods
     waitlist = Waitlists.findOne {_id: id}
     if !waitlist?
       throw new Meteor.Error "error", "There is no waitlist by that ID"
-    if waitlist.commander is char._id or char._id in waitlist.manager
+    if waitlist.commander is char._id or waitlist.manager is char._id
       throw new Meteor.Error "error", "You can't join because you're in a management position."
     if !char.fits? or char.fits.length is 0
       throw new Meteor.Error "error", "You must have at least one fit to join."
@@ -190,10 +190,74 @@ Meteor.methods
       throw new Meteor.Error "error", "The server does not know about your character."
     unless char.roles? and (("command" in char.roles) or ("admin" in char.roles) or ("manager" in char.roles))
       throw new Meteor.Error "error", "You are not an admin or a fleet manager."
-    waitlist = Waitlists.findOne({finished: false, $or: [{manager: char._id}, {commander: char._id}]})
+    waitlist = Waitlists.findOne({finished: false, $or: [{commander: char._id}]})
     if !waitlist?
       throw new Meteor.Error "error", "You are not a commander of the waitlist."
     tchar = Characters.findOne {_id: cid, waitlist: waitlist._id}
     if !tchar?
       throw new Meteor.Error "error", "Can't find that character."
     Characters.update {_id: cid}, {$set: {waitlist: null}}
+  setBooster: (hash, cid)->
+    check hash, String
+    check cid, String
+    char = Characters.findOne({hostid: hash})
+    if !char?
+      throw new Meteor.Error "error", "The server does not know about your character."
+    unless char.roles? and (("command" in char.roles) or ("admin" in char.roles))
+      throw new Meteor.Error "error", "You are not an admin or a fleet manager."
+    waitlist = Waitlists.findOne({finished: false, $or: [{commander: char._id}]})
+    if !waitlist?
+      throw new Meteor.Error "error", "You are not a commander of the waitlist."
+    tchar = Characters.findOne {_id: cid}
+    if !tchar?
+      throw new Meteor.Error "error", "Can't find that character."
+    unless tchar.roles? and "booster" in tchar.roles
+      throw new Meteor.Error "error", "That character is not a booster."
+    if waitlist.booster?
+      throw new Meteor.Error "error", "There is already a booster set."
+    Waitlists.update {_id: waitlist._id}, {$set: {booster: tchar._id}}
+  removeBooster: (hash)->
+    check hash, String
+    char = Characters.findOne({hostid: hash})
+    if !char?
+      throw new Meteor.Error "error", "The server does not know about your character."
+    unless char.roles? and (("command" in char.roles) or ("admin" in char.roles))
+      throw new Meteor.Error "error", "You are not an admin or a fleet manager."
+    waitlist = Waitlists.findOne({finished: false, $or: [{commander: char._id}]})
+    if !waitlist?
+      throw new Meteor.Error "error", "You are not a commander of the waitlist."
+    if !waitlist.booster?
+      throw new Meteor.Error "error", "There is no booster set."
+    Waitlists.update {_id: waitlist._id}, {$set: {booster: null}}
+  setManager: (hash, cid)->
+    check hash, String
+    check cid, String
+    char = Characters.findOne({hostid: hash})
+    if !char?
+      throw new Meteor.Error "error", "The server does not know about your character."
+    unless char.roles? and (("command" in char.roles) or ("admin" in char.roles) or ("manager" in char.roles))
+      throw new Meteor.Error "error", "You are not an admin or a waitlist manager or a commander."
+    waitlist = Waitlists.findOne({finished: false, $or: [{commander: char._id}, {manager: char._id}]})
+    if !waitlist?
+      throw new Meteor.Error "error", "You are not a commander of the waitlist."
+    tchar = Characters.findOne {_id: cid}
+    if !tchar?
+      throw new Meteor.Error "error", "Can't find that character."
+    unless tchar.roles? and "manager" in tchar.roles
+      throw new Meteor.Error "error", "That character is not a manager."
+    if waitlist.manager?
+      throw new Meteor.Error "error", "There is already a manager set."
+    Waitlists.update {_id: waitlist._id}, {$set: {manager: tchar._id}}
+  removeManager: (hash)->
+    check hash, String
+    char = Characters.findOne({hostid: hash})
+    if !char?
+      throw new Meteor.Error "error", "The server does not know about your character."
+    unless char.roles? and (("manager" in char.roles) or ("admin" in char.roles) or ("command" in char.roles))
+      throw new Meteor.Error "error", "You are not an admin or a fleet manager or a commander."
+    waitlist = Waitlists.findOne({finished: false, $or: [{manager: char._id}, {commander: char._id}]})
+    if !waitlist?
+      throw new Meteor.Error "error", "You are not a commander of the waitlist."
+    if !waitlist.manager?
+      throw new Meteor.Error "error", "There is no manager set."
+    Waitlists.update {_id: waitlist._id}, {$set: {manager: null}}

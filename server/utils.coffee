@@ -40,4 +40,5 @@
       other: 0
       dps: 0
     used: false
-    manager: []
+    manager: null
+    booster: null

@@ -2,56 +2,140 @@
 <div class="row">
   {{#with fleet}}
   <div class="col-sm-4 col-md-4 col-lg-3">
-      <div class="panel panel-info panel-dark widget-profile stat-panel">
-          <div class="panel-heading" id="fcName" style="cursor: pointer">
-              <div class="widget-profile-bg-icon"><i class="fa fa-twitter" style="display: none !important;"></i></div>
-              <img src={{fc.avatar}} alt="" class="widget-profile-avatar">
-              <div class="widget-profile-header">
-                  <span>{{fc.name}}</span><br>
-                  <a href="" class="da">Current FC </a>
-              </div>
-          </div>
-          <div class="stat-row">
-              <div class="stat-counters bordered no-border-t text-center">
-                  <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
-                      <span class="text-bg"><strong>{{counts.logi}}</strong></span><br>
-                      <span class="text-xs">LOGISTICS</span>
-                  </div>
-                  <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
-                      <span class="text-bg"><strong>{{counts.dps}}</strong></span><br>
-                      <span class="text-xs">DAMAGE</span>
-                  </div>
-                  <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
-                      <span class="text-bg"><strong>{{counts.other}}</strong></span><br>
-                      <span class="text-xs">OTHER</span>
-                  </div>
-              </div>
-          </div>
-          <div class="stat-row">
-            <a href="#" class="stat-cell bg-danger padding-sm valign-middle closeWaitlist" disabled={{nisCommander}}>
-                  <i class="fa fa-ban pull-right"></i>
-                  Close waitlist
-              </a>
-          </div>
+    <div class="panel panel-info panel-dark widget-profile stat-panel">
+      <div class="panel-heading" id="fcName" style="cursor: pointer">
+        <div class="widget-profile-bg-icon"><i class="fa fa-twitter" style="display: none !important;"></i></div>
+        <img src={{fc.avatar}} alt="" class="widget-profile-avatar">
+        <div class="widget-profile-header">
+          <span>{{fc.name}}</span><br>
+          <a href="" class="da">Current FC </a>
+        </div>
       </div>
+      <div class="stat-row">
+        <div class="stat-counters bordered no-border-t text-center">
+          <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
+            <span class="text-bg"><strong>{{counts.logi}}</strong></span><br>
+            <span class="text-xs">LOGISTICS</span>
+          </div>
+          <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
+            <span class="text-bg"><strong>{{counts.dps}}</strong></span><br>
+            <span class="text-xs">DAMAGE</span>
+          </div>
+          <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
+            <span class="text-bg"><strong>{{counts.other}}</strong></span><br>
+            <span class="text-xs">OTHER</span>
+          </div>
+        </div>
+      </div>
+      <div class="stat-row">
+        <a href="#" class="stat-cell bg-danger padding-sm valign-middle closeWaitlist" disabled={{nisCommander}}>
+          <i class="fa fa-ban pull-right"></i>
+          Close waitlist
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4 col-md-4 col-lg-3">
+    <div class="panel panel-primary panel-dark widget-profile stat-panel">
+      <div class="panel-heading" id="boosterName" style="cursor: pointer">
+        <div class="widget-profile-bg-icon"><i class="fa fa-twitter" style="display: none !important;"></i></div>
+        {{#if booster}}
+        <img src={{booster.avatar}} alt="" class="widget-profile-avatar">
+        {{/if}}
+        <div class="widget-profile-header">
+          {{#if booster}}
+          <span>{{booster.name}}</span><br>
+          <a href="" class="da">Current booster</a>
+          {{else}}
+          <span>No Booster Active</span><br>
+          {{#if isCommander}}
+          <a href="" class="da">Pick a booster from the list</a>
+          {{else}}
+          <a href="" class="da">No boosts received</a>
+          {{/if}}
+          {{/if}}
+        </div>
+      </div>
+      {{#if isCommander}}
+      {{#if booster}}
+      <div class="stat-row">
+        <a href="#" class="stat-cell bg-danger padding-sm valign-middle removeBoost" disabled={{nisCommander}}>
+          <i class="fa fa-ban pull-right"></i>
+          Remove booster
+        </a>
+      </div>
+      {{else}}
+      {{#each pboost}}
+      <div class="stat-row">
+        <a href="#" class="stat-cell bg-info padding-sm valign-middle setBoost" disabled={{nisCommander}}>
+          <i class="fa fa-male pull-right"></i>
+          Set to {{name}}
+        </a>
+      </div>
+      {{/each}}
+      {{/if}}
+      {{/if}}
+    </div>
+  </div>
+  <div class="col-sm-4 col-md-4 col-lg-3">
+    <div class="panel panel-primary panel-dark widget-profile stat-panel">
+      <div class="panel-heading" id="managerName" style="cursor: pointer">
+        <div class="widget-profile-bg-icon"><i class="fa fa-twitter" style="display: none !important;"></i></div>
+        {{#if manager}}
+        <img src={{manager.avatar}} alt="" class="widget-profile-avatar">
+        {{/if}}
+        <div class="widget-profile-header">
+          {{#if manager}}
+          <span>{{manager.name}}</span><br>
+          <a href="" class="da">Current manager</a>
+          {{else}}
+          <span>No Active Manager</span><br>
+          {{#if isCommander}}
+          <a href="" class="da">Pick a manager from the list</a>
+          {{else}}
+          <a href="" class="da">No waitlist manager</a>
+          {{/if}}
+          {{/if}}
+        </div>
+      </div>
+      {{#if isCommander}}
+      {{#if manager}}
+      <div class="stat-row">
+        <a href="#" class="stat-cell bg-danger padding-sm valign-middle removeManager" disabled={{nisCommander}}>
+          <i class="fa fa-ban pull-right"></i>
+          Remove manager
+        </a>
+      </div>
+      {{else}}
+      {{#each pmanager}}
+      <div class="stat-row">
+        <a href="#" class="stat-cell bg-info padding-sm valign-middle setManager" disabled={{nisCommander}}>
+          <i class="fa fa-male pull-right"></i>
+          Set to {{name}}
+        </a>
+      </div>
+      {{/each}}
+      {{/if}}
+      {{/if}}
+    </div>
   </div>
   {{/with}}
   {{#unless fleet}}
   <div class="col-sm-4 col-md-4 col-lg-4">
-      <div class="panel panel-danger panel-dark widget-profile stat-panel">
-          <div class="panel-heading">
-              <div class="widget-profile-header">
-                  <span>Waitlist Inactive</span><br>
-                  <a href="" class="da"></a>
-              </div>
-          </div>
-          <div class="stat-row">
-              <a href="#" class="stat-cell bg-success padding-sm valign-middle openWaitlist">
-                  <i class="fa fa-check pull-right"></i>
-                  Open waitlist as FC
-              </a>
-          </div>
+    <div class="panel panel-danger panel-dark widget-profile stat-panel">
+      <div class="panel-heading">
+        <div class="widget-profile-header">
+          <span>Waitlist Inactive</span><br>
+          <a href="" class="da"></a>
+        </div>
       </div>
+      <div class="stat-row">
+        <a href="#" class="stat-cell bg-success padding-sm valign-middle openWaitlist">
+          <i class="fa fa-check pull-right"></i>
+          Open waitlist as FC
+        </a>
+      </div>
+    </div>
   </div>
   {{/unless}}
 </div>
@@ -60,7 +144,7 @@
     <div class="panel widget-followers">
       <div class="panel-heading">
         <span class="panel-title"><i class="panel-title-icon fa fa-fire-extinguisher"></i>Logistics</span>
-      </div> <!-- / .panel-heading -->
+      </div>
       <div class="panel-body">
         {{#each char 0}}
         <div class="follower">
