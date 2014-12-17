@@ -113,7 +113,8 @@ Template.command.events
           text: err.reason
           type: "error"
       else
-        CCPEVE.inviteToFleet id
+        #CCPEVE.inviteToFleet id
+        CCPEVE.showInfo 1377, id
   "click .setBoost": (e)->
     e.preventDefault()
     id = @_id
