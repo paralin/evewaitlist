@@ -1,5 +1,8 @@
+dnaRegex = /:?(\d+:\d+;)+\d+::/g
 @filterDna = (input)->
-  input.replace (new RegExp("[^0-9;:]", "g")), ""
+  matches = input.match dnaRegex
+  return "" if matches.length is 0
+  matches[0]
 if typeof String::endsWith isnt "function"
   String::endsWith = (suffix) ->
     @indexOf(suffix, @length - suffix.length) isnt -1
