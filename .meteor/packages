@@ -6,7 +6,6 @@
 meteor-platform
 coffeescript
 less
-kidovate:bower
 mizzao:bootstrap-3
 natestrauser:animate-css
 http
@@ -18,3 +17,4 @@ copleykj:livestamp
 random
 natestrauser:font-awesome
 
+kidovate:bower@0.1.17
