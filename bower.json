@@ -17,6 +17,7 @@
     "tests"
   ],
   "dependencies": {
-    "pnotify": "~2.0.1"
+    "pnotify": "~2.0.1",
+    "sweetalert": "mkoczka/sweetalert#prompt"
   }
 }

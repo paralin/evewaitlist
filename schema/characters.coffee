@@ -8,6 +8,9 @@ FitSchema = new SimpleSchema
     type: String
   primary:
     type: Boolean
+  comment:
+    type: String
+    optional: true
 CharacterSchema = new SimpleSchema
   name:
     type: String

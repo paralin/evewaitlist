@@ -73,3 +73,26 @@ Template.waitlist.events
           type: "error"
         return
       $("#addFitInput").val("")
+  "click .setComment": (e)->
+    e.preventDefault()
+    $(".setComment").attr("disabled", true)
+    swal
+      title: "Comment"
+      type: "prompt"
+      text: "Enter a fit comment."
+      promptPlaceholder: ""
+      promptDefaultValue: @comment
+    , (value)=>
+      Meteor.call "setComment", Session.get("hostHash"), @fid, value, (err, res)->
+        $(".setComment").attr("disabled", false)
+        if err?
+          $.pnotify
+            title: "Can't Set Comment"
+            text: err.reason
+            type: "error"
+        else
+          $.pnotify
+            title: "Comment Set"
+            type: "success"
+            text: "You have set a comment on your fit."
+            delay: 1000

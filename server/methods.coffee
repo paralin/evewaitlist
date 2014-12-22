@@ -1,4 +1,19 @@
 Meteor.methods
+  setComment: (hash, id, comment)->
+    check hash, String
+    check comment, String
+    check id, String
+    comment = comment.replace(/[^\w\s]/gi, '')
+    char = Characters.findOne({hostid: hash})
+    if !char?
+      throw new Meteor.Error "error", "The server does not know about your character."
+    fit = _.findWhere(char.fits, {fid: id})
+    if !fit?
+      throw new Meteor.Error "error", "Can't find that fit in your fits."
+    idx = _.indexOf char.fits, fit
+    fit["comment"] = comment
+    char.fits[idx] = fit
+    Characters.update {_id: char._id}, {$set: {fits: char.fits}}
   addFit: (hash, dna)->
     check hash, String
     check dna, String
@@ -14,7 +29,7 @@ Meteor.methods
     char.fits = [] if !char.fits?
     if _.findWhere(char.fits, {dna: dna})?
       throw new Meteor.Error "error", "You already have that exact fit in your fit list."
-    char.fits.push {dna: dna, shipid: id, fid: Random.id(), primary: char.fits.length==0}
+    char.fits.push {dna: dna, shipid: id, fid: Random.id(), primary: char.fits.length==0, comment: ""}
     Characters.update {_id: char._id}, {$set: {fits: char.fits}}
   delFit: (hash, fid)->
     check hash, String
