@@ -20,7 +20,7 @@ WaitSchema = new SimpleSchema
   used:
     type: Boolean
   booster:
-    type: String
+    type: [String]
     optional: true
   manager:
     type: String

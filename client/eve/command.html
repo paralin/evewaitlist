@@ -40,33 +40,16 @@
   <div class="col-sm-4 col-md-4 col-lg-3">
     <div class="panel panel-primary panel-dark widget-profile stat-panel">
       <div class="panel-heading" id="boosterName" style="cursor: pointer">
-        <div class="widget-profile-bg-icon"><i class="fa fa-twitter" style="display: none !important;"></i></div>
-        {{#if booster}}
-        <img src={{booster.avatar}} alt="" class="widget-profile-avatar">
-        {{/if}}
         <div class="widget-profile-header">
-          {{#if booster}}
-          <span>{{booster.name}}</span><br>
-          <a href="" class="da">Current booster</a>
-          {{else}}
-          <span>No Booster Active</span><br>
+          <span>Fleet Boosters</span><br>
+          <a href="" class="da"></a>
           {{#if isCommander}}
-          <a href="" class="da">Pick a booster from the list</a>
+          <a href="" class="da">Pick boosters from the list</a>
           {{else}}
-          <a href="" class="da">No boosts received</a>
-          {{/if}}
+          <a href="" class="da"></a>
           {{/if}}
         </div>
       </div>
-      {{#if isCommander}}
-      {{#if booster}}
-      <div class="stat-row">
-        <a href="#" class="stat-cell bg-danger padding-sm valign-middle removeBoost" disabled={{nisCommander}}>
-          <i class="fa fa-ban pull-right"></i>
-          Remove booster
-        </a>
-      </div>
-      {{else}}
       {{#each pboost}}
       <div class="stat-row">
         <a href="#" class="stat-cell bg-info padding-sm valign-middle setBoost" disabled={{nisCommander}}>
@@ -75,8 +58,14 @@
         </a>
       </div>
       {{/each}}
-      {{/if}}
-      {{/if}}
+      {{#each booster}}
+      <div class="stat-row">
+        <a href="#" class="stat-cell bg-danger padding-sm valign-middle removeBoost" disabled={{nisCommander}}>
+          <i class="fa fa-ban pull-right"></i>
+          Remove {{name}}
+        </a>
+      </div>
+      {{/each}}
     </div>
   </div>
   <div class="col-sm-4 col-md-4 col-lg-3">
@@ -142,13 +131,14 @@
   {{/unless}}
 </div>
 <div class="row">
+  {{#each types}}
   <div class="col-sm-6 col-md-4 col-lg-4">
     <div class="panel widget-followers">
       <div class="panel-heading">
-        <span class="panel-title"><i class="panel-title-icon fa fa-fire-extinguisher"></i>Logistics</span>
+          <span class="panel-title"><i class="panel-title-icon fa {{icon}}"></i>{{name}}</span>
       </div>
       <div class="panel-body">
-        {{#each char 0}}
+        {{#each char id}}
         <div class="follower">
           <img src="https://image.eveonline.com/Character/{{_id}}_256.jpg" alt="" class="follower-avatar">
           <div class="body">
@@ -165,51 +155,6 @@
       </div>
     </div>
   </div>
-  <div class="col-sm-6 col-md-4 col-lg-4">
-    <div class="panel widget-followers">
-      <div class="panel-heading">
-        <span class="panel-title"><i class="panel-title-icon fa fa-fire"></i>Damage</span>
-      </div> <!-- / .panel-heading -->
-      <div class="panel-body">
-        {{#each char 1}}
-        <div class="follower">
-          <img src="https://image.eveonline.com/Character/{{_id}}_256.jpg" alt="" class="follower-avatar">
-          <div class="body">
-            <div class="follower-controls">
-              <a href="#" class="btn btn-sm btn-danger delWaitlist"><i class="fa fa-ban"></i></a>
-              <a href="#" class="btn btn-sm btn-danger delMail"><i class="fa fa-envelope"></i></a>
-              <a href="#" class="btn btn-sm btn-success sendInv"><i class="fa fa-check"></i></a>
-            </div>
-            <a href="#" class="follower-name">{{name}}</a><br>
-            <a href="#" class="follower-username">in a {{getFitShiptype}}</a>
-          </div>
-        </div>
-        {{/each}}
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-12 col-md-4 col-lg-4">
-    <div class="panel widget-followers">
-      <div class="panel-heading">
-        <span class="panel-title"><i class="panel-title-icon fa fa-question"></i>Other</span>
-      </div> <!-- / .panel-heading -->
-      <div class="panel-body">
-        {{#each char 2}}
-        <div class="follower">
-          <img src="https://image.eveonline.com/Character/{{_id}}_256.jpg" alt="" class="follower-avatar">
-          <div class="body">
-            <div class="follower-controls">
-              <a href="#" class="btn btn-sm btn-danger delWaitlist"><i class="fa fa-ban"></i></a>
-              <a href="#" class="btn btn-sm btn-danger delMail"><i class="fa fa-envelope"></i></a>
-              <a href="#" class="btn btn-sm btn-success sendInv"><i class="fa fa-check"></i></a>
-            </div>
-            <a href="#" class="follower-name">{{name}}</a><br>
-            <a href="#" class="follower-username">in a {{getFitShiptype}}</a>
-          </div>
-        </div>
-        {{/each}}
-      </div>
-    </div>
-  </div>
+  {{/each}}
 </div>
 </template>

@@ -213,9 +213,11 @@ Meteor.methods
       throw new Meteor.Error "error", "Can't find that character."
     unless tchar.roles? and "booster" in tchar.roles
       throw new Meteor.Error "error", "That character is not a booster."
-    if waitlist.booster?
-      throw new Meteor.Error "error", "There is already a booster set."
-    Waitlists.update {_id: waitlist._id}, {$set: {booster: tchar._id}}
+    boost = waitlist.booster || []
+    if _.contains boost, tchar._id
+      throw new Meteor.Error "error", "That booster already is set."
+    boost.push tchar._id
+    Waitlists.update {_id: waitlist._id}, {$set: {booster: boost}}
   removeBooster: (hash)->
     check hash, String
     char = Characters.findOne({hostid: hash})
@@ -246,7 +248,7 @@ Meteor.methods
     unless tchar.roles? and "manager" in tchar.roles
       throw new Meteor.Error "error", "That character is not a manager."
     if waitlist.manager?
-      throw new Meteor.Error "error", "There is already a manager set."
+      throw new Meteor.Error "error", "There already is a manager."
     Waitlists.update {_id: waitlist._id}, {$set: {manager: tchar._id}}
   removeManager: (hash)->
     check hash, String
@@ -258,6 +260,4 @@ Meteor.methods
     waitlist = Waitlists.findOne({finished: false, $or: [{manager: char._id}, {commander: char._id}]})
     if !waitlist?
       throw new Meteor.Error "error", "You are not a commander of the waitlist."
-    if !waitlist.manager?
-      throw new Meteor.Error "error", "There is no manager set."
     Waitlists.update {_id: waitlist._id}, {$set: {manager: null}}

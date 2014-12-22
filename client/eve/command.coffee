@@ -1,4 +1,7 @@
+types = [{name: "Logistics", id: 0, icon: "fa-fire-extinguisher"}, {name: "Damage", id: 1, icon: "fa-fire"}, {name: "Other", id: 2, icon: "fa-question"}]
 Template.command.helpers
+  "types": ->
+    types
   "fleet": ->
     wait = Waitlists.findOne()
     return if !wait?
@@ -11,20 +14,17 @@ Template.command.helpers
         avatar: "https://image.eveonline.com/Character/#{commander._id}_128.jpg"
         id: commander._id
     }
-    if wait.booster?
-      booster = Characters.findOne {_id: wait.booster}
-      if booster?
-        resp["booster"] =
-          name: booster.name
-          avatar: "https://image.eveonline.com/Character/#{booster._id}_128.jpg"
-          id: booster._id
-    if wait.manager?
-      manager = Characters.findOne {_id: wait.manager}
-      if manager?
-        resp["manager"] =
-          name: manager.name
-          avatar: "https://image.eveonline.com/Character/#{manager._id}_128.jpg"
-          id: manager._id
+    if wait.booster? && wait.booster.length
+      booster = Characters.find {_id: {$in: wait.booster}}
+      if booster.count()
+        resp["booster"] = []
+        for boost in booster.fetch()
+          resp["booster"].push
+            name: boost.name
+            avatar: "https://image.eveonline.com/Character/#{boost._id}_128.jpg"
+            id: boost._id
+    if wait.manager? && wait.manager.length
+      resp["manager"] = Characters.findOne {_id: wait.manager}
     resp
   "isCommander": ->
     wait = Waitlists.findOne()
@@ -47,11 +47,17 @@ Template.command.helpers
     return "unknown" if !primary?
     typeids[primary.shipid+""]
   "pboost": ->
-    Characters.find {roles: "booster", active: true}
+    wait = Waitlists.findOne()
+    return [] if !wait?
+    boost = wait.booster || []
+    Characters.find {roles: "booster", active: true, _id: {$nin: boost}}
   "pmanager": ->
     wait = Waitlists.findOne()
     return [] if !wait?
-    Characters.find {roles: "manager", active: true, _id: {$ne: wait.commander}}
+    manage = [wait.commander]
+    if wait.manager
+      manage.push wait.manager
+    Characters.find {roles: "manager", active: true, _id: {$nin: manage}}
 Template.command.events
   "click #fcName": (e)->
     CCPEVE.showInfo 1377, @fc.id
