@@ -10,10 +10,7 @@ Meteor.methods
     fit = _.findWhere(char.fits, {fid: id})
     if !fit?
       throw new Meteor.Error "error", "Can't find that fit in your fits."
-    idx = _.indexOf char.fits, fit
-    fit["comment"] = comment
-    char.fits[idx] = fit
-    Characters.update {_id: char._id}, {$set: {fits: char.fits}}
+    Characters.update {_id: char._id, "fits.fid": id}, {$set: {"fits.$.comment": comment}}
   addFit: (hash, dna)->
     check hash, String
     check dna, String
