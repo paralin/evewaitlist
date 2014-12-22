@@ -24,7 +24,11 @@ Template.command.helpers
             avatar: "https://image.eveonline.com/Character/#{boost._id}_128.jpg"
             id: boost._id
     if wait.manager? && wait.manager.length
-      resp["manager"] = Characters.findOne {_id: wait.manager}
+      char = Characters.findOne {_id: wait.manager}
+      resp["manager"] = 
+        name: char.name
+        avatar: "https://image.eveonline.com/Character/#{char._id}_128.jpg"
+        id: char._id
     resp
   "isCommander": ->
     wait = Waitlists.findOne()
