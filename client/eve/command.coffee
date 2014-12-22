@@ -42,6 +42,10 @@ Template.command.helpers
       return Characters.find {"fits": {$elemMatch: {primary: true, shipid: {$in: search}}}, "waitlist": Waitlists.findOne()._id}
     else
       return Characters.find {"fits": {$elemMatch: {primary: true, shipid: {$not: {$in: _.union(logi, dps)}}}}, "waitlist": Waitlists.findOne()._id}
+  "hasComment": ->
+    primary = _.findWhere @fits, {primary: true}
+    return false if !primary?
+    primary.comment? && primary.comment.length>0
   "getFitShiptype": ->
     primary = _.findWhere @fits, {primary: true}
     return "unknown" if !primary?
@@ -157,3 +161,10 @@ Template.command.events
           title: "Can't Remove Manager"
           text: e.reason
           type: "error"
+  "click .viewComment": (e)->
+    e.preventDefault()
+    primary = _.findWhere @fits, {primary: true}
+    return if !primary?
+    swal
+      title: "Comment"
+      text: primary.comment
