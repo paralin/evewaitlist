@@ -63,7 +63,7 @@ CharacterSchema = new SimpleSchema
     type: [String]
     optional: true
   fits:
-    type: [Object]
+    type: [FitSchema]
     optional: true
   regionname:
     type: String
