@@ -29,8 +29,9 @@ Meteor.methods
     char.fits = [] if !char.fits?
     if _.findWhere(char.fits, {dna: dna})?
       throw new Meteor.Error "error", "You already have that exact fit in your fit list."
-    char.fits.push {dna: dna, shipid: id, fid: Random.id(), primary: char.fits.length==0, comment: ""}
-    Characters.update {_id: char._id}, {$set: {fits: char.fits}}
+    fit = {dna: dna, shipid: id, fid: Random.id(), primary: char.fits.length==0, comment: ""}
+    Characters.update {_id: char._id}, {$push: {fits: fit}}
+    #Characters.update {_id: char._id}, {$set: {fits: char.fits}}
   delFit: (hash, fid)->
     check hash, String
     check fid, String
