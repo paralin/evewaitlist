@@ -31,7 +31,8 @@
     canView: ->
       character = Session.get "me"
       character? and character.roles? and _.contains character.roles, "events"
-    subscriptions: ["eventlog"]
+    onView: ->
+      Meteor.subscribe "eventlog"
   admin:
     title: "Admin"
     template: "admin"

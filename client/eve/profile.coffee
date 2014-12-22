@@ -10,7 +10,7 @@ Template.profile.helpers
   "shiptype": (id)->
     typeids[id]
   "events": ->
-    EventLog.find {charid: parseInt Session.get("profilechar")}
+    EventLog.find {charid: parseInt Session.get("profilechar")}, {sort: {time: -1}}
   "allroles": ->
     Roles.find {}
   "hasRole": ->
