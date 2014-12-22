@@ -41,14 +41,14 @@
       <div class="panel-heading" id="boosterName" style="cursor: pointer">
         <div class="widget-profile-header">
           <span>Fleet Boosters</span><br>
-          <a href="" class="da"></a>
           {{#if isCommander}}
           <a href="" class="da">Pick boosters from the list</a>
           {{else}}
-          <a href="" class="da"></a>
+          <a href="" class="da">Currently boosting fleet</a>
           {{/if}}
         </div>
       </div>
+      {{#if isCommander}}
       {{#each pboost}}
       <div class="stat-row">
         <a href="#" class="stat-cell bg-info padding-sm valign-middle setBoost" disabled={{nisCommander}}>
@@ -57,6 +57,7 @@
         </a>
       </div>
       {{/each}}
+      {{/if}}
       {{#each booster}}
       <div class="stat-row">
         <a href="#" class="stat-cell bg-danger padding-sm valign-middle removeBoost" disabled={{nisCommander}}>
