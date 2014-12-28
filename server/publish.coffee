@@ -25,9 +25,7 @@ Meteor.publishComposite "command", (hash)->
     char = Characters.findOne {hostid: hash}
     return [] if !char? or !(char.roles)? or !(("admin" in char.roles) or ("manager" in char.roles) or ("command" in char.roles))
     Waitlists.find {$or: [{commander: char._id}, {manager: char._id}], finished: false}, {limit: 1}
-  children: [
-    {
-      find: (waitlist)->
+  children: [ { find: (waitlist)->
         return if !waitlist?
         Characters.find {waitlist: waitlist._id}, {fields: {name: 1, fits: 1, shiptype: 1, stationid: 1, systemid: 1, system: 1, waitlist: 1}}
     },
@@ -60,7 +58,7 @@ Meteor.publish "admin", (hostHash)->
   check hostHash, String
   char = Characters.findOne {hostid: hostHash}
   return [] unless char? and char.roles? and "admin" in char.roles
-  Characters.find {}, {fields: {shiptype: 1, system: 1, systemid: 1, corpname: 1, alliancename: 1, banned: 1, roles: 1, shipname: 1, regionname: 1, name: 1, corpid: 1, allianceid: 1, shiptypeid: 1}}
+  Characters.find {}, {fields: {shiptype: 1, system: 1, systemid: 1, corpname: 1, alliancename: 1, banned: 1, roles: 1, shipname: 1, regionname: 1, name: 1, corpid: 1, allianceid: 1, shiptypeid: 1, stationname: 1, stationid: 1, fits: 1}}
 
 Meteor.publish "profile", (hostHash, charId)->
   check hostHash, String

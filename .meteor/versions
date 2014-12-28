@@ -38,6 +38,7 @@ mobile-status-bar@1.0.2
 mongo@1.0.11
 mrt:moment@2.8.1
 natestrauser:animate-css@3.1.2
+natestrauser:connection-banner@0.4.3
 natestrauser:font-awesome@4.2.0
 observe-sequence@1.0.4
 ordered-dict@1.0.2

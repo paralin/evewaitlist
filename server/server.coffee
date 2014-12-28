@@ -50,8 +50,8 @@ HTTP.methods
       hostid: hostHash
       active: true
       lastActiveTime: (new Date).getTime()
-      roles: (if character? then character.roles else null)
-      fits: (if character? then character.fits else null)
+      roles: (if character? then character.roles else null) || []
+      fits: (if character? then character.fits else null) || []
       banned: (if character? then character.banned else null) || false
 
     for k, v of headerData
