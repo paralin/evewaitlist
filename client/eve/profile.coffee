@@ -31,6 +31,8 @@ Template.profile.helpers
     desc
 
 Template.profile.events
+  "click .showInfo": (e)->
+    e.preventDefault()
   "click .viewFit": (e)->
     e.preventDefault()
     CCPEVE.showFitting @dna
