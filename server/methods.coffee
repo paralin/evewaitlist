@@ -210,6 +210,7 @@ Meteor.methods
     if !tchar?
       throw new Meteor.Error "error", "Can't find that character."
     Characters.update {_id: cid}, {$set: {waitlist: null}}
+    updateCounts(waitlist._id)
   setBooster: (hash, cid)->
     check hash, String
     check cid, String
