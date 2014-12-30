@@ -31,6 +31,28 @@ Template.admin.events
           title: "Can't Set System"
           text: err.reason
           type: "error"
+  "click .setCustomSystem": ->
+    swal
+      title: "Set Custom System"
+      text: "Drag the system name to a chat message, send the message, right click it and select copy, and paste it in this field."
+      type: "prompt"
+      promptPlaceholder: "<url=showinfo:5//30004852>System</url>"
+      promptDefaultValue: ""
+    , (value)=>
+      return if !value? || value.length == 0
+      matches = filterSys value
+      if matches.length == 0
+        swal
+          title: "Invalid System"
+          text: "Couldn't find a valid system in the input you pasted. Be sure to follow the instructions closely!"
+          type: "error"
+      else
+        Meteor.call "setCustomSystem", Session.get("hostHash"), matches[0], (err)->
+          if err?
+            $.pnotify
+              title: "Can't Set System"
+              text: err.reason
+              type: "error"
   "click .showshiptype": (e)->
     e.preventDefault()
     CCPEVE.showInfo @shiptypeid

@@ -91,6 +91,17 @@ Meteor.methods
     unless char.roles? and "admin" in char.roles
       throw new Meteor.Error "error", "You are not authorized to perform this action."
     Settings.update {_id: "incursion"}, {$set: {sysid: char.systemid, sysname: char.system}}
+  setCustomSystem: (hash, match)->
+    check hash, String
+    check match, Object
+    check match.id, Number
+    check match.name, String
+    char = Characters.findOne({hostid: hash})
+    if !char?
+      throw new Meteor.Error "error", "The server does not know about your character."
+    unless char.roles? and "admin" in char.roles
+      throw new Meteor.Error "error", "You are not authorized to perform this action."
+    Settings.update {_id: "incursion"}, {$set: {sysid: match.id, sysname: match.name}}
   addRole: (hash, cid, role)->
     check hash, String
     check cid, String

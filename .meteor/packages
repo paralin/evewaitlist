@@ -15,7 +15,5 @@ tap:http-methods
 insecure
 copleykj:livestamp
 random
-natestrauser:font-awesome
-
 kidovate:bower@0.1.17
 natestrauser:connection-banner
