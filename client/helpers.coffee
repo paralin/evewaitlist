@@ -5,3 +5,5 @@ Template.registerHelper "characters", ->
 Template.registerHelper "inStagingSystem", ->
   char = Session.get "me"
   char.systemid is Settings.findOne({_id: "incursion"}).sysid
+Template.registerHelper "stagingSystem", ->
+  Settings.findOne {_id: "incursion"}

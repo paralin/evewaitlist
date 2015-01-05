@@ -7,7 +7,7 @@
         <img src={{fc.avatar}} alt="" class="widget-profile-avatar">
         <div class="widget-profile-header">
           <span>{{fc.name}}</span><br>
-          <a href="" class="da">Current FC </a>
+          <a href="" class="da">Staging system: {{stagingSystem.sysname}}</a>
         </div>
       </div>
       <div class="stat-row">
@@ -28,9 +28,15 @@
       </div>
       {{#if isCommander}}
       <div class="stat-row">
-        <a href="#" class="stat-cell bg-danger padding-sm valign-middle closeWaitlist" disabled={{nisCommander}}>
+        <a href="#" class="stat-cell bg-danger padding-sm valign-middle closeWaitlist">
           <i class="fa fa-ban pull-right"></i>
           Close waitlist
+        </a>
+      </div>
+      <div class="stat-row">
+        <a href="#" class="stat-cell padding-sm valign-middle setCurrentSystem">
+          <i class="fa fa-location-arrow pull-right"></i>
+          Set Staging System Here
         </a>
       </div>
       {{/if}}

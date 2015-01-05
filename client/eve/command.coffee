@@ -172,3 +172,10 @@ Template.command.events
     swal
       title: "Comment"
       text: primary.comment
+  "click .setCurrentSystem": ->
+    Meteor.call "setCurrentSystem", Session.get("hostHash"), (err)->
+      if err?
+        $.pnotify
+          title: "Can't Set System"
+          text: err.reason
+          type: "error"
