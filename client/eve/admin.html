@@ -7,12 +7,12 @@
         <div class="widget-profile-bg-icon"><i class="fa fa-location-arrow"></i></div>
         <div class="widget-profile-header">
           <span>{{sysname}}</span><br>
-          current incursion system
+          {{_ "current incursion system"}}
         </div>
       </div>
       <div class="list-group">
-        <a href="#" class="list-group-item setCurrentSystem">Set to current system</a>
-        <a href="#" class="list-group-item setCustomSystem">Set to custom system</a>
+        <a href="#" class="list-group-item setCurrentSystem">{{_ "Set to current system"}}</a>
+        <a href="#" class="list-group-item setCustomSystem">{{_ "Set to custom system"}}</a>
       </div>
     </div>
   </div>
@@ -32,15 +32,15 @@
               <div class="stat-counters bordered no-border-t text-center">
                   <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
                       <span class="text-bg"><strong>{{counts.logi}}</strong></span><br>
-                      <span class="text-xs">LOGISTICS</span>
+                      <span class="text-xs">{{_ "LOGISTICS"}}</span>
                   </div>
                   <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
                       <span class="text-bg"><strong>{{counts.dps}}</strong></span><br>
-                      <span class="text-xs">DAMAGE</span>
+                      <span class="text-xs">{{_ "DAMAGE"}}</span>
                   </div>
                   <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
                       <span class="text-bg"><strong>{{counts.other}}</strong></span><br>
-                      <span class="text-xs">OTHER</span>
+                      <span class="text-xs">{{_ "OTHER"}}</span>
                   </div>
               </div>
           </div>
@@ -48,7 +48,7 @@
               <!-- Success background, small padding, vertically aligned text -->
               <a href="#" class="stat-cell bg-danger padding-sm valign-middle closeWaitlist">
                   <i class="fa fa-ban pull-right"></i>
-                  Close waitlist
+                  {{_ "Close waitlist"}}
               </a>
           </div>
       </div>
@@ -58,8 +58,8 @@
   <div class="col-sm-4 col-md-4 col-lg-4">
       <div class="stat-panel">
           <div class="stat-cell bg-danger valign-middle">
-              <span class="text-xlg">INACTIVE</span><br/>
-              <span class="text-bg">The waitlist is not in use.</span>
+            <span class="text-xlg">{{_ "INACTIVE"}}</span><br/>
+            <span class="text-bg">{{_ "The waitlist is not in use."}}</span>
           </div>
       </div>
   </div>
@@ -68,7 +68,7 @@
 <div class="row">
     <div class="panel widget-threads" title="" style="padding-bottom: 10px">
         <div class="panel-heading">
-            <span class="panel-title"><i class="panel-title-icon fa fa-comments-o"></i>All Characters</span>
+          <span class="panel-title"><i class="panel-title-icon fa fa-comments-o"></i>{{_ "All Characters"}}</span>
         </div> <!-- / .panel-heading -->
         <div class="panel-body" title="">
             {{#each characters}}
@@ -77,7 +77,7 @@
                 <div class="thread-body">
                     <span class="thread-time">{{{corpInfo}}}</span>
                     <a href="#" class="thread-title gotoprofile">{{name}}</a>
-                    <div class="thread-info">with a <a href="#" class="showshiptype">{{shiptype}}</a> in <a href="#" class="showsystem">{{system}}</a></div>
+                    <div class="thread-info">{{_ "with a"}} <a href="#" class="showshiptype">{{shiptype}}</a> in <a href="#" class="showsystem">{{system}}</a></div>
                 </div>
             </div>
             {{/each}}

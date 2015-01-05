@@ -2,108 +2,108 @@
 {{#if hasTrust}}
 {{#if character.banned}}
 <div class="row" style="padding: 25px">
-    <div class="col-sm-5 col-md-5 col-lg-5">
-        <div class="stat-panel">
-            <div class="stat-cell bg-danger valign-middle">
-                <span class="text-xlg">BANNED</span><br/>
-                <span class="text-bg">Your character {{character.name}} has been banned.</span>
-            </div>
-        </div>
+  <div class="col-sm-5 col-md-5 col-lg-5">
+    <div class="stat-panel">
+      <div class="stat-cell bg-danger valign-middle">
+        <span class="text-xlg">{{_ "BANNED"}}</span><br/>
+        <span class="text-bg">{{_ "Your character"}} {{character.name}} {{_ "has been banned"}}.</span>
+      </div>
     </div>
+  </div>
 </div>
 {{else}}
 <div class="theme-default main-menu-animated" style="width: 100%;height:100%">
 
-    <div id="main-wrapper">
-        <div id="main-navbar" class="navbar navbar-inverse" role="navigation">
-            <div class="navbar-inner">
-                <div class="navbar-header">
-                    <a href="#" class="navbar-brand">
-                        <div><img alt="Valhalla Project" src="/images/logo.png"></div>
-                        The Valhalla Project
-                    </a>
+  <div id="main-wrapper">
+    <div id="main-navbar" class="navbar navbar-inverse" role="navigation">
+      <div class="navbar-inner">
+        <div class="navbar-header">
+          <a href="#" class="navbar-brand">
+            <div><img alt="{{_ 'NAME'}}" src="/images/logo.png"></div>
+            {{_ "NAME"}}
+          </a>
 
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar-collapse"><i class="navbar-icon"></i></button>
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar-collapse"><i class="navbar-icon"></i></button>
 
-                </div>
-
-                <div id="main-navbar-collapse" class="collapse navbar-collapse main-navbar-collapse">
-                    <div>
-                        <ul class="nav navbar-nav">
-                            <li> <a href="#" class="gotoLink" page-target="waitlist">Waitlist</a>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="da dropdown-toggle" data-toggle="dropdown">Fits</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#" class="gotoLink" page-target="logifits">Logistics</a></li>
-                                    <li><a href="#" class="gotoLink" page-target="hybridfits">Hybrids</a></li>
-                                    <li><a href="#" class="gotoLink" page-target="projfits">Projectile</a></li>
-                                    <li><a href="#" class="gotoLink" page-target="lazerfits">Lazers</a></li>
-                                    <li><a href="#" class="gotoLink" page-target="missilefits">Missiles</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#" class="gotoLink" page-target="insurance">Insurance</a>
-                            </li>
-                            {{#if canView "command"}}
-                            <li>
-                                <a href="#" class="gotoLink" page-target="command">Command</a>
-                            </li>
-                            {{/if}}
-                            {{#if canView "eventlog"}}
-                            <li>
-                                <a href="#" class="gotoLink" page-target="eventlog">Event Log</a>
-                            </li>
-                            {{/if}}
-                            {{#if canView "admin"}}
-                            <li>
-                                <a href="#" class="gotoLink" page-target="admin">Admin</a>
-                            </li>
-                            {{/if}}
-                        </ul>
-
-                        <div class="right clearfix">
-                            <ul class="nav navbar-nav pull-right right-navbar-nav">
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle user-menu" data-toggle="dropdown">
-                                        {{#if character}}
-                                        <img src="{{avatar character}}" alt="">
-                                        <span>{{character.name}}</span>
-                                        {{/if}}
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="" class="destoToStaging"><i class="dropdown-icon"></i>&nbsp;&nbsp;Set Destination to Staging</a></li>
-                                        <li><a href="" id="joinChatChannel"><i class="dropdown-icon"></i>&nbsp;&nbsp;Join Public Channel</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
 
-        <div id="content-wrapper">
-            <div class="page-header">
+        <div id="main-navbar-collapse" class="collapse navbar-collapse main-navbar-collapse">
+          <div>
+            <ul class="nav navbar-nav">
+              <li> <a href="#" class="gotoLink" page-target="waitlist">{{_ "Waitlist"}}</a>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="da dropdown-toggle" data-toggle="dropdown">{{_ "Fits"}}</a>
+                <ul class="dropdown-menu">
+                  <li><a href="#" class="gotoLink" page-target="logifits">{{_ "Logistics"}}</a></li>
+                  <li><a href="#" class="gotoLink" page-target="hybridfits">{{_ "Hybrids"}}</a></li>
+                  <li><a href="#" class="gotoLink" page-target="projfits">{{_ "Projectile"}}</a></li>
+                  <li><a href="#" class="gotoLink" page-target="lazerfits">{{_ "Lazers"}}</a></li>
+                  <li><a href="#" class="gotoLink" page-target="missilefits">{{_ "Missiles"}}</a></li>
+                </ul>
+              </li>
+              <li>
+                <a href="#" class="gotoLink" page-target="insurance">{{_ "Insurance"}}</a>
+              </li>
+              {{#if canView "command"}}
+              <li>
+                <a href="#" class="gotoLink" page-target="command">{{_ "Command"}}</a>
+              </li>
+              {{/if}}
+              {{#if canView "eventlog"}}
+              <li>
+                <a href="#" class="gotoLink" page-target="eventlog">{{_ "Event Log"}}</a>
+              </li>
+              {{/if}}
+              {{#if canView "admin"}}
+              <li>
+                <a href="#" class="gotoLink" page-target="admin">{{_ "Admin"}}</a>
+              </li>
+              {{/if}}
+            </ul>
 
-                <div class="row">
-                    <h1 class="col-xs-12 col-sm-4 text-center text-left-sm"><i class="page-header-icon"></i>&nbsp;&nbsp;{{activePage.title}}</h1>
-
-                    <div class="col-xs-12 col-sm-8">
-                        <div class="row">
-                            <hr class="visible-xs no-grid-gutter-h">
-
-                            <div class="visible-xs clearfix form-group-margin"></div>
-                        </div>
-                    </div>
-                </div>
+            <div class="right clearfix">
+              <ul class="nav navbar-nav pull-right right-navbar-nav">
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle user-menu" data-toggle="dropdown">
+                    {{#if character}}
+                    <img src="{{avatar character}}" alt="">
+                    <span>{{character.name}}</span>
+                    {{/if}}
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a href="" class="destoToStaging"><i class="dropdown-icon"></i>&nbsp;&nbsp;{{_ "Set Destination to Staging"}}</a></li>
+                    <li><a href="" id="joinChatChannel"><i class="dropdown-icon"></i>&nbsp;&nbsp;{{_ "Join Public Channel"}}</a></li>
+                  </ul>
+                </li>
+              </ul>
             </div>
-
-            {{#if character}}
-            {{>Template.dynamic template=activeTemplate}}
-            {{/if}}
+          </div>
         </div>
+      </div>
     </div>
+
+    <div id="content-wrapper">
+      <div class="page-header">
+
+        <div class="row">
+          <h1 class="col-xs-12 col-sm-4 text-center text-left-sm"><i class="page-header-icon"></i>&nbsp;&nbsp;{{activePage.title}}</h1>
+
+          <div class="col-xs-12 col-sm-8">
+            <div class="row">
+              <hr class="visible-xs no-grid-gutter-h">
+
+              <div class="visible-xs clearfix form-group-margin"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {{#if character}}
+      {{>Template.dynamic template=activeTemplate}}
+      {{/if}}
+    </div>
+  </div>
 </div>
 {{/if}}
 {{else}}
@@ -112,12 +112,12 @@
 </template>
 <template name="requestTrust">
 <div style="width: 100%;height:100%;padding:20px">
-    <h1>This site needs trust to work.</h1>
-    Trust allows the system to view basic information about your character: where you are, what ship you are in. The FC can view this information in realtime while the page is open in your ingame browser. The system can't see anything about you without trust, so you need to accept to continue.<br><br>
-    Just click the button and hit "trust website":<br>
-    <button class="requestTrustButton btn btn-success">Request Trust</button>
-    <br><br>
-    <h3>If nothing comes up...</h3>
-    It is possible you clicked "Ignore Always" before. To fix this, go to Options - Trusted Sites and remove the ignored entry for this site, then click the button again.
+  <h1>{{_ "TRUST"}}</h1>
+  {{_ "TRUSTE"}}
+  {{_ "TRUSTE2"}}<br>
+  <button class="requestTrustButton btn btn-success">{{_ "Request Trust"}}</button>
+  <br><br>
+  <h3>{{_ "If nothing comes up"}}...</h3>
+  {{_ "TRUSTE3"}}
 </div>
 </template>

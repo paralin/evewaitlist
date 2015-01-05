@@ -1,10 +1,10 @@
 Meteor.startup ->
   if not @eveClient
     return
-  
+
   pathArray = window.location.href.split '/'
   webAddress = pathArray[0]+"//"+pathArray[2]+"/"
-  
+
   if !Session.get("hostHash")?
     Session.set("hostHash", Random.id())
 

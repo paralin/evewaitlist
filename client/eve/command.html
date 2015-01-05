@@ -7,22 +7,22 @@
         <img src={{fc.avatar}} alt="" class="widget-profile-avatar">
         <div class="widget-profile-header">
           <span>{{fc.name}}</span><br>
-          <a href="" class="da">Staging system: {{stagingSystem.sysname}}</a>
+          <a href="" class="da">{{_ "Staging system"}}: {{stagingSystem.sysname}}</a>
         </div>
       </div>
       <div class="stat-row">
         <div class="stat-counters bordered no-border-t text-center">
           <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
             <span class="text-bg"><strong>{{counts.logi}}</strong></span><br>
-            <span class="text-xs">LOGISTICS</span>
+            <span class="text-xs">{{_ "LOGISTICS"}}</span>
           </div>
           <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
             <span class="text-bg"><strong>{{counts.dps}}</strong></span><br>
-            <span class="text-xs">DAMAGE</span>
+            <span class="text-xs">{{_ "DAMAGE"}}</span>
           </div>
           <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
             <span class="text-bg"><strong>{{counts.other}}</strong></span><br>
-            <span class="text-xs">OTHER</span>
+            <span class="text-xs">{{_ "OTHER"}}</span>
           </div>
         </div>
       </div>
@@ -30,13 +30,13 @@
       <div class="stat-row">
         <a href="#" class="stat-cell bg-danger padding-sm valign-middle closeWaitlist">
           <i class="fa fa-ban pull-right"></i>
-          Close waitlist
+          {{_ "Close waitlist"}}
         </a>
       </div>
       <div class="stat-row">
         <a href="#" class="stat-cell padding-sm valign-middle setCurrentSystem">
           <i class="fa fa-location-arrow pull-right"></i>
-          Set Staging System Here
+          {{_ "Set Staging System Here"}}
         </a>
       </div>
       {{/if}}
@@ -46,11 +46,11 @@
     <div class="panel panel-primary panel-dark widget-profile stat-panel">
       <div class="panel-heading" id="boosterName" style="cursor: pointer">
         <div class="widget-profile-header">
-          <span>Fleet Boosters</span><br>
+          <span>{{_ "Fleet Boosters"}}</span><br>
           {{#if isCommander}}
-          <a href="" class="da">Pick boosters from the list</a>
+          <a href="" class="da">{{_ "Pick boosters from the list"}}</a>
           {{else}}
-          <a href="" class="da">Currently boosting fleet</a>
+          <a href="" class="da">{{_ "Currently boosting fleet"}}</a>
           {{/if}}
         </div>
       </div>
@@ -59,7 +59,7 @@
       <div class="stat-row">
         <a href="#" class="stat-cell bg-info padding-sm valign-middle setBoost" disabled={{nisCommander}}>
           <i class="fa fa-male pull-right"></i>
-          Set to {{name}}
+          {{_ "Set to"}} {{name}}
         </a>
       </div>
       {{/each}}
@@ -68,7 +68,7 @@
       <div class="stat-row">
         <a href="#" class="stat-cell bg-danger padding-sm valign-middle removeBoost" disabled={{nisCommander}}>
           <i class="fa fa-ban pull-right"></i>
-          Remove {{name}}
+          {{_ "Remove"}} {{name}}
         </a>
       </div>
       {{/each}}
@@ -83,13 +83,13 @@
         <div class="widget-profile-header">
           {{#if manager}}
           <span>{{manager.name}}</span><br>
-          <a href="" class="da">Current manager</a>
+          <a href="" class="da">{{_ "Current manager"}}</a>
           {{else}}
-          <span>No Active Manager</span><br>
+          <span>{{_ "No Active Manager"}}</span><br>
           {{#if isCommander}}
-          <a href="" class="da">Pick a manager from the list</a>
+          <a href="" class="da">{{_ "Pick a manager from the list"}}</a>
           {{else}}
-          <a href="" class="da">No waitlist manager</a>
+          <a href="" class="da">{{_ "No waitlist manager"}}</a>
           {{/if}}
           {{/if}}
         </div>
@@ -99,7 +99,7 @@
       <div class="stat-row">
         <a href="#" class="stat-cell bg-danger padding-sm valign-middle removeManager" disabled={{nisCommander}}>
           <i class="fa fa-ban pull-right"></i>
-          Remove manager
+          {{_ "Remove manager"}}
         </a>
       </div>
       {{else}}
@@ -107,7 +107,7 @@
       <div class="stat-row">
         <a href="#" class="stat-cell bg-info padding-sm valign-middle setManager" disabled={{nisCommander}}>
           <i class="fa fa-male pull-right"></i>
-          Set to {{name}}
+          {{_ "Set to"}} {{name}}
         </a>
       </div>
       {{/each}}
@@ -121,14 +121,14 @@
     <div class="panel panel-danger panel-dark widget-profile stat-panel">
       <div class="panel-heading">
         <div class="widget-profile-header">
-          <span>Waitlist Inactive</span><br>
+          <span>{{_ "Waitlist Inactive"}}</span><br>
           <a href="" class="da"></a>
         </div>
       </div>
       <div class="stat-row">
         <a href="#" class="stat-cell bg-success padding-sm valign-middle openWaitlist">
           <i class="fa fa-check pull-right"></i>
-          Open waitlist as FC
+          {{_ "Open waitlist as FC"}}
         </a>
       </div>
     </div>
@@ -156,7 +156,7 @@
               <a href="#" class="btn btn-sm btn-success sendInv"><i class="fa fa-check"></i></a>
             </div>
             <a href="#" class="follower-name">{{name}}</a><br>
-            <a href="#" class="follower-username">with a {{getFitShiptype}} in {{system}}</a>
+            <a href="#" class="follower-username">{{_ "with a"}} {{getFitShiptype}} {{_ "in"}} {{system}}</a>
           </div>
         </div>
         {{/each}}

@@ -8,22 +8,22 @@
         <img src={{fc.avatar}} alt="" class="widget-profile-avatar">
         <div class="widget-profile-header">
           <span>{{fc.name}}</span><br>
-          <a href="" class="da">Staging system: {{stagingSystem.sysname}}</a>
+          <a href="" class="da">{{_ "Staging system"}}: {{stagingSystem.sysname}}</a>
         </div>
       </div>
       <div class="stat-row">
         <div class="stat-counters bordered no-border-t text-center">
           <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
             <span class="text-bg"><strong>{{counts.logi}}</strong></span><br>
-            <span class="text-xs">LOGISTICS</span>
+            <span class="text-xs">{{_ "LOGISTICS"}}</span>
           </div>
           <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
             <span class="text-bg"><strong>{{counts.dps}}</strong></span><br>
-            <span class="text-xs">DAMAGE</span>
+            <span class="text-xs">{{_ "DAMAGE"}}</span>
           </div>
           <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
             <span class="text-bg"><strong>{{counts.other}}</strong></span><br>
-            <span class="text-xs">OTHER</span>
+            <span class="text-xs">{{_ "OTHER"}}</span>
           </div>
         </div>
       </div>
@@ -32,12 +32,12 @@
         {{#if inwaitlist}}
         <a href="#" class="stat-cell bg-danger padding-sm valign-middle leaveWaitlist">
           <i class="fa fa-ban pull-right"></i>
-          Leave waitlist
+          {{_ "Leave waitlist"}}
         </a>
         {{else}}
         <a href="#" class="stat-cell bg-success padding-sm valign-middle joinWaitlist">
           <i class="fa fa-check pull-right"></i>
-          Join waitlist
+          {{_ "Join waitlist"}}
         </a>
         {{/if}}
       </div>
@@ -45,7 +45,7 @@
         {{#unless inStagingSystem}}
         <a href="#" class="stat-cell bg-info padding-sm valign-middle destoToStaging">
           <i class="fa fa-location-arrow pull-right"></i>
-          Set Destination to Dockup
+          {{_ "Set Destination to Staging"}}
         </a>
         {{/unless}}
       </div>
@@ -56,14 +56,14 @@
   <div class="col-sm-3 col-md-3 col-lg-3">
     <div class="stat-panel">
       <div class="stat-cell bg-danger valign-middle">
-        <span class="text-xlg">INACTIVE</span><br/>
-        <span class="text-bg">The waitlist is not in use.</span>
+        <span class="text-xlg">{{_ "INACTIVE"}}</span><br/>
+        <span class="text-bg">{{_ "The waitlist is not in use."}}</span>
       </div>
       <div class="stat-row">
         {{#unless inStagingSystem}}
         <a href="#" class="stat-cell bg-info padding-sm valign-middle destoToStaging">
           <i class="fa fa-location-arrow pull-right"></i>
-          Set Destination to Dockup
+          {{_ "Set Destination to Staging"}}
         </a>
         {{/unless}}
       </div>
@@ -73,7 +73,7 @@
   <div class="col-sm-8 col-md-8 col-lg-9">
     <div class="panel widget-followers" title="">
       <div class="panel-heading">
-        <span class="panel-title">Your Fits</span>
+        <span class="panel-title">{{_ "Your Fits"}}</span>
       </div> <!-- / .panel-heading -->
       <div class="panel-body" title="">
         {{#each character.fits}}
@@ -81,14 +81,14 @@
           <img src="{{avatar shipid}}" alt="" class="follower-avatar" title="" style="">
           <div class="body">
             <div class="follower-controls">
-              <a href="#" class="btn btn-sm btn-info setComment"><span>Comment</span></a>
+              <a href="#" class="btn btn-sm btn-info setComment"><span>{{_ "Comment"}}</span></a>
               {{#unless primary}}
-              <a href="#" class="btn btn-sm btn-primary makePrimary"><span>Make Primary</span></a>
+              <a href="#" class="btn btn-sm btn-primary makePrimary"><span>{{_ "Make Primary"}}</span></a>
               {{/unless}}
-              <a href="#" class="btn btn-sm btn-danger removeFit"><span>Remove</span></a>
+              <a href="#" class="btn btn-sm btn-danger removeFit"><span>{{_ "Remove"}}</span></a>
             </div>
             <a href="#" class="follower-name da">{{shiptype shipid}}</a><br>
-            <a href="#" class="follower-username viewFit">Click here to view</a>
+            <a href="#" class="follower-username viewFit">{{_ "Click here to view"}}</a>
           </div>
         </div>
         {{/each}}
@@ -97,7 +97,7 @@
         <div class="fit-input">
           <textarea rows="1" class="form-control" style="overflow: hidden; word-wrap: break-word; height: 31px;" id="addFitInput"></textarea>
         </div>
-        <button class="btn btn-primary add-fit">Add Fit</button>
+        <button class="btn btn-primary add-fit">{{_ "Add Fit"}}</button>
       </form>
     </div>
   </div>

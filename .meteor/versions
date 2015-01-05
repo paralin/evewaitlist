@@ -11,6 +11,7 @@ callback-hook@1.0.2
 check@1.0.3
 coffeescript@1.0.5
 copleykj:livestamp@1.1.5
+cwaring:modernizr@0.0.2
 ddp@1.0.13
 deps@1.0.6
 ejson@1.0.5
@@ -41,6 +42,7 @@ natestrauser:animate-css@3.1.2
 natestrauser:connection-banner@0.4.3
 observe-sequence@1.0.4
 ordered-dict@1.0.2
+pcel:loading@1.0.1
 random@1.0.2
 reactive-dict@1.0.5
 reactive-var@1.0.4
@@ -52,6 +54,7 @@ session@1.0.5
 spacebars@1.0.4
 spacebars-compiler@1.0.4
 tap:http-methods@0.0.23
+tap:i18n@1.2.1
 templating@1.0.10
 tracker@1.0.4
 ui@1.0.5
