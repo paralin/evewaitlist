@@ -1,89 +1,105 @@
 <template name="waitlist">
 <div class="row">
-    {{#with fleet}}
-    <div class="col-sm-4 col-md-4 col-lg-3">
-        <div class="panel panel-info panel-dark widget-profile stat-panel">
-            <div class="panel-heading" id="fcName" style="cursor: pointer">
-                <div class="widget-profile-bg-icon"><i class="fa fa-twitter" style="display: none !important;"></i></div>
-                <img src={{fc.avatar}} alt="" class="widget-profile-avatar">
-                <div class="widget-profile-header">
-                    <span>{{fc.name}}</span><br>
-                    <a href="" class="da">Current FC </a>
-                </div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-counters bordered no-border-t text-center">
-                    <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
-                        <span class="text-bg"><strong>{{counts.logi}}</strong></span><br>
-                        <span class="text-xs">LOGISTICS</span>
-                    </div>
-                    <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
-                        <span class="text-bg"><strong>{{counts.dps}}</strong></span><br>
-                        <span class="text-xs">DAMAGE</span>
-                    </div>
-                    <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
-                        <span class="text-bg"><strong>{{counts.other}}</strong></span><br>
-                        <span class="text-xs">OTHER</span>
-                    </div>
-                </div>
-            </div>
-            <div class="stat-row">
-                <!-- Success background, small padding, vertically aligned text -->
-                {{#if inwaitlist}}
-                <a href="#" class="stat-cell bg-danger padding-sm valign-middle leaveWaitlist">
-                    <i class="fa fa-ban pull-right"></i>
-                    Leave waitlist
-                </a>
-                {{else}}
-                <a href="#" class="stat-cell bg-success padding-sm valign-middle joinWaitlist">
-                    <i class="fa fa-check pull-right"></i>
-                    Join waitlist
-                </a>
-                {{/if}}
-            </div>
+  {{#with fleet}}
+  <div class="col-sm-4 col-md-4 col-lg-3">
+    <div class="panel panel-info panel-dark widget-profile stat-panel">
+      <div class="panel-heading" id="fcName" style="cursor: pointer">
+        <div class="widget-profile-bg-icon"><i class="fa fa-twitter" style="display: none !important;"></i></div>
+        <img src={{fc.avatar}} alt="" class="widget-profile-avatar">
+        <div class="widget-profile-header">
+          <span>{{fc.name}}</span><br>
+          <a href="" class="da">Current FC </a>
         </div>
-    </div>
-    {{/with}}
-    {{#unless fleet}}
-    <div class="col-sm-3 col-md-3 col-lg-3">
-        <div class="stat-panel">
-            <div class="stat-cell bg-danger valign-middle">
-                <span class="text-xlg">INACTIVE</span><br/>
-                <span class="text-bg">The waitlist is not in use.</span>
-            </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-counters bordered no-border-t text-center">
+          <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
+            <span class="text-bg"><strong>{{counts.logi}}</strong></span><br>
+            <span class="text-xs">LOGISTICS</span>
+          </div>
+          <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
+            <span class="text-bg"><strong>{{counts.dps}}</strong></span><br>
+            <span class="text-xs">DAMAGE</span>
+          </div>
+          <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
+            <span class="text-bg"><strong>{{counts.other}}</strong></span><br>
+            <span class="text-xs">OTHER</span>
+          </div>
         </div>
+      </div>
+      <div class="stat-row">
+        <!-- Success background, small padding, vertically aligned text -->
+        {{#if inwaitlist}}
+        <a href="#" class="stat-cell bg-danger padding-sm valign-middle leaveWaitlist">
+          <i class="fa fa-ban pull-right"></i>
+          Leave waitlist
+        </a>
+        {{else}}
+        <a href="#" class="stat-cell bg-success padding-sm valign-middle joinWaitlist">
+          <i class="fa fa-check pull-right"></i>
+          Join waitlist
+        </a>
+        {{/if}}
+      </div>
+      <div class="stat-row">
+        {{#unless inStagingSystem}}
+        <a href="#" class="stat-cell bg-info padding-sm valign-middle destoToStaging">
+          <i class="fa fa-location-arrow pull-right"></i>
+          Set Destination to Dockup
+        </a>
+        {{/unless}}
+      </div>
     </div>
-    {{/unless}}
-    <div class="col-sm-8 col-md-8 col-lg-9">
-        <div class="panel widget-followers" title="">
-            <div class="panel-heading">
-                <span class="panel-title">Your Fits</span>
-            </div> <!-- / .panel-heading -->
-            <div class="panel-body" title="">
-                {{#each character.fits}}
-                <div class="follower" title="">
-                    <img src="{{avatar shipid}}" alt="" class="follower-avatar" title="" style="">
-                    <div class="body">
-                        <div class="follower-controls">
-                            <a href="#" class="btn btn-sm btn-info setComment"><span>Comment</span></a>
-                            {{#unless primary}}
-                            <a href="#" class="btn btn-sm btn-primary makePrimary"><span>Make Primary</span></a>
-                            {{/unless}}
-                            <a href="#" class="btn btn-sm btn-danger removeFit"><span>Remove</span></a>
-                        </div>
-                        <a href="#" class="follower-name da">{{shiptype shipid}}</a><br>
-                        <a href="#" class="follower-username viewFit">Click here to view</a>
-                    </div>
-                </div>
-                {{/each}}
+  </div>
+  {{/with}}
+  {{#unless fleet}}
+  <div class="col-sm-3 col-md-3 col-lg-3">
+    <div class="stat-panel">
+      <div class="stat-cell bg-danger valign-middle">
+        <span class="text-xlg">INACTIVE</span><br/>
+        <span class="text-bg">The waitlist is not in use.</span>
+      </div>
+      <div class="stat-row">
+        {{#unless inStagingSystem}}
+        <a href="#" class="stat-cell bg-info padding-sm valign-middle destoToStaging">
+          <i class="fa fa-location-arrow pull-right"></i>
+          Set Destination to Dockup
+        </a>
+        {{/unless}}
+      </div>
+    </div>
+  </div>
+  {{/unless}}
+  <div class="col-sm-8 col-md-8 col-lg-9">
+    <div class="panel widget-followers" title="">
+      <div class="panel-heading">
+        <span class="panel-title">Your Fits</span>
+      </div> <!-- / .panel-heading -->
+      <div class="panel-body" title="">
+        {{#each character.fits}}
+        <div class="follower" title="">
+          <img src="{{avatar shipid}}" alt="" class="follower-avatar" title="" style="">
+          <div class="body">
+            <div class="follower-controls">
+              <a href="#" class="btn btn-sm btn-info setComment"><span>Comment</span></a>
+              {{#unless primary}}
+              <a href="#" class="btn btn-sm btn-primary makePrimary"><span>Make Primary</span></a>
+              {{/unless}}
+              <a href="#" class="btn btn-sm btn-danger removeFit"><span>Remove</span></a>
             </div>
-            <form class="panel-footer chat-controls">
-                <div class="fit-input">
-                    <textarea rows="1" class="form-control" style="overflow: hidden; word-wrap: break-word; height: 31px;" id="addFitInput"></textarea>
-                </div>
-                <button class="btn btn-primary add-fit">Add Fit</button>
-            </form>
+            <a href="#" class="follower-name da">{{shiptype shipid}}</a><br>
+            <a href="#" class="follower-username viewFit">Click here to view</a>
+          </div>
         </div>
+        {{/each}}
+      </div>
+      <form class="panel-footer chat-controls">
+        <div class="fit-input">
+          <textarea rows="1" class="form-control" style="overflow: hidden; word-wrap: break-word; height: 31px;" id="addFitInput"></textarea>
+        </div>
+        <button class="btn btn-primary add-fit">Add Fit</button>
+      </form>
     </div>
+  </div>
 </div>
 </template>

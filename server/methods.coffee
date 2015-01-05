@@ -28,7 +28,6 @@ Meteor.methods
       throw new Meteor.Error "error", "You already have that exact fit in your fit list."
     fit = {dna: dna, shipid: id, fid: Random.id(), primary: char.fits.length==0, comment: ""}
     Characters.update {_id: char._id}, {$push: {fits: fit}}
-    #Characters.update {_id: char._id}, {$set: {fits: char.fits}}
   delFit: (hash, fid)->
     check hash, String
     check fid, String
@@ -55,11 +54,9 @@ Meteor.methods
     fit = _.findWhere char.fits, {fid: id}
     if !fit?
       throw new Meteor.Error "error", "Can't find the fit you want to make primary."
-    for fi in char.fits
-      fi.primary = fi is fit
-    Characters.update {_id: char._id}, {$set: {fits: char.fits}}
-    if char.waitlist?
-      updateCounts(char.waitlist)
+    Characters.update {_id: char._id, "fits.primary": true}, {$set: {"fits.$.primary": false}}
+    Characters.update {_id: char._id, "fits.fid": id}, {$set: {"fits.$.primary": true}}
+    updateCounts(char.waitlist) if char.waitlist?
   joinWaitlist: (hash, id)->
     check hash, String
     check id, String

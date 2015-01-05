@@ -15,8 +15,6 @@ Template.waitlist.helpers
     typeids[id]
   "avatar": (id)->
     "https://image.eveonline.com/Render/#{id}_128.png"
-  "character": ->
-    Session.get "me"
   "inwaitlist": ->
     char = Session.get "me"
     char.waitlist? and char.waitlist is @_id

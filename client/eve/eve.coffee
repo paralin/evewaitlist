@@ -28,7 +28,7 @@ Template.eveClient.helpers
     Session.get("hasTrust")
 
 Template.eveClient.events
-  "click #destoToStaging": (e)->
+  "click .destoToStaging": (e)->
     e.preventDefault()
     CCPEVE.setDestination Settings.findOne({_id: "incursion"}).sysid
   "click #joinChatChannel": (e)->

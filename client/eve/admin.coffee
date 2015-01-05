@@ -1,8 +1,6 @@
 Template.admin.helpers
   "incursion": ->
     Settings.findOne {_id: "incursion"}
-  "characters": ->
-    Characters.find({})
   "corpInfo": ->
     info = ""
     if @corpname?
