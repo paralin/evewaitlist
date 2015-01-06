@@ -110,6 +110,8 @@ Template.command.events
       type: "prompt"
       promptPlaceholder: "Rejection reason"
       promptDefaultValue: ""
+      confirmButtonColor: "#DD6B55"
+      confirmButtonText: "Reject"
     , (reason)->
       Meteor.call "deleteFromWaitlist", Session.get("hostHash"), id, false, reason, (err)->
         if err?
