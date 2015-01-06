@@ -7,3 +7,4 @@ if [ ! -f ./.git/hooks/pre-commit ]; then
 fi
 VERSION=`git describe --always --tags --dirty`
 echo "@gitid = \"$VERSION\"" > version.coffee
+git add version.coffee
