@@ -44,6 +44,12 @@ Meteor.publishComposite "command", (hash)->
       find: (waitlist)->
         return if !(waitlist? and waitlist.manager?)
         Characters.find {_id: waitlist.manager}, {limit: 1, fields: {name: 1}}
+    },
+    {
+      find: (waitlist)->
+        return if !(waitlist? and waitlist.booster?)
+        #Active false because already would be published above
+        Characters.find {_id: {$in: waitlist.booster}, active: false}, {fields: {name: 1}}
     }
   ]
 
