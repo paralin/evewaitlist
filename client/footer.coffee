@@ -2,7 +2,7 @@ generateCharMsg = (char)->
   """
 Dear Morpheus Deathbrew,
 
-I have an issue to report with the waitlist, iteration 1.0. Here is my issue:
+Here is my issue report for the problem I'm experiencing:
 
 
 Sincerely,
