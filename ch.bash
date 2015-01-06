@@ -5,6 +5,6 @@ if [ ! -f ./.git/hooks/pre-commit ]; then
   chmod +x ./.git/hooks/pre-commit
   echo "Created pre-commit hook"
 fi
-VERSION=`git describe --always --tags --dirty`
+VERSION=`git describe --always --tags`
 echo "@gitid = \"$VERSION\"" > version.coffee
 git add version.coffee
