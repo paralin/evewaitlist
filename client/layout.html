@@ -2,16 +2,20 @@
 <title>EVE Fleet Waitlist</title>
 </head>
 <body>
-  {{>connectionBanner}}
+  <div id="ce">
+    {{>connectionBanner}}
 
-  {{#if showLoading}}
-  {{>loading}}
-  {{/if}}
+    {{#if showLoading}}
+    {{>loading}}
+    {{/if}}
 
-  {{#if isEve}}
-  {{>eveClient}}
-  {{else}}
-  {{>browserClient}}
-  {{/if}}
+    {{#if isEve}}
+    {{>eveClient}}
+    {{else}}
+    {{>browserClient}}
+    {{/if}}
+  </div>
+
+  {{> footer}}
 
 </body>
