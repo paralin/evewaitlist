@@ -204,8 +204,12 @@ Meteor.methods
     if waitlist?
       throw new Meteor.Error "error", "There is already an active waitlist."
     openWaitlist char
-  deleteFromWaitlist: (hash, cid, accepted)->
+  deleteFromWaitlist: (hash, cid, accepted, reason)->
     check hash, String
+    check accepted, Boolean
+    check cid, String
+    if accepted
+      check reason, String
     char = Characters.findOne({hostid: hash})
     if !char?
       throw new Meteor.Error "error", "The server does not know about your character."

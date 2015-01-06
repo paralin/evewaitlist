@@ -1,5 +1,7 @@
 @rejectMail = """
 
+========
+
 Thank you for using the TVP Waitlist... I hope you are enjoying using it as much as the FC team!
 
 The current FC has deemed your fit not up to standard, this could be for any number of reasons, from a lack of tank, through to too much tank reducing your applied damage.

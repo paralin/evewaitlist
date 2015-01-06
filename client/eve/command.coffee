@@ -97,26 +97,28 @@ Template.command.events
     primary = _.findWhere @fits, {primary: true}
     return if !primary?
     CCPEVE.showFitting primary.dna
+  "click .openConvo": (e)->
+    e.preventDefault()
+    CCPEVE.startConversation @_id
   "click .delWaitlist": (e)->
     e.preventDefault()
-    Meteor.call "deleteFromWaitlist", Session.get("hostHash"), @_id, false, (err)->
-      if err?
-        $.pnotify
-          title: "Can't Remove"
-          text: err.reason
-          type: "error"
-  "click .delMail": (e)->
-    e.preventDefault()
     id = @_id
-    CCPEVE.sendMail id, "Hello, TVP Pilot!", rejectMail
-    Meteor.call "deleteFromWaitlist", Session.get("hostHash"), @_id, false, (err)->
-      if err?
-        $.pnotify
-          title: "Can't Remove"
-          text: err.reason
-          type: "error"
-      else
-        CCPEVE.sendMail id, "Hello, TVP Pilot!", rejectMail
+    char = Characters.findOne {_id: id}
+    swal
+      title: "Reject from Waitlist"
+      text: "You are rejecting #{char.name} from the waitlist."
+      type: "prompt"
+      promptPlaceholder: "Rejection reason"
+      promptDefaultValue: ""
+    , (reason)->
+      Meteor.call "deleteFromWaitlist", Session.get("hostHash"), id, false, reason, (err)->
+        if err?
+          $.pnotify
+            title: "Can't Remove"
+            text: err.reason
+            type: "error"
+        else
+          CCPEVE.sendMail id, "Hello, TVP Pilot!", reason+rejectMail
   "click .sendInv": (e)->
     e.preventDefault()
     id = @_id
