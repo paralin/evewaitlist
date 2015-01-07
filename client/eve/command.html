@@ -150,12 +150,14 @@
           <img src="https://image.eveonline.com/Character/{{_id}}_256.jpg" alt="" class="follower-avatar">
           <div class="body">
             <div class="follower-controls">
+              {{#if isCommanderOrManager}}
               {{#if hasComment}}
               <a href="#" class="btn btn-sm btn-info viewComment"><i class="fa fa-tag"></i></a>
               {{/if}}
               <a href="#" class="btn btn-sm btn-danger delWaitlist"><i class="fa fa-trash"></i></a>
               <a href="#" class="btn btn-sm btn-error  openConvo"><i class="fa fa-comments"></i></a>
               <a href="#" class="btn btn-sm btn-success sendInv"><i class="fa fa-check"></i></a>
+              {{/if}}
             </div>
             <a href="#" class="follower-name">{{name}}</a><br>
             <a href="#" class="follower-username">{{_ "with a"}} {{getFitShiptype}} {{_ "in"}} {{system}}</a>

@@ -56,6 +56,6 @@
     canView: ->
       character = Session.get "me"
       waitlist = Waitlists.findOne {finished: false}
-      character? and character.roles? and (("manager" in character.roles) or ("command" in character.roles)) and (!waitlist? or waitlist.commander is character._id or waitlist.manager is character._id)
+      character? and character.roles? and (("manager" in character.roles) or ("command" in character.roles))
     onView: ->
       Meteor.subscribe "command", Session.get("hostHash")
