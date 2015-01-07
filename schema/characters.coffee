@@ -52,11 +52,16 @@ CharacterSchema = new SimpleSchema
   waitlist:
     type: String
     optional: true
+    index: true
+  waitlistJoinedTime:
+    type: Date
+    optional: true
   hostid:
     type: String
     index: true
   active:
     type: Boolean
+    index: true
   lastActiveTime:
     type: Number
   roles:
