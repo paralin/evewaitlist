@@ -47,6 +47,7 @@ HTTP.methods
       shiptypeid: parseInt headers["eve_shiptypeid"]
       corproles: headers["eve_corprole"]
       waitlist: (if character? then character.waitlist else null)
+      waitlistJoinedTime: (if character? then character.waitlistJoinedTime else null)
       hostid: hostHash
       active: true
       lastActiveTime: (new Date).getTime()

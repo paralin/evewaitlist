@@ -47,7 +47,7 @@ Template.command.helpers
     search = null
     search = logi if i is 0
     search = dps if i is 1
-    sort = {waitlistJoinedTime: -1}
+    sort = {waitlistJoinedTime: 1}
     if search?
       return Characters.find {"fits": {$elemMatch: {primary: true, shipid: {$in: search}}}, "waitlist": Waitlists.findOne()._id}, {sort: sort}
     else
