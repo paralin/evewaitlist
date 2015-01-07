@@ -20,6 +20,8 @@ Template.admin.helpers
         avatar: "https://image.eveonline.com/Character/#{commander._id}_128.jpg"
         id: commander._id
     }
+  "characters": ->
+    Characters.find {}, {sort: {active: -1}}
 
 Template.admin.events
   "click .setCurrentSystem": ->

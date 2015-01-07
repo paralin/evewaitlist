@@ -1,6 +1,6 @@
 Meteor.publishComposite "igbdata", (hostHash)->
   find: ->
-    TrustStatus.find {_id: hostHash}, {limit: 1}
+    TrustStatus.find {_id: hostHash}, {limit: 2}
   children: [
     {
       find: (trust)->
@@ -66,7 +66,7 @@ Meteor.publish "admin", (hostHash)->
   check hostHash, String
   char = Characters.findOne {hostid: hostHash}
   return [] unless char? and char.roles? and "admin" in char.roles
-  Characters.find {}, {fields: {shiptype: 1, system: 1, systemid: 1, corpname: 1, alliancename: 1, banned: 1, roles: 1, shipname: 1, regionname: 1, name: 1, corpid: 1, allianceid: 1, shiptypeid: 1, stationname: 1, stationid: 1, fits: 1}}
+  Characters.find {}, {fields: {shiptype: 1, system: 1, systemid: 1, corpname: 1, alliancename: 1, banned: 1, roles: 1, shipname: 1, regionname: 1, name: 1, corpid: 1, allianceid: 1, shiptypeid: 1, stationname: 1, stationid: 1, fits: 1, active: 1}}
 
 Meteor.publish "profile", (hostHash, charId)->
   check hostHash, String

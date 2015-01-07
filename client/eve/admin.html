@@ -70,9 +70,9 @@
         <div class="panel-heading">
           <span class="panel-title"><i class="panel-title-icon fa fa-comments-o"></i>{{_ "All Characters"}}</span>
         </div> <!-- / .panel-heading -->
-        <div class="panel-body" title="">
+        <div class="panel-body" title="" style="padding-top:0">
             {{#each characters}}
-            <div class="thread">
+            <div class="thread" style="{{#if active}}background-color:#dff0d8{{/if}}">
                 <img src="https://image.eveonline.com/Character/{{_id}}_128.jpg" alt="" class="thread-avatar">
                 <div class="thread-body">
                     <span class="thread-time">{{{corpInfo}}}</span>

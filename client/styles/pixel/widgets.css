@@ -185,6 +185,7 @@
 }
 .widget-threads .thread {
   padding: 0 0 14px 0;
+  padding-top: 13px;
 }
 .widget-threads .thread + .thread {
   padding-top: 13px;
