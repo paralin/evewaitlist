@@ -38,7 +38,7 @@ Meteor.publishComposite "command", (hash)->
     },
     {
       find: (waitlist)->
-        Characters.find {$or: [{roles: "booster"}, {roles: "manager"}], active: true, waitlist: {$exists: false}}, {fields: {name: 1, roles: 1, active: 1}}
+        Characters.find {$or: [{roles: "booster"}, {roles: "manager"}], active: true, waitlist: null}, {fields: {name: 1, roles: 1, active: 1}}
     },
     {
       find: (waitlist)->
