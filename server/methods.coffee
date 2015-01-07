@@ -287,3 +287,17 @@ Meteor.methods
     if !waitlist?
       throw new Meteor.Error "error", "You are not a commander of the waitlist."
     Waitlists.update {_id: waitlist._id}, {$set: {manager: null}}
+  becomeFC: (hash, id)->
+    check hash, String
+    check id, String
+    char = Characters.findOne({hostid: hash})
+    if !char?
+      throw new Meteor.Error "error", "The server does not know about your character."
+    unless char.roles? and ("command" in char.roles)
+      throw new Meteor.Error "error", "You are not a fleet commander."
+    waitlist = Waitlists.findOne({finished: false, _id: id})
+    if !waitlist?
+      throw new Meteor.Error 404, "Can't find that waitlist."
+    if waitlist.commander is char._id
+      throw new Meteor.Error 404, "You are already the commander."
+    Waitlists.update {_id: waitlist._id}, {$set: {commander: char._id}}

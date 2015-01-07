@@ -43,6 +43,12 @@ Template.command.helpers
     return false if !wait?
     meid = (Session.get("me"))._id
     wait.commander is meid or wait.manager is meid
+  "canBecomeFC": ->
+    wait = Waitlists.findOne()
+    return false if !wait?
+    me = Session.get "me"
+    meid = me._id
+    wait.commander isnt meid and wait.manager isnt meid and !(wait.booster? and meid in wait.booster) and me.roles? and "command" in me.roles
   "char": (i)->
     search = null
     search = logi if i is 0
@@ -187,5 +193,12 @@ Template.command.events
       if err?
         $.pnotify
           title: "Can't Set System"
+          text: err.reason
+          type: "error"
+  "click .becomeFC": ->
+    Meteor.call "becomeFC", Session.get("hostHash"), Waitlists.findOne()._id, (err)->
+      if err?
+        $.pnotify
+          title: "Can't Become FC"
           text: err.reason
           type: "error"
