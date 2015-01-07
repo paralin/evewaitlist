@@ -82,3 +82,6 @@ CharacterSchema = new SimpleSchema
   regionname: "Region"
 
 Characters.attachSchema CharacterSchema
+
+Characters.initEasySearch ['name'],
+  'limit' : 20

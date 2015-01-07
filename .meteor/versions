@@ -29,6 +29,7 @@ launch-screen@1.0.1
 less@1.0.12
 livedata@1.0.12
 logging@1.0.6
+matteodem:easy-search@1.4.5
 meteor@1.1.4
 meteor-platform@1.2.1
 minifiers@1.1.3
@@ -36,6 +37,7 @@ minimongo@1.0.6
 mizzao:bootstrap-3@3.3.1_1
 mobile-status-bar@1.0.2
 mongo@1.0.11
+mongo-livedata@1.0.7
 mrt:moment@2.8.1
 natestrauser:animate-css@3.1.2
 natestrauser:connection-banner@0.4.3
@@ -51,6 +53,7 @@ routepolicy@1.0.3
 session@1.0.5
 spacebars@1.0.4
 spacebars-compiler@1.0.4
+standard-app-packages@1.0.4
 tap:http-methods@0.0.23
 tap:i18n@1.2.1
 templating@1.0.10

@@ -19,69 +19,94 @@
   {{/with}}
   {{#with fleet}}
   <div class="col-sm-4 col-md-4 col-lg-3">
-      <div class="panel panel-info panel-dark widget-profile stat-panel">
-          <div class="panel-heading" id="fcName" style="cursor: pointer">
-              <div class="widget-profile-bg-icon"><i class="fa fa-twitter" style="display: none !important;"></i></div>
-              <img src={{fc.avatar}} alt="" class="widget-profile-avatar">
-              <div class="widget-profile-header">
-                  <span>{{fc.name}}</span><br>
-                  <a href="" class="da">Current FC </a>
-              </div>
-          </div>
-          <div class="stat-row">
-              <div class="stat-counters bordered no-border-t text-center">
-                  <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
-                      <span class="text-bg"><strong>{{counts.logi}}</strong></span><br>
-                      <span class="text-xs">{{_ "LOGISTICS"}}</span>
-                  </div>
-                  <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
-                      <span class="text-bg"><strong>{{counts.dps}}</strong></span><br>
-                      <span class="text-xs">{{_ "DAMAGE"}}</span>
-                  </div>
-                  <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
-                      <span class="text-bg"><strong>{{counts.other}}</strong></span><br>
-                      <span class="text-xs">{{_ "OTHER"}}</span>
-                  </div>
-              </div>
-          </div>
-          <div class="stat-row">
-              <!-- Success background, small padding, vertically aligned text -->
-              <a href="#" class="stat-cell bg-danger padding-sm valign-middle closeWaitlist">
-                  <i class="fa fa-ban pull-right"></i>
-                  {{_ "Close waitlist"}}
-              </a>
-          </div>
+    <div class="panel panel-info panel-dark widget-profile stat-panel">
+      <div class="panel-heading" id="fcName" style="cursor: pointer">
+        <div class="widget-profile-bg-icon"><i class="fa fa-twitter" style="display: none !important;"></i></div>
+        <img src={{fc.avatar}} alt="" class="widget-profile-avatar">
+        <div class="widget-profile-header">
+          <span>{{fc.name}}</span><br>
+          <a href="" class="da">Current FC </a>
+        </div>
       </div>
+      <div class="stat-row">
+        <div class="stat-counters bordered no-border-t text-center">
+          <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
+            <span class="text-bg"><strong>{{counts.logi}}</strong></span><br>
+            <span class="text-xs">{{_ "LOGISTICS"}}</span>
+          </div>
+          <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
+            <span class="text-bg"><strong>{{counts.dps}}</strong></span><br>
+            <span class="text-xs">{{_ "DAMAGE"}}</span>
+          </div>
+          <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
+            <span class="text-bg"><strong>{{counts.other}}</strong></span><br>
+            <span class="text-xs">{{_ "OTHER"}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="stat-row">
+        <!-- Success background, small padding, vertically aligned text -->
+        <a href="#" class="stat-cell bg-danger padding-sm valign-middle closeWaitlist">
+          <i class="fa fa-ban pull-right"></i>
+          {{_ "Close waitlist"}}
+        </a>
+      </div>
+    </div>
   </div>
   {{/with}}
   {{#unless fleet}}
   <div class="col-sm-4 col-md-4 col-lg-4">
-      <div class="stat-panel">
-          <div class="stat-cell bg-danger valign-middle">
-            <span class="text-xlg">{{_ "INACTIVE"}}</span><br/>
-            <span class="text-bg">{{_ "The waitlist is not in use."}}</span>
-          </div>
+    <div class="stat-panel">
+      <div class="stat-cell bg-danger valign-middle">
+        <span class="text-xlg">{{_ "INACTIVE"}}</span><br/>
+        <span class="text-bg">{{_ "The waitlist is not in use."}}</span>
       </div>
+    </div>
   </div>
   {{/unless}}
 </div>
 <div class="row">
+  <div class="col-lg-12">
     <div class="panel widget-threads" title="" style="padding-bottom: 10px">
-        <div class="panel-heading">
-          <span class="panel-title"><i class="panel-title-icon fa fa-comments-o"></i>{{_ "All Characters"}}</span>
-        </div> <!-- / .panel-heading -->
-        <div class="panel-body" title="" style="padding-top:0">
-            {{#each characters}}
-            <div class="thread" style="{{#if active}}background-color:#dff0d8{{/if}}">
-                <img src="https://image.eveonline.com/Character/{{_id}}_128.jpg" alt="" class="thread-avatar">
-                <div class="thread-body">
-                    <span class="thread-time">{{{corpInfo}}}</span>
-                    <a href="#" class="thread-title gotoprofile">{{name}}</a>
-                    <div class="thread-info">{{_ "with a"}} <a href="#" class="showshiptype">{{shiptype}}</a> in <a href="#" class="showsystem">{{system}}</a></div>
-                </div>
-            </div>
-            {{/each}}
+      <div class="panel-heading">
+        <span class="panel-title"><i class="panel-title-icon fa fa-comments-o"></i>{{_ "All Characters"}}</span>
+        <div class="panel-heading-controls">
+          <div class="input-group input-group-sm">
+            {{> esInput index="characters" placeholder="Search..." class="form-control" }}
+          </div> <!-- / .input-group -->
         </div>
+      </div> <!-- / .panel-heading -->
+      <div class="panel-body" title="" style="padding-top:0;padding-bottom:13px">
+        {{#ifEsInputIsEmpty index="characters"}}
+        {{#each characters}}
+        {{>characterRow this}}
+        {{/each}}
+        {{/ifEsInputIsEmpty}}
+
+        {{#ifEsIsSearching index="characters"}}
+        <h1 style="padding-top:13px;">Loading...</h1>
+        {{else}}
+        {{#esEach index="characters"}}
+        {{> characterRow}}
+        {{/esEach}}
+        {{> esLoadMoreButton index="characters"}}
+        {{/ifEsIsSearching}}
+
+        {{#ifEsHasNoResults index="characters"}}
+        <h1 style="padding-top:13px;">No results found!</h1>
+        {{/ifEsHasNoResults}}
+      </div>
     </div>
+  </div>
+</div>
+</template>
+<template name="characterRow">
+<div class="thread" style="{{#if active}}background-color:#dff0d8;{{/if}} min-height: 62px;">
+  <img src="https://image.eveonline.com/Character/{{_id}}_128.jpg" alt="" class="thread-avatar">
+  <div class="thread-body">
+    <span class="thread-time">{{{corpInfo}}}</span>
+    <a href="#" class="thread-title gotoprofile">{{name}}</a>
+    <div class="thread-info">{{_ "with a"}} <a href="#" class="showshiptype">{{shiptype}}</a> in <a href="#" class="showsystem">{{system}}</a></div>
+  </div>
 </div>
 </template>
