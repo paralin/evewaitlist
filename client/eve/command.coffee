@@ -119,12 +119,12 @@ Template.command.events
             title: "Can't Remove"
             text: err.reason
             type: "error"
-        else
+        else if reason? and reason.length
           CCPEVE.sendMail id, "Hello, TVP Pilot!", reason+rejectMail
   "click .sendInv": (e)->
     e.preventDefault()
     id = @_id
-    Meteor.call "deleteFromWaitlist", Session.get("hostHash"), @_id, true, (err)->
+    Meteor.call "deleteFromWaitlist", Session.get("hostHash"), id, true, (err)->
       if err?
         $.pnotify
           title: "Can't Accept"

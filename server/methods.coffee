@@ -208,7 +208,7 @@ Meteor.methods
     check hash, String
     check accepted, Boolean
     check cid, String
-    if accepted
+    if !accepted
       check reason, String
     char = Characters.findOne({hostid: hash})
     if !char?
