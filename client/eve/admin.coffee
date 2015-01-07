@@ -21,7 +21,7 @@ Template.admin.helpers
         id: commander._id
     }
   "characters": ->
-    Characters.find {}, {sort: {active: -1}}
+    Characters.find {}, {sort: {active: -1, name: 1}}
 
 Template.admin.events
   "click .setCurrentSystem": ->
