@@ -48,7 +48,7 @@ Template.command.helpers
     return false if !wait?
     me = Session.get "me"
     meid = me._id
-    wait.commander isnt meid and wait.manager isnt meid and !(wait.booster? and meid in wait.booster) and me.roles? and "command" in me.roles
+    wait.commander isnt meid and !(wait.booster? and meid in wait.booster) and me.roles? and "command" in me.roles
   "char": (i)->
     search = null
     search = logi if i is 0

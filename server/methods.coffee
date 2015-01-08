@@ -300,4 +300,7 @@ Meteor.methods
       throw new Meteor.Error 404, "Can't find that waitlist."
     if waitlist.commander is char._id
       throw new Meteor.Error 404, "You are already the commander."
-    Waitlists.update {_id: waitlist._id}, {$set: {commander: char._id}}
+    upd = {$set: {commander: char._id}}
+    if waitlist.manager is char._id
+      upd.$set.manager = null
+    Waitlists.update {_id: waitlist._id}, upd
