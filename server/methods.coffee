@@ -215,7 +215,7 @@ Meteor.methods
       throw new Meteor.Error "error", "The server does not know about your character."
     unless char.roles? and (("command" in char.roles) or ("admin" in char.roles) or ("manager" in char.roles))
       throw new Meteor.Error "error", "You are not an admin or a fleet manager."
-    waitlist = Waitlists.findOne({finished: false, $or: [{commander: char._id}]})
+    waitlist = Waitlists.findOne({finished: false, $or: [{commander: char._id}, {manager: char._id}]})
     if !waitlist?
       throw new Meteor.Error "error", "You are not a commander of the waitlist."
     tchar = Characters.findOne {_id: cid, waitlist: waitlist._id}
