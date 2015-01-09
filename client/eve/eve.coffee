@@ -1,6 +1,9 @@
 Meteor.startup ->
   Tracker.autorun ->
-    char = Characters.findOne({hostid: Session.get("hostHash")})
+    hash = Session.get("hostHash")
+    char = null
+    if hash?
+      char = Characters.findOne({hostid: hash})
     Session.set "me", char
   Tracker.autorun ->
     page = Session.get("igbpage")

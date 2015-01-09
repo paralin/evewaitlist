@@ -24,6 +24,12 @@ Template.waitlist.helpers
     moment(char.waitlistJoinedTime).fromNow true
 
 Template.waitlist.events
+  "click .showAlarmTutorial": (e)->
+    e.preventDefault()
+    swal
+      title: "Out of Browser"
+      text: "You can perform basic tasks in the waitlist and set up different alerts in the out of game app. Copy the session ID from the left side of the page and paste it into the \"Session code\" box in your out of game browser."
+      type: "info"
   "click .makePrimary": (e)->
     e.preventDefault()
     Meteor.call "setPrimary", Session.get("hostHash"), @fid, (err)->

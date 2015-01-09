@@ -1,5 +1,5 @@
-Meteor.startup ->
-  if not @eveClient
+Meteor.startup =>
+  if !CCPEVE?
     return
 
   pathArray = window.location.href.split '/'

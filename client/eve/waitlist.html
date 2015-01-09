@@ -1,7 +1,7 @@
 <template name="waitlist">
 <div class="row">
   {{#with fleet}}
-  <div class="col-sm-4 col-md-4 col-lg-3">
+  <div class="col-sm-5 col-md-4 col-lg-3">
     <div class="panel panel-info panel-dark widget-profile stat-panel">
       <div class="panel-heading" id="fcName" style="cursor: pointer">
         <div class="widget-profile-bg-icon"><i class="fa fa-twitter" style="display: none !important;"></i></div>
@@ -9,6 +9,11 @@
         <div class="widget-profile-header">
           <span>{{fc.name}}</span><br>
           <a href="" class="da">{{_ "Staging system"}}: {{stagingSystem.sysname}}</a>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-cell bordered no-border-t text-center text-lg">
+          <strong>{{character.hostid}}</strong>
         </div>
       </div>
       <div class="stat-row">
@@ -56,13 +61,19 @@
         {{/if}}
       </div>
       <div class="stat-row">
-        {{#unless inStagingSystem}}
+        <a href="#" class="stat-cell bg-success padding-sm valign-middle showAlarmTutorial">
+          <i class="fa fa-question pull-right"></i>
+          {{_ "Out of browser page"}}
+        </a>
+      </div>
+      {{#unless inStagingSystem}}
+      <div class="stat-row">
         <a href="#" class="stat-cell bg-info padding-sm valign-middle destoToStaging">
           <i class="fa fa-location-arrow pull-right"></i>
           {{_ "Set Destination to Staging"}}
         </a>
-        {{/unless}}
       </div>
+      {{/unless}}
     </div>
   </div>
   {{/with}}
@@ -84,7 +95,7 @@
     </div>
   </div>
   {{/unless}}
-  <div class="col-sm-8 col-md-8 col-lg-9">
+  <div class="col-sm-7 col-md-8 col-lg-9">
     <div class="panel widget-followers" title="">
       <div class="panel-heading">
         <span class="panel-title">{{_ "Your Fits"}}</span>

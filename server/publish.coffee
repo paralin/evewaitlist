@@ -1,3 +1,6 @@
+Meteor.publish "ogbData", (hostHash)->
+  Characters.find {hostid: hostHash}, {limit: 1, fields: {name: 1, waitlistJoinedTime: 1, waitlist: 1, waitlistPosition: 1, hostid: 1}}
+
 Meteor.publishComposite "igbdata", (hostHash)->
   find: ->
     TrustStatus.find {_id: hostHash}, {limit: 2}

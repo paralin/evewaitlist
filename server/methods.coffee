@@ -1,4 +1,10 @@
 Meteor.methods
+  validateHostHash: (hash)->
+    check hash, String
+    char = Characters.findOne({hostid: hash})
+    if !char?
+      throw new Meteor.Error "error", "The server does not know about that character."
+    true
   setComment: (hash, id, comment)->
     check hash, String
     check comment, String
