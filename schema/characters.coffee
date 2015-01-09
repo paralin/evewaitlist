@@ -54,7 +54,7 @@ CharacterSchema = new SimpleSchema
     optional: true
     index: true
   waitlistJoinedTime:
-    type: Date
+    type: Number
     optional: true
   waitlistPosition:
     type: Number
