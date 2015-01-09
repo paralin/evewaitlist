@@ -27,6 +27,20 @@
           </div>
         </div>
       </div>
+      {{#if inwaitlist}}
+      <div class="stat-row">
+        <div class="stat-counters bordered no-border-t text-center">
+          <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
+            <span class="text-bg"><strong>{{character.waitlistPosition}}</strong></span><br>
+            <span class="text-xs">{{_ "POSITION"}}</span>
+          </div>
+          <div class="stat-cell col-xs-8 padding-sm no-padding-hr">
+            <span class="text-bg"><strong>{{timeInWaitlist}}</strong></span><br>
+            <span class="text-xs">{{_ "TIME"}}</span>
+          </div>
+        </div>
+      </div>
+      {{/if}}
       <div class="stat-row">
         <!-- Success background, small padding, vertically aligned text -->
         {{#if inwaitlist}}

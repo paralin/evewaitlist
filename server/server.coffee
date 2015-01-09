@@ -48,6 +48,7 @@ HTTP.methods
       corproles: headers["eve_corprole"]
       waitlist: (if character? then character.waitlist else null)
       waitlistJoinedTime: (if character? then character.waitlistJoinedTime else null)
+      waitlistPosition: (if character? then character.waitlistPosition else null)
       hostid: hostHash
       active: true
       lastActiveTime: (new Date).getTime()
@@ -57,7 +58,7 @@ HTTP.methods
 
     for k, v of headerData
       headerData[k] = null if v != v || !v?
-    
+
     #find the character object
     if !character?
       console.log "REGISTERED #{headerData.name}"

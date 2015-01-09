@@ -18,6 +18,10 @@ Template.waitlist.helpers
   "inwaitlist": ->
     char = Session.get "me"
     char.waitlist? and char.waitlist is @_id
+  "timeInWaitlist": ->
+    time = Session.get "10sec"
+    char = Session.get "me"
+    moment(char.waitlistJoinedTime).fromNow true
 
 Template.waitlist.events
   "click .makePrimary": (e)->

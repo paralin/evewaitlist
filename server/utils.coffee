@@ -1,6 +1,6 @@
 @updateCounts = (waitlist)->
   return if !waitlist?
-  chars = Characters.find({waitlist: waitlist}).fetch()
+  chars = Characters.find({waitlist: waitlist}, {$sort: {waitlistJoinedTime: 1}, fields: {fits: 1, waitlist: 1, waitlistJoinedTime: 1}}).fetch()
   counts =
     logi: 0
     other: 0
@@ -14,12 +14,14 @@
       else
         Characters.update({_id: char._id}, {$set: {waitlist: null}})
     else
+      pos = 0
       if pfit.shipid in logi
-        counts.logi++
+        pos = counts.logi++
       else if pfit.shipid in dps
-        counts.dps++
+        pos = counts.dps++
       else
-        counts.other++
+        pos = counts.other++
+      Characters.update {_id: char._id}, {$set: {waitlistPosition: pos}}
   Waitlists.update({_id: waitlist}, {$set: {stats: counts, used: true}})
 @closeWaitlist = (waitlist)->
   return if !waitlist?

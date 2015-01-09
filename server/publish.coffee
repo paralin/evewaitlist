@@ -5,7 +5,7 @@ Meteor.publishComposite "igbdata", (hostHash)->
     {
       find: (trust)->
         return if !(trust? and trust.status)
-        Characters.find {hostid: hostHash}, {limit: 1, fields: {active: 0, lastActiveTime: 0}}
+        Characters.find {hostid: hostHash}, {limit: 1, fields: {active: 0, lastActiveTime: 0, regionname: 0, regionid: 0}}
     }
   ]
 
