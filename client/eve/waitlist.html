@@ -20,9 +20,7 @@
         <div class="stat-counters bordered no-border-t text-center">
           <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
             <span class="text-bg"><strong>{{counts.logi}}</strong></span><br>
-            <span class="text-xs">{{_ "LOGISTICS"}}</span>
-          </div>
-          <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
+            <span class="text-xs">{{_ "LOGISTICS"}}</span> </div> <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
             <span class="text-bg"><strong>{{counts.dps}}</strong></span><br>
             <span class="text-xs">{{_ "DAMAGE"}}</span>
           </div>
@@ -83,6 +81,17 @@
       <div class="stat-cell bg-danger valign-middle">
         <span class="text-xlg">{{_ "INACTIVE"}}</span><br/>
         <span class="text-bg">{{_ "The waitlist is not in use."}}</span>
+      </div>
+      <div class="stat-row">
+        <div class="stat-cell bordered no-border-t text-center text-lg">
+          <strong>{{character.hostid}}</strong>
+        </div>
+      </div>
+      <div class="stat-row">
+        <a href="#" class="stat-cell bg-success padding-sm valign-middle showAlarmTutorial">
+          <i class="fa fa-question pull-right"></i>
+          {{_ "Out of browser page"}}
+        </a>
       </div>
       <div class="stat-row">
         {{#unless inStagingSystem}}
