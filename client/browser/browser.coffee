@@ -1,5 +1,7 @@
 Meteor.startup =>
   return if CCPEVE?
+  Session.set "inWaitlist", false
+  Session.set "me", null
   Meteor.setInterval ->
     perm = PNotify.desktop.checkPermission()
     Session.set "pnotifyPermission", perm
@@ -16,6 +18,25 @@ Meteor.startup =>
         title: "Invalid ID"
         text: "There are no characters for that code, try again"
         type: "error"
+  Tracker.autorun ->
+    return if !Session.get("hostHash")?
+    me = Session.get "me"
+    return if !me?
+    inwait = me.waitlist?
+    wasin = Session.get "inWaitlist"
+    if inwait && !wasin
+      Session.set "inWaitlist", inwait
+    else if wasin && !inwait
+      Session.set "inWaitlist", inwait
+      if !me.waitlistJoinedTime?
+        alertSound.play()
+        $.pnotify
+          desktop:
+            desktop: true
+          title: "Removed from Waitlist"
+          text: "Check your invites / EVE mails."
+          type: "success"
+          delay: 10000
 
 Template.browserPage.events
   "click .toggleAlarmSound": (e)->
