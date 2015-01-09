@@ -16,11 +16,14 @@
     else
       pos = 0
       if pfit.shipid in logi
-        pos = counts.logi++
+        counts.logi++
+        pos = counts.logi
       else if pfit.shipid in dps
-        pos = counts.dps++
+        counts.dps++
+        pos = counts.dps
       else
-        pos = counts.other++
+        counts.other++
+        pos = counts.other
       Characters.update {_id: char._id}, {$set: {waitlistPosition: pos}}
   Waitlists.update({_id: waitlist}, {$set: {stats: counts, used: true}})
 @closeWaitlist = (waitlist)->
