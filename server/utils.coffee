@@ -1,6 +1,6 @@
 @updateCounts = (waitlist)->
   return if !waitlist?
-  chars = Characters.find({waitlist: waitlist}, {$sort: {waitlistJoinedTime: 1}, fields: {fits: 1, waitlist: 1, waitlistJoinedTime: 1}}).fetch()
+  chars = Characters.find({waitlist: waitlist}, {sort: {waitlistJoinedTime: 1}, fields: {fits: 1, waitlist: 1, waitlistJoinedTime: 1}}).fetch()
   counts =
     logi: 0
     other: 0
