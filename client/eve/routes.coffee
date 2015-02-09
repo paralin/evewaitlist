@@ -25,14 +25,6 @@
   insurance:
     title: "Insurance Guide"
     template: "insurance"
-  eventlog:
-    title: "Event Log"
-    template: "events"
-    canView: ->
-      character = Session.get "me"
-      character? and character.roles? and _.contains character.roles, "events"
-    onView: ->
-      Meteor.subscribe "eventlog"
   admin:
     title: "Admin"
     template: "admin"
