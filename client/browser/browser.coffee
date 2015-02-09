@@ -28,7 +28,7 @@ Meteor.startup =>
       Session.set "inWaitlist", inwait
     else if wasin && !inwait
       Session.set "inWaitlist", inwait
-      if !me.waitlistJoinedTime?
+      if !me.waitlistJoinedTime? && Session.get("alarmSoundEnabled")
         alertSound.play()
         $.pnotify
           desktop:
@@ -107,3 +107,5 @@ Template.browserPage.helpers
     moment(char.waitlistJoinedTime).fromNow true
   "alarmSoundEnabled": ->
     Session.get "alarmSoundEnabled"
+  "click .da": (e)->
+    e.preventDefault()

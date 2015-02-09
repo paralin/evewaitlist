@@ -77,6 +77,8 @@ CharacterSchema = new SimpleSchema
     type: String
   regionid:
     type: Number
+  logifive:
+    type: Boolean
 
 @CharactersDesc =
   name: "Name"

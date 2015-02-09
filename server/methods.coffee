@@ -293,6 +293,13 @@ Meteor.methods
     if !waitlist?
       throw new Meteor.Error "error", "You are not a commander of the waitlist."
     Waitlists.update {_id: waitlist._id}, {$set: {manager: null}}
+  setLogiLvl: (hash, lvl)->
+    check hash, String
+    check lvl, Boolean
+    char = Characters.findOne({hostid: hash})
+    if !char?
+      throw new Meteor.Error "error", "The server does not know about your character."
+    Characters.update {_id: char._id}, {$set: {logifive: lvl}}
   becomeFC: (hash, id)->
     check hash, String
     check id, String

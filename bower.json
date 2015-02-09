@@ -19,6 +19,7 @@
   "dependencies": {
     "pnotify": "~2.0.1",
     "sweetalert": "mkoczka/sweetalert#prompt",
-    "spinkit": "~1.0.0"
+    "spinkit": "~1.0.0",
+    "select2": "~3.5.2"
   }
 }

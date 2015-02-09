@@ -1,3 +1,4 @@
+lswitcher = null
 Template.waitlist.helpers
   "fleet": ->
     wait = Waitlists.findOne()
@@ -22,6 +23,17 @@ Template.waitlist.helpers
     time = Session.get "10sec"
     char = Session.get "me"
     moment(char.waitlistJoinedTime).fromNow true
+
+Template.waitlist.rendered = ->
+  lswitcher = $("#logi-switcher").switcher
+    theme: 'square'
+    on_state_content: '<span>5</span>',
+    off_state_content: '<span>4</span>'
+    on_toggle: (e)->
+      Meteor.call "setLogiLvl", Session.get("hostHash"), e
+  $("#roles_input").select2
+    placeholder: "Fleet roles"
+
 
 Template.waitlist.events
   "click .showAlarmTutorial": (e)->
