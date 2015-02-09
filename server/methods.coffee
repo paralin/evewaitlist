@@ -45,11 +45,11 @@ Meteor.methods
     if !fit?
       throw new Meteor.Error "error", "Can't find the fit you want to delete"
     char.fits = _.without char.fits, fit
-    char.fits[0].primary = true if fit.primary and char.fits.length > 0
-    update = {fits: char.fits}
+    Characters.update {_id: char._id}, {$pull: {fits: {fid: fid}}}
+    if fit.primary and char.fits.length > 0
+      Characters.update {_id: char._id, "fits.fid": char.fits[0].fid}, {$set: {"fits.$.primary": true}}
     if char.fits.length is 0
-      update["waitlist"] = null
-    Characters.update {_id: char._id}, {$set: update}
+      Characters.update {_id: char._id}, {$set: {waitlist: null}}
     updateCounts(char.waitlist)
   setPrimary: (hash, id)->
     check hash, String
@@ -293,6 +293,13 @@ Meteor.methods
     if !waitlist?
       throw new Meteor.Error "error", "You are not a commander of the waitlist."
     Waitlists.update {_id: waitlist._id}, {$set: {manager: null}}
+  setLogiLvl: (hash, lvl)->
+    check hash, String
+    check lvl, Boolean
+    char = Characters.findOne({hostid: hash})
+    if !char?
+      throw new Meteor.Error "error", "The server does not know about your character."
+    Characters.update {_id: char._id}, {$set: {logifive: lvl}}
   becomeFC: (hash, id)->
     check hash, String
     check id, String
