@@ -8,4 +8,4 @@ USER root
 
 EXPOSE 8080
 ENV PORT 8080
-CMD ["/bin/bash", "-c", "MONGO_URL=$MONGODB_URL meteor"]
+CMD ["/bin/bash", "-c", "MONGO_URL=$MONGODB_URL meteor --port 8080"]
