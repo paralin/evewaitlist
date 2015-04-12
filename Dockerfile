@@ -4,7 +4,7 @@ MAINTAINER Christian Stewart
 COPY . /opt/bundle
 WORKDIR /opt/bundle
 RUN meteor add meteor-platform
-USER nobody
+USER root
 
 EXPOSE 8080
 ENV PORT 8080
