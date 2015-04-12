@@ -3,7 +3,6 @@ MAINTAINER Christian Stewart
 
 COPY . /opt/bundle
 WORKDIR /opt/bundle
-RUN meteor add meteor-platform
 USER root
 
 EXPOSE 8080

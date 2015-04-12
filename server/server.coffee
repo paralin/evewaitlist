@@ -9,6 +9,7 @@ HTTP.methods
     hostHash = headers["ident"]
     htrusted = headers["eve_trusted"]
     if !htrusted? or !hostHash?
+      console.log headers
       @setStatusCode 401
       return "This is a background update method not supported in normal browsers."
     trusted = htrusted is "Yes" and headers["eve_serverip"]?
