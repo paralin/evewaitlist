@@ -1,8 +1,12 @@
 FROM danieldent/meteor:latest
 MAINTAINER Christian Stewart
 
-COPY . /opt/bundle
 WORKDIR /opt/bundle
+ADD .meteor/ /opt/bundle/.meteor/
+ADD bower.json /opt/bundle/bower.json
+RUN meteor run --port 8080 --once
+
+COPY . /opt/bundle
 USER root
 
 EXPOSE 8080
