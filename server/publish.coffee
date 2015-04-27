@@ -32,7 +32,7 @@ Meteor.publishComposite "command", (hash)->
     {
       find: (waitlist)->
         return if !waitlist?
-        Characters.find {waitlist: waitlist._id}, {fields: {name: 1, fits: 1, shiptype: 1, stationid: 1, systemid: 1, system: 1, waitlist: 1, waitlistJoinedTime: 1, stationname: 1, regionname: 1, alliancename: 1, roles: 1}}
+        Characters.find {waitlist: waitlist._id}, {fields: {name: 1, fits: 1, shiptype: 1, stationid: 1, systemid: 1, system: 1, waitlist: 1, waitlistJoinedTime: 1, stationname: 1, regionname: 1, alliancename: 1, roles: 1, fleetroles: 1}}
     },
     {
       find: (waitlist)->
@@ -41,7 +41,7 @@ Meteor.publishComposite "command", (hash)->
     },
     {
       find: (waitlist)->
-        Characters.find {$or: [{roles: "booster"}, {roles: "manager"}], active: true, waitlist: null}, {fields: {name: 1, roles: 1, active: 1}}
+        Characters.find {$or: [{roles: "booster"}, {roles: "manager"}], active: true, waitlist: null}, {fields: {name: 1, roles: 1, active: 1, fleetroles: 1}}
     },
     {
       find: (waitlist)->
@@ -69,7 +69,7 @@ Meteor.publish "admin", (hostHash)->
   check hostHash, String
   char = Characters.findOne {hostid: hostHash}
   return [] unless char? and char.roles? and "admin" in char.roles
-  Characters.find {}, {fields: {shiptype: 1, system: 1, systemid: 1, corpname: 1, alliancename: 1, banned: 1, roles: 1, shipname: 1, regionname: 1, name: 1, corpid: 1, allianceid: 1, shiptypeid: 1, stationname: 1, stationid: 1, fits: 1, active: 1}}
+  Characters.find {}, {fields: {shiptype: 1, system: 1, systemid: 1, corpname: 1, alliancename: 1, banned: 1, roles: 1, shipname: 1, regionname: 1, name: 1, corpid: 1, allianceid: 1, shiptypeid: 1, stationname: 1, stationid: 1, fits: 1, active: 1, fleetroles: 1, logifive: 1}}
 
 Meteor.publish "profile", (hostHash, charId)->
   check hostHash, String

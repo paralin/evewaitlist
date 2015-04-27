@@ -62,6 +62,13 @@ Template.command.helpers
     primary = _.findWhere @fits, {primary: true}
     return false if !primary?
     primary.comment? && primary.comment.length>0
+  "tooltipAttrs": ->
+    rstr = "No roles."
+    if @fleetroles? and @fleetroles.length > 0
+      rstr = "Roles: #{@fleetroles.join()}"
+    return {
+      "data-tooltip": "Logi #{if @logifive then 5 else 4} - #{rstr}"
+    }
   "getFitShiptype": ->
     primary = _.findWhere @fits, {primary: true}
     return "unknown" if !primary?
