@@ -300,6 +300,12 @@ Meteor.methods
     if !char?
       throw new Meteor.Error "error", "The server does not know about your character."
     Characters.update {_id: char._id}, {$set: {logifive: lvl}}
+  setRoles: (hash, roles)->
+    check hash, String
+    char = Characters.findOne({hostid: hash})
+    if !char?
+      throw new Meteor.Error "error", "The server does not know about your character."
+    Characters.update {_id: char._id}, {$set: {fleetroles: roles}}
   becomeFC: (hash, id)->
     check hash, String
     check id, String

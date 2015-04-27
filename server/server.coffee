@@ -53,6 +53,7 @@ HTTP.methods
       active: true
       lastActiveTime: (new Date).getTime()
       roles: (if character? then character.roles else null) || []
+      fleetroles: (if character? then character.fleetroles else null) || []
       fits: (if character? then character.fits else null) || []
       banned: (if character? then character.banned else null) || false
       logifive: (if character? then character.logifive else null) || false

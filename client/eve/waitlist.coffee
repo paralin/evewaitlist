@@ -24,16 +24,48 @@ Template.waitlist.helpers
     char = Session.get "me"
     moment(char.waitlistJoinedTime).fromNow true
 
-Template.waitlist.rendered = ->
+lastManualToggle = null
+Template.logiSwitcher.onRendered ->
+  selected = Session.get("me").logifive
   lswitcher = $("#logi-switcher").switcher
     theme: 'square'
     on_state_content: '<span>5</span>',
+    selected: selected
     off_state_content: '<span>4</span>'
     on_toggle: (e)->
-      Meteor.call "setLogiLvl", Session.get("hostHash"), e
-  $("#roles_input").select2
-    placeholder: "Fleet roles"
+      lastManualToggle = e
+      Meteor.call "setLogiLvl", Session.get("hostHash"), e, (err)->
+        if err?
+          alert err
 
+Template.logiSwitcher.onDestroyed ->
+  lswitcher = null
+
+###
+Meteor.startup ->
+  Tracker.autorun ->
+    me = Session.get "me"
+    return if !me? || !lswitcher? || lastManualToggle?
+    if me.logifive
+      lswitcher.on()
+    else
+      lswitcher.off()
+###
+
+Template.rolesInput.rendered = ->
+  ele = $("#roles_input")
+  ele.select2
+    placeholder: "Fleet roles"
+  ele.val(Session.get("me").fleetroles).trigger("change")
+  ele.on "change", (e)->
+    roles = ele.val()
+    return if arraysEqual roles, Session.get("me").fleetroles
+    Meteor.call "setRoles", Session.get("hostHash"), roles, (err)->
+      if err?
+        $.pnotify
+          title: "Can't Set Roles"
+          text: err.reason
+          type: "error"
 
 Template.waitlist.events
   "click .showAlarmTutorial": (e)->

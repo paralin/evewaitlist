@@ -50,19 +50,12 @@
         <div class="stat-counters bordered no-border-t text-center">
           <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
             <span class="text-bg" style="padding-left: 8px">
-              <input id="logi-switcher" type="checkbox" data-class="switcher-primary" checked="{{character.logifive}}" />&nbsp;&nbsp;
+              {{>logiSwitcher}}
             </span><br>
             <span class="text-xs">{{_ "LOGI LVL"}}</span>
           </div>
           <div class="stat-cell col-xs-8 padding-sm no-padding-hr">
-              <select multiple="multiple" id="roles_input" class="form-control roles-control" >
-                  <option value="DDD">DDD</option>
-                  <option value="VVV">VVV</option>
-                  <option value="AAA">AAA</option>
-                  <option value="HHH">HHH</option>
-                  <option value="SSS">SSS</option>
-                  <option value="MTAC">MTAC</option>
-              </select>
+            {{>rolesInput}}
             <br/>
             <span class="text-xs">{{_ "ROLES"}}</span>
           </div>
@@ -160,4 +153,17 @@
     </div>
   </div>
 </div>
+</template>
+<template name="logiSwitcher">
+<input id="logi-switcher" type="checkbox" data-class="switcher-primary">&nbsp;&nbsp;
+</template>
+<template name="rolesInput">
+<select multiple="multiple" id="roles_input" class="form-control roles-control" >
+  <option value="DDD">DDD</option>
+  <option value="VVV">VVV</option>
+  <option value="AAA">AAA</option>
+  <option value="HHH">HHH</option>
+  <option value="SSS">SSS</option>
+  <option value="MTAC">MTAC</option>
+</select>
 </template>

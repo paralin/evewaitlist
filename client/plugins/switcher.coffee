@@ -26,9 +26,10 @@ Switcher = ($el, options={}) ->
 
   # Disable switcher if checkbox is disabled
   @$box.addClass('disabled') if @$checkbox.prop('disabled')
+
   # Set switcher on if checkbox is checked
   @status = false
-  if @$checkbox.is(':checked')
+  if @$checkbox.is(':checked') or options.selected
     @$box.addClass('checked')
     @status = true
 

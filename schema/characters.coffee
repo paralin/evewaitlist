@@ -79,6 +79,8 @@ CharacterSchema = new SimpleSchema
     type: Number
   logifive:
     type: Boolean
+  fleetroles:
+    type: [String]
 
 @CharactersDesc =
   name: "Name"
