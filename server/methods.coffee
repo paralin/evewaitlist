@@ -306,7 +306,6 @@ Meteor.methods
     if !char?
       throw new Meteor.Error "error", "The server does not know about your character."
     Characters.update {_id: char._id}, {$set: {fleetroles: roles}}
-    console.log roles
   becomeFC: (hash, id)->
     check hash, String
     check id, String
