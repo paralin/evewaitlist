@@ -1,6 +1,6 @@
 <template name="profile">
 {{#with character}}
-<div class="page-profile" style="width: 100%;height: 100%; color: white;">
+<div class="page-profile" style="width: 100%;height: 100%">
   <div class="profile-full-name">
     <span class="text-semibold">{{name}}</span>'s {{_ "profile"}}
   </div>
@@ -16,26 +16,26 @@
         <a href="#" disabled={{banDisabled}} class="btn btn-success banCharacter"><i class="fa fa-check"></i>&nbsp;&nbsp;{{_ "Not Banned"}}</a>&nbsp;&nbsp;
         {{/if}}
       </div>
-      <div class="panel panel-transparent panel-dark" style="padding-bottom: 0; margin-bottom: 0">
+      <div class="panel panel-transparent" style="padding-bottom: 0; margin-bottom: 0">
         <div class="panel-heading">
-          <span class="panel-title" style="color:white">{{_ "Current Data"}}</span>
+          <span class="panel-title">{{_ "Current Data"}}</span>
         </div>
         <div class="list-group" style="padding-top:10px;">
           {{#each props}}
-          <a href="#" class="list-group-item showInfo" style="padding-top:0;padding-bottom:0;margin-top:0;margin-bottom:0;color:white"><strong>{{n}}:</strong> {{v}}</a>
+          <a href="#" class="list-group-item showInfo" style="padding-top:0;padding-bottom:0;margin-top:0;margin-bottom:0"><strong>{{n}}:</strong> {{v}}</a>
           {{/each}}
         </div>
       </div>
       <div class="panel panel-transparent profile-skills">
         <div class="panel-heading">
-          <span class="panel-title" style="color:white">{{_ "Roles"}}</span>
+          <span class="panel-title">{{_ "Roles"}}</span>
         </div>
         <div class="panel-body">
           {{#each roles}}
-          <span class="label label-primary" style="color:white">{{this}}</span>
+          <span class="label label-primary">{{this}}</span>
           {{/each}}
           {{#if noRoles}}
-          <span class="label label-success" style="color:white">{{_ "No Roles"}}</span>
+          <span class="label label-success">{{_ "No Roles"}}</span>
           {{/if}}
         </div>
       </div>

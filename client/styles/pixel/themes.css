@@ -1,30 +1,25 @@
 .theme-default {
-  background: #1A1A1A;
+  background: #f6f6f6;
 }
 .theme-default .page-header {
-  background: #1A1A1A;
+  background: #f6f6f6;
   border-color: #e9e9e9;
 }
 .theme-default .table,
 .theme-default .panel,
 .theme-default hr {
-  border-color: #e9e9e9;
-}
-.form-header {
-  color: white;
-}
-.page-header-name {
-  color: white;
+  border-color: #e2e2e2;
 }
 .theme-default .bordered {
-  border-color: #e9e9e9;
+  border-color: #e2e2e2;
 }
 .theme-default .bordered[class*='bg-'],
 .theme-default [class*='bg-'] .border-t {
+  border-color: #fff;
   border-color: rgba(0, 0, 0, 0.2);
 }
 .theme-default .panel.panel-transparent > .panel-heading {
-  border-bottom-color: #darkgrey !important;
+  border-bottom-color: #e2e2e2 !important;
 }
 .theme-default .breadcrumb-page {
   background: #f6f6f6;
@@ -312,18 +307,18 @@
   box-shadow: 0 0 0 3px #f6f6f6;
 }
 .theme-default .tl-body:before {
-  border-color: transparent #e9e9e9 transparent transparent;
+  border-color: transparent #e2e2e2 transparent transparent;
 }
 @media (min-width: 768px) {
   .theme-default .timeline.centered .tl-entry.left .tl-body:before {
-    border-color: transparent transparent transparent #e9e9e9;
+    border-color: transparent transparent transparent #e2e2e2;
   }
   .theme-default.right-to-left .timeline.centered .tl-entry.left .tl-body:before {
-    border-color: transparent #e9e9e9 transparent transparent;
+    border-color: transparent #e2e2e2 transparent transparent;
   }
 }
 .theme-default.right-to-left .tl-body:before {
-  border-color: transparent transparent transparent #e9e9e9;
+  border-color: transparent transparent transparent #e2e2e2;
 }
 .theme-default.page-mail .mail-nav,
 .theme-default.page-mail .mail-nav:before {
@@ -337,13 +332,13 @@
 .theme-default.page-mail .mail-nav .compose-btn,
 .theme-default.page-mail .mail-nav .sections li.active,
 .theme-default.page-mail .mail-nav:before {
-  border-color: #e9e9e9;
+  border-color: #e2e2e2;
 }
 .theme-default.page-mail .mail-nav .navigation.open .sections li.active {
   background: #ececec;
 }
 .theme-default.page-mail .mail-nav li.divider {
-  background: #e9e9e9;
+  background: #e2e2e2;
 }
 .theme-default.page-mail .mail-nav .sections li.active a {
   color: #444444;
