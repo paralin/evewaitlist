@@ -26,13 +26,26 @@ export interface ISquadInfo {
   otherSquad?: ISquad;
 }
 
+export interface IFleetMember {
+  id: number;
+  name: string;
+  shipid: number;
+  shipname: string;
+}
+
+export interface IFleetMembers {
+  logi: IFleetMember[];
+  dps: IFleetMember[];
+  other: IFleetMember[];
+}
+
 export interface IWaitlist {
   _id?: string;
   fleeturl: string;
   commander: string;
   stats: IStats;
-  fleet_stats?: IStats;
   fleet_squads?: ISquadInfo;
+  fleet_members?: IFleetMembers;
   finished: boolean;
   used: boolean;
   booster?: string;

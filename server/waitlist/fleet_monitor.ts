@@ -22,17 +22,12 @@ export class FleetMonitorService implements IService {
   }
 
   private update() {
-    this.syncFleetCheckers();
+    // let waitlists: IWaitlist[] = Waitlists.find({finished: false}).fetch();
   }
 
   private setNextUpdate() {
     this.updateTimeout = Meteor.setTimeout(() => {
       this.update();
     }, 5000);
-  }
-
-  // Sync list of active fleets to fleet checker list.
-  private syncFleetCheckers() {
-    // let waitlists: IWaitlist[] = Waitlists.find({finished: false}).fetch();
   }
 }
