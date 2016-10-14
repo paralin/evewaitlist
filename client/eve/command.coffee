@@ -88,13 +88,13 @@ Template.command.helpers
     Characters.find {roles: "manager", active: true, _id: {$nin: manage}}
 Template.command.events
   "click #fcName": (e)->
-    CCPEVE.showInfo 1377, @fc.id
+    showOwnerDetails @fc.id
   "click #boosterName": (e)->
     if @booster?
-      CCPEVE.showInfo 1377, @booster.id
+      showOwnerDetails @booster.id
   "click #managerName": (e)->
     if @manager?
-      CCPEVE.showInfo 1377, @manager.id
+      showOwnerDetails @manager.id
   "click .closeWaitlist": (e)->
     Meteor.call "closeWaitlist", (err)->
       if err?
@@ -111,15 +111,15 @@ Template.command.events
           type: "error"
   "click .follower-name": (e)->
     e.preventDefault()
-    CCPEVE.showInfo 1377, @_id
+    showOwnerDetails @_id
   "click .follower-username": (e)->
     e.preventDefault()
     primary = _.findWhere @fits, {primary: true}
     return if !primary?
-    CCPEVE.showFitting primary.dna
+    showFitting primary.dna
   "click .openConvo": (e)->
     e.preventDefault()
-    CCPEVE.startConversation @_id
+    showOwnerDetails @_id
   "click .delWaitlist": (e)->
     e.preventDefault()
     id = @_id
@@ -140,7 +140,7 @@ Template.command.events
             text: err.reason
             type: "error"
         else if reason? and reason.length
-          CCPEVE.sendMail id, "Hello, TVP Pilot!", reason+rejectMail
+          sendEvemail id, 'Hello, Incursion Pilot!', reason+rejectMail
   "click .sendInv": (e)->
     e.preventDefault()
     id = @_id
@@ -151,8 +151,7 @@ Template.command.events
           text: err.reason
           type: "error"
       else
-        #CCPEVE.inviteToFleet id
-        CCPEVE.showInfo 1377, id
+        showOwnerDetails id
   "click .setBoost": (e)->
     e.preventDefault()
     id = @_id

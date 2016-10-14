@@ -78,6 +78,9 @@ Template.waitlist.events
           type: "error"
   "click .joinWaitlist": (e)->
     e.preventDefault()
+    user = Meteor.user()
+    if !user?
+      return doEveSignin()
     Meteor.call "joinWaitlist", @_id, (err)->
       if err?
         swal
@@ -93,10 +96,10 @@ Template.waitlist.events
           text: err.reason
           type: "error"
   "click #fcName": (e)->
-    CCPEVE.showInfo 1377, @fc.id
+    showOwnerDetails @fc.id
   "click .viewFit": (e)->
     e.preventDefault()
-    CCPEVE.showFitting @dna
+    showFitting @dna
   "click .removeFit": (e)->
     e.preventDefault()
     Meteor.call "delFit", @fid, (err, res)->

@@ -9,7 +9,7 @@ Template.registerHelper "character", ->
 Template.registerHelper "inStagingSystem", ->
   char = getMyCharacter()
   if !char?
-    return false
+    return true
   char.systemid is Settings.findOne({_id: "incursion"}).sysid
 
 Template.registerHelper "stagingSystem", ->

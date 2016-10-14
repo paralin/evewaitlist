@@ -1,3 +1,29 @@
+@doEveSignin = ()->
+  Meteor.loginWithEveonline {scope: 'characterLocationRead fleetRead fleetWrite publicData remoteClientUI'}
+
+@showFitting = (dna)->
+  swal
+    title: 'Can\'t show fitting'
+    text: 'Showing fittings has not been implemented with the new CREST api yet.'
+    type: 'warning'
+
+@sendEvemail = (target, subject, message)->
+  Meteor.call('sendEvemail', target, subject, message, (error)->
+    if err?
+      swal(
+        title: 'Error'
+        text: error.reason
+        type: 'error'
+      )
+    else
+      swal(
+        title: 'Mail Opened'
+        text: 'Check your EVE client, a prefilled evemail should be open.'
+        type: 'success'
+      )
+    return
+  )
+
 Meteor.startup ->
   Tracker.autorun ->
     page = Session.get("igbpage")
@@ -48,4 +74,4 @@ Template.eveClient.events
   "click .da": (e)->
     e.preventDefault()
   "click .sign-in-button": ->
-    Meteor.loginWithEveonline {scope: 'characterLocationRead fleetRead fleetWrite publicData remoteClientUI'}
+    doEveSignin()

@@ -14,4 +14,4 @@ Template.fits.helpers
 Template.fits.events
   "click .fitLabel": (e)->
     e.preventDefault()
-    CCPEVE.showFitting @shipdna
+    showFitting @shipdna

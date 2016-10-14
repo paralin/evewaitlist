@@ -41,6 +41,7 @@
         </div>
       </div>
       {{/if}}
+      {{#if character}}
       <div class="stat-row">
         <div class="stat-counters bordered no-border-t text-center">
           <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
@@ -56,6 +57,7 @@
           </div>
         </div>
       </div>
+      {{/if}}
       <div class="stat-row">
         <!-- Success background, small padding, vertically aligned text -->
         {{#if inwaitlist}}
@@ -99,6 +101,7 @@
     </div>
   </div>
   {{/unless}}
+  {{#if character}}
   <div class="col-sm-7 col-md-8 col-lg-9">
     <div class="panel widget-followers" title="">
       <div class="panel-heading">
@@ -130,6 +133,7 @@
       </form>
     </div>
   </div>
+  {{/if}}
 </div>
 </template>
 <template name="logiSwitcher">
