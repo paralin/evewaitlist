@@ -1,6 +1,5 @@
 <template name="eveClient">
-{{#if hasTrust}}
-{{#if character.banned}}
+{{#if isBanned}}
 <div class="row" style="padding: 25px">
   <div class="col-sm-5 col-md-5 col-lg-5">
     <div class="stat-panel">
@@ -64,18 +63,26 @@
 
             <div class="right clearfix">
               <ul class="nav navbar-nav pull-right right-navbar-nav">
+                {{#if character}}
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle user-menu" data-toggle="dropdown">
-                    {{#if character}}
                     <img src="{{avatar character}}" alt="">
                     <span>{{character.name}}</span>
-                    {{/if}}
                   </a>
                   <ul class="dropdown-menu">
+                    {{#unless inStagingSystem}}
                     <li><a href="" class="destoToStaging"><i class="dropdown-icon"></i>&nbsp;&nbsp;{{_ "Set Destination to Staging"}}</a></li>
-                    <li><a href="" id="joinChatChannel"><i class="dropdown-icon"></i>&nbsp;&nbsp;{{_ "Join Public Channel"}}</a></li>
+                    {{/unless}}
+                    <li><a href="" class="logoutBtn"><i class="dropdown-icon"></i>&nbsp;&nbsp;{{_ "Log Out"}}</a></li>
                   </ul>
                 </li>
+                {{else}}
+                <li>
+                  <a href="#" class="sign-in-button">
+                    <span>Sign in</span>
+                  </a>
+                </li>
+                {{/if}}
               </ul>
             </div>
           </div>
@@ -87,7 +94,7 @@
       <div class="page-header">
 
         <div class="row">
-          <h1 class="col-xs-12 col-sm-4 text-center text-left-sm page-header-name" style="color:white !important;">&nbsp;{{activePage.title}}</h1>
+          <h1 class="col-xs-12 col-sm-4 text-center text-left-sm page-header-name">&nbsp;{{activePage.title}}</h1>
 
           <div class="col-xs-12 col-sm-8">
             <div class="row">
@@ -106,18 +113,4 @@
   </div>
 </div>
 {{/if}}
-{{else}}
-{{>requestTrust}}
-{{/if}}
-</template>
-<template name="requestTrust">
-<div style="width: 100%;height:100%;padding:20px">
-  <h1>{{_ "TRUST"}}</h1>
-  {{_ "TRUSTE"}}
-  {{_ "TRUSTE2"}}<br>
-  <button class="requestTrustButton btn btn-success">{{_ "Request Trust"}}</button>
-  <br><br>
-  <h3>{{_ "If nothing comes up"}}...</h3>
-  {{_ "TRUSTE3"}}
-</div>
 </template>

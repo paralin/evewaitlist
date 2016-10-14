@@ -54,10 +54,11 @@ Template.command.helpers
     search = logi if i is 0
     search = dps if i is 1
     sort = {waitlistJoinedTime: 1}
+    waitlist = Waitlists.findOne()
     if search?
-      return Characters.find {"fits": {$elemMatch: {primary: true, shipid: {$in: search}}}, "waitlist": Waitlists.findOne()._id}, {sort: sort}
+      return Characters.find {"fits": {$elemMatch: {primary: true, shipid: {$in: search}}}, "waitlist": waitlist._id}, {sort: sort}
     else
-      return Characters.find {"fits": {$elemMatch: {primary: true, shipid: {$not: {$in: _.union(logi, dps)}}}}, "waitlist": Waitlists.findOne()._id}, {sort: sort}
+      return Characters.find {"fits": {$elemMatch: {primary: true, shipid: {$not: {$in: _.union(logi, dps)}}}}, "waitlist": waitlist._id}, {sort: sort}
   "hasComment": ->
     primary = _.findWhere @fits, {primary: true}
     return false if !primary?
@@ -95,16 +96,16 @@ Template.command.events
     if @manager?
       CCPEVE.showInfo 1377, @manager.id
   "click .closeWaitlist": (e)->
-    Meteor.call "closeWaitlist", Session.get("hostHash"), (err)->
+    Meteor.call "closeWaitlist", (err)->
       if err?
-        $.pnotify
+        swal
           title: "Can't Close Waitlist"
           text: err.reason
           type: "error"
   "click .openWaitlist": (e)->
-    Meteor.call "openWaitlist", Session.get("hostHash"), (err)->
+    Meteor.call "openWaitlist", (err)->
       if err?
-        $.pnotify
+        swal
           title: "Can't Open Waitlist"
           text: err.reason
           type: "error"
@@ -132,9 +133,9 @@ Template.command.events
       confirmButtonColor: "#DD6B55"
       confirmButtonText: "Reject"
     , (reason)->
-      Meteor.call "deleteFromWaitlist", Session.get("hostHash"), id, false, reason, (err)->
+      Meteor.call "deleteFromWaitlist", id, false, reason, (err)->
         if err?
-          $.pnotify
+          swal
             title: "Can't Remove"
             text: err.reason
             type: "error"
@@ -143,9 +144,9 @@ Template.command.events
   "click .sendInv": (e)->
     e.preventDefault()
     id = @_id
-    Meteor.call "deleteFromWaitlist", Session.get("hostHash"), id, true, (err)->
+    Meteor.call "deleteFromWaitlist", id, true, (err)->
       if err?
-        $.pnotify
+        swal
           title: "Can't Accept"
           text: err.reason
           type: "error"
@@ -155,36 +156,36 @@ Template.command.events
   "click .setBoost": (e)->
     e.preventDefault()
     id = @_id
-    Meteor.call "setBooster", Session.get("hostHash"), id, (err)->
+    Meteor.call "setBooster", id, (err)->
       if err?
-        $.pnotify
+        swal
           title: "Can't Set Booster"
           text: err.reason
           type: "error"
   "click .removeBoost": (e)->
     e.preventDefault()
     id = @_id
-    Meteor.call "removeBooster", Session.get("hostHash"), (err)->
+    Meteor.call "removeBooster", (err)->
       if err?
-        $.pnotify
+        swal
           title: "Can't Remove Booster"
           text: e.reason
           type: "error"
   "click .setManager": (e)->
     e.preventDefault()
     id = @_id
-    Meteor.call "setManager", Session.get("hostHash"), id, (err)->
+    Meteor.call "setManager", id, (err)->
       if err?
-        $.pnotify
+        swal
           title: "Can't Set Manager"
           text: err.reason
           type: "error"
   "click .removeManager": (e)->
     e.preventDefault()
     id = @_id
-    Meteor.call "removeManager", Session.get("hostHash"), (err)->
+    Meteor.call "removeManager", (err)->
       if err?
-        $.pnotify
+        swal
           title: "Can't Remove Manager"
           text: e.reason
           type: "error"
@@ -196,16 +197,16 @@ Template.command.events
       title: "Comment"
       text: primary.comment
   "click .setCurrentSystem": ->
-    Meteor.call "setCurrentSystem", Session.get("hostHash"), (err)->
+    Meteor.call "setCurrentSystem", (err)->
       if err?
-        $.pnotify
+        swal
           title: "Can't Set System"
           text: err.reason
           type: "error"
   "click .becomeFC": ->
-    Meteor.call "becomeFC", Session.get("hostHash"), Waitlists.findOne()._id, (err)->
+    Meteor.call "becomeFC", Waitlists.findOne()._id, (err)->
       if err?
-        $.pnotify
+        swal
           title: "Can't Become FC"
           text: err.reason
           type: "error"

@@ -35,36 +35,39 @@ Template.profile.events
     e.preventDefault()
   "click .viewFit": (e)->
     e.preventDefault()
-    CCPEVE.showFitting @dna
+    swal
+      title: "Not Implemented"
+      text: "Still figuring out the best way to show fittings."
+      type: 'warning'
   "click .addRole": (e)->
     e.preventDefault()
-    Meteor.call "addRole", Session.get("hostHash"), $(e.currentTarget).attr("cid"), @_id, (err)->
+    Meteor.call "addRole", $(e.currentTarget).attr("cid"), @_id, (err)->
       if err?
-        $.pnotify
+        swal
           title: "Can't Add Role"
           text: err.reason
           type: "error"
   "click .removeRole": (e)->
     e.preventDefault()
-    Meteor.call "removeRole", Session.get("hostHash"), $(e.currentTarget).attr("cid"), @_id, (err)->
+    Meteor.call "removeRole", $(e.currentTarget).attr("cid"), @_id, (err)->
       if err?
-        $.pnotify
+        swal
           title: "Can't Remove Role"
           text: err.reason
           type: "error"
   "click .banCharacter": (e)->
     e.preventDefault()
-    Meteor.call "banCharacter", Session.get("hostHash"), @_id, (err)->
+    Meteor.call "banCharacter", @_id, (err)->
       if err?
-        $.pnotify
+        swal
           title: "Can't Ban Character"
           text: err.reason
           type: "error"
   "click .unbanCharacter": (e)->
     e.preventDefault()
-    Meteor.call "unbanCharacter", Session.get("hostHash"), @_id, (err)->
+    Meteor.call "unbanCharacter", @_id, (err)->
       if err?
-        $.pnotify
+        swal
           title: "Can't Unban Character"
           text: err.reason
           type: "error"

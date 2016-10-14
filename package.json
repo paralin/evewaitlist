@@ -1,0 +1,20 @@
+{
+  "name": "evewaitlist",
+  "description": "A waitlist app for EVE Online incursion fleets.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paralin/evewaitlist.git"
+  },
+  "author": "Christian Stewart <christian@paral.in>",
+  "bugs": {
+    "url": "https://github.com/paralin/evewaitlist/issues"
+  },
+  "homepage": "https://github.com/paralin/evewaitlist#readme",
+  "dependencies": {
+    "pnotify": "^3.0.0",
+    "select2": "^4.0.3",
+    "spinkit": "^1.2.5",
+    "sweetalert": "^1.1.3",
+    "winston": "^2.2.0"
+  }
+}

@@ -32,7 +32,7 @@
       character = Session.get "me"
       character? and character.roles? and _.contains character.roles, "admin"
     onView: ->
-      Meteor.subscribe "admin", Session.get("hostHash")
+      Meteor.subscribe "admin"
   profile:
     title: "Character Profile"
     template: "profile"
@@ -40,8 +40,8 @@
       character = Session.get "me"
       character? and character.roles? and _.contains character.roles, "admin"
     onView: ->
-      Meteor.subscribe "admin", Session.get("hostHash")
-      Meteor.subscribe "profile", Session.get("hostHash"), parseInt Session.get("profilechar")
+      Meteor.subscribe "admin"
+      Meteor.subscribe "profile", parseInt Session.get("profilechar")
   command:
     title: "Waitlist Command"
     template: "command"
@@ -50,4 +50,12 @@
       waitlist = Waitlists.findOne {finished: false}
       character? and character.roles? and (("manager" in character.roles) or ("command" in character.roles))
     onView: ->
-      Meteor.subscribe "command", Session.get("hostHash")
+      Meteor.subscribe "command"
+  eventlog:
+    title: "Event Log"
+    template: "events"
+    canView: ->
+      character = Session.get "me"
+      character? and character.roles? and _.contains character.roles, "events"
+    onView: ->
+      Meteor.subscribe "eventlog"

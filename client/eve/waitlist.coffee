@@ -34,7 +34,7 @@ Template.logiSwitcher.onRendered ->
     off_state_content: '<span>4</span>'
     on_toggle: (e)->
       lastManualToggle = e
-      Meteor.call "setLogiLvl", Session.get("hostHash"), e, (err)->
+      Meteor.call "setLogiLvl", e, (err)->
         if err?
           alert err
 
@@ -60,41 +60,35 @@ Template.rolesInput.rendered = ->
   ele.on "change", (e)->
     roles = ele.val()
     return if arraysEqual roles, Session.get("me").fleetroles
-    Meteor.call "setRoles", Session.get("hostHash"), roles, (err)->
+    Meteor.call "setRoles", roles, (err)->
       if err?
-        $.pnotify
+        swal
           title: "Can't Set Roles"
           text: err.reason
           type: "error"
 
 Template.waitlist.events
-  "click .showAlarmTutorial": (e)->
-    e.preventDefault()
-    swal
-      title: "Out of Browser"
-      text: "You can perform basic tasks in the waitlist and set up different alerts in the out of game app. Copy the session ID from the left side of the page and paste it into the \"Session code\" box in your out of game browser."
-      type: "info"
   "click .makePrimary": (e)->
     e.preventDefault()
-    Meteor.call "setPrimary", Session.get("hostHash"), @fid, (err)->
+    Meteor.call "setPrimary", @fid, (err)->
       if err?
-        $.pnotify
+        swal
           title: "Can't Make Primary"
           text: err.reason
           type: "error"
   "click .joinWaitlist": (e)->
     e.preventDefault()
-    Meteor.call "joinWaitlist", Session.get("hostHash"), @_id, (err)->
+    Meteor.call "joinWaitlist", @_id, (err)->
       if err?
-        $.pnotify
-          title: "Can't Join Waitlist"
+        swal
+          title: 'Can\'t Join Waitlist'
           text: err.reason
           type: "error"
   "click .leaveWaitlist": (e)->
     e.preventDefault()
-    Meteor.call "leaveWaitlist", Session.get("hostHash"), @_id, (err)->
+    Meteor.call "leaveWaitlist", @_id, (err)->
       if err?
-        $.pnotify
+        swal
           title: "Can't Leave Waitlist"
           text: err.reason
           type: "error"
@@ -105,9 +99,9 @@ Template.waitlist.events
     CCPEVE.showFitting @dna
   "click .removeFit": (e)->
     e.preventDefault()
-    Meteor.call "delFit", Session.get("hostHash"), @fid, (err, res)->
+    Meteor.call "delFit", @fid, (err, res)->
       if err?
-        $.pnotify
+        swal
           title: "Can't Delete Fit"
           text: err.reason
           type: "error"
@@ -117,9 +111,9 @@ Template.waitlist.events
     field = $("#addFitInput")
     dna = filterDna field.val()
     field.val(dna)
-    Meteor.call "addFit", Session.get("hostHash"), dna, (err, res)->
+    Meteor.call "addFit", dna, (err, res)->
       if err?
-        $.pnotify
+        swal
           title: "Invalid ShipDNA"
           text: err.reason
           type: "error"
@@ -135,15 +129,15 @@ Template.waitlist.events
       promptPlaceholder: ""
       promptDefaultValue: @comment
     , (value)=>
-      Meteor.call "setComment", Session.get("hostHash"), @fid, value, (err, res)->
+      Meteor.call "setComment", @fid, value, (err, res)->
         $(".setComment").attr("disabled", false)
         if err?
-          $.pnotify
+          swal
             title: "Can't Set Comment"
             text: err.reason
             type: "error"
         else
-          $.pnotify
+          swal
             title: "Comment Set"
             type: "success"
             text: "You have set a comment on your fit."

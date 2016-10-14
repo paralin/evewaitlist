@@ -1,0 +1,21 @@
+import * as PNotify from 'pnotify';
+
+declare var $: any;
+
+window['PNotify'] = PNotify;
+Meteor.startup(() => {
+  $['pnotify'] = (options) => {
+    return new PNotify(options);
+  };
+  PNotify.prototype.options.history = false;
+  PNotify.prototype.options.stack = {
+    'dir1': 'down',
+    'dir2': 'left',
+    'firstpos1': 70,
+    'firstpos2': 25,
+  };
+  PNotify.prototype.options.nonblock = true;
+  PNotify.prototype.options.closer = false;
+  PNotify.prototype.options.sticker = false;
+  PNotify.prototype.options.styling = 'bootstrap3';
+});

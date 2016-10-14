@@ -17,7 +17,7 @@
     "tests"
   ],
   "dependencies": {
-    "pnotify": "~2.0.1",
+    "pnotify": "~3.0.0",
     "sweetalert": "mkoczka/sweetalert#prompt",
     "spinkit": "~1.0.0",
     "select2": "~3.5.2"

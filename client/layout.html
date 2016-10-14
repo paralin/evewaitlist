@@ -4,14 +4,8 @@
 <body>
   <div id="ce">
     {{>connectionBanner}}
-
-    {{#if isEve}}
     {{>eveClient}}
-    {{else}}
-    {{>browserClient}}
-    {{/if}}
   </div>
 
   {{> footer}}
-
 </body>

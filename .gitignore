@@ -14,3 +14,6 @@ Session.vim
 .meteor/local
 .meteor/meteorite
 .demeteorized
+
+typings/
+node_modules/
