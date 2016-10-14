@@ -11,7 +11,6 @@
   },
   "homepage": "https://github.com/paralin/evewaitlist#readme",
   "dependencies": {
-    "pnotify": "^3.0.0",
     "select2": "^4.0.3",
     "spinkit": "^1.2.5",
     "sweetalert": "^1.1.3",
