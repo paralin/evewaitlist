@@ -61,9 +61,9 @@ Meteor.publish('igbdata', function() {
       });
       if ((chara == null) ||
           (chara.roles == null) ||
-          !((chara.roles.indexOf('admin')) >= 0) ||
+          !((chara.roles.indexOf('admin')) >= 0 ||
           (chara.roles.indexOf('manager') >= 0) ||
-          (chara.roles.indexOf('command') >= 0)) {
+          (chara.roles.indexOf('command') >= 0))) {
         return [];
       }
       return Waitlists.find({

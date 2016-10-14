@@ -15,9 +15,24 @@ export interface IStats {
   other: number;
 }
 
+export interface ISquad {
+  id: number;
+  wing_id: number;
+}
+
+export interface ISquadInfo {
+  logiSquad?: ISquad;
+  dpsSquad?: ISquad;
+  otherSquad?: ISquad;
+}
+
 export interface IWaitlist {
+  _id?: string;
+  fleeturl: string;
   commander: string;
   stats: IStats;
+  fleet_stats?: IStats;
+  fleet_squads?: ISquadInfo;
   finished: boolean;
   used: boolean;
   booster?: string;

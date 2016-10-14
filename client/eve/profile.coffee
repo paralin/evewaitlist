@@ -35,10 +35,8 @@ Template.profile.events
     e.preventDefault()
   "click .viewFit": (e)->
     e.preventDefault()
-    swal
-      title: "Not Implemented"
-      text: "Still figuring out the best way to show fittings."
-      type: 'warning'
+    # todo: fill in id
+    showFitting 0
   "click .addRole": (e)->
     e.preventDefault()
     Meteor.call "addRole", $(e.currentTarget).attr("cid"), @_id, (err)->

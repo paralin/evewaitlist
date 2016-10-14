@@ -1,4 +1,4 @@
-showOwnerDetails = (id)->
+@showOwnerDetails = (id)->
   Meteor.call 'showOwnerDetails', id, (error) ->
     if error?
       swal

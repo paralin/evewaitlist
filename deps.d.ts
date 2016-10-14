@@ -4,6 +4,6 @@ declare module 'pnotify' {
   export = PNotify;
 }
 declare var swal: any;
-declare module 'sweetalert' {
+declare module 'sweetalert2' {
   export = swal;
 }

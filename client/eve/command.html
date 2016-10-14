@@ -168,7 +168,7 @@
               {{/if}}
             </div>
             <a href="#" class="follower-name">{{name}}</a><br>
-            <a href="#" class="follower-username">{{_ "with a"}} {{getFitShiptype}} {{_ "in"}} {{system}}</a>
+            <a href="#" class="follower-username">{{_ "with a"}} {{getFitShiptype}}{{#if system}} {{_ "in"}} {{system}}{{/if}}</a>
           </div>
         </div>
         {{/each}}

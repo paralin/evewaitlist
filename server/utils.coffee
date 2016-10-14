@@ -35,15 +35,3 @@
     Waitlists.remove {_id: waitlist._id}
   else
     Waitlists.update {_id: waitlist._id}, {$set: {finished: true}}
-@openWaitlist = (char)->
-  return if !char?
-  Waitlists.insert
-    commander: char._id
-    finished: false
-    stats:
-      logi: 0
-      other: 0
-      dps: 0
-    used: false
-    manager: null
-    booster: null

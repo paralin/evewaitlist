@@ -1,3 +1,6 @@
+declare var showOwnerDetails: any;
+declare var sendEvemail: any;
+
 let generateCharMsg = function(char) {
   return `
 Dear Morpheus Deathbrew,
@@ -12,19 +15,10 @@ ${char.name}
 Template['footer'].events({
   'click .morph': function(e) {
     e.preventDefault();
-    Meteor.call('showOwnerDetails', 90720899, (error) => {
-      if (error) {
-        swal({
-          title: 'Error',
-          text: error.reason,
-          type: 'error'
-        });
-      }
-    });
+    showOwnerDetails(90720899);
   },
   'click .msgmorph': function(e) {
     e.preventDefault();
-    declare var sendEvemail: any;
     sendEvemail(90720899, 'Waitlist Issue Report', generateCharMsg(Session.get('me')));
   }
 });

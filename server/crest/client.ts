@@ -37,7 +37,10 @@ export interface ICrestTree {
   [key: string]: any | ICrestTree;
 }
 
-export function buildCrestTree(client: CrestClient, data: Object): ICrestTree {
+export function buildCrestTree(client: CrestClient, data: Object): ICrestTree | ICrestTree[] {
+  if (typeof data === 'object' && data['href'] && Object.keys(data).length === 1) {
+    return client.callTree('GET', data['href'], {});
+  }
   let res: ICrestTree = {};
   for (let keyi in data) {
     if (!data.hasOwnProperty(keyi)) {
@@ -53,11 +56,14 @@ export function buildCrestTree(client: CrestClient, data: Object): ICrestTree {
           return buildCrestTree(client, cres.data);
         }
         if (typeof val === 'object') {
-          if (val.href && Object.keys(val).length === 1) {
-            return client.callTree(method || 'GET', val.href, options || {});
-          } else {
-            return buildCrestTree(client, val);
+          if (val.constructor === Array) {
+            let resa: ICrestTree[] = [];
+            for (let item of val) {
+              resa.push(buildCrestTree(client, item));
+            }
+            return resa;
           }
+          return buildCrestTree(client, val);
         }
         return val;
       };

@@ -18,10 +18,14 @@ Template.waitlist.helpers
     "https://image.eveonline.com/Render/#{id}_128.png"
   "inwaitlist": ->
     char = Session.get "me"
+    if !char?
+      return false
     char.waitlist? and char.waitlist is @_id
   "timeInWaitlist": ->
     time = Session.get "10sec"
     char = Session.get "me"
+    if !char? || !time?
+      return "unknown"
     moment(char.waitlistJoinedTime).fromNow true
 
 lastManualToggle = null

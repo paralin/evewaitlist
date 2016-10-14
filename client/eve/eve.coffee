@@ -7,7 +7,7 @@
     text: 'Showing fittings has not been implemented with the new CREST api yet.'
     type: 'warning'
 
-@sendEvemail = (target, subject, message)->
+@sendEvemail = (target, subject, message, noshowconfirm)->
   Meteor.call('sendEvemail', target, subject, message, (error)->
     if err?
       swal(
@@ -15,7 +15,7 @@
         text: error.reason
         type: 'error'
       )
-    else
+    else if !noshowconfirm
       swal(
         title: 'Mail Opened'
         text: 'Check your EVE client, a prefilled evemail should be open.'

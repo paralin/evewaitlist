@@ -33,20 +33,22 @@ Template.command.helpers
   "isCommander": ->
     wait = Waitlists.findOne()
     return false if !wait?
-    wait.commander is (Session.get("me"))._id
+    wait.commander is (Session.get("me") || {})._id
   "nisCommander": ->
     wait = Waitlists.findOne()
     return true if !wait?
-    wait.commander isnt (Session.get("me"))._id
+    wait.commander isnt (Session.get("me") || {})._id
   "isCommanderOrManager": ->
     wait = Waitlists.findOne()
     return false if !wait?
-    meid = (Session.get("me"))._id
+    meid = (Session.get("me") || {})._id
     wait.commander is meid or wait.manager is meid
   "canBecomeFC": ->
     wait = Waitlists.findOne()
     return false if !wait?
     me = Session.get "me"
+    if !me?
+      return false
     meid = me._id
     wait.commander isnt meid and !(wait.booster? and meid in wait.booster) and me.roles? and "command" in me.roles
   "char": (i)->
@@ -55,6 +57,8 @@ Template.command.helpers
     search = dps if i is 1
     sort = {waitlistJoinedTime: 1}
     waitlist = Waitlists.findOne()
+    if !waitlist?
+      return null
     if search?
       return Characters.find {"fits": {$elemMatch: {primary: true, shipid: {$in: search}}}, "waitlist": waitlist._id}, {sort: sort}
     else
@@ -103,12 +107,22 @@ Template.command.events
           text: err.reason
           type: "error"
   "click .openWaitlist": (e)->
-    Meteor.call "openWaitlist", (err)->
-      if err?
-        swal
-          title: "Can't Open Waitlist"
-          text: err.reason
-          type: "error"
+    inp = swal
+      title: "Fleet URL"
+      text: "Click the dropdown at the top left of the fleet window, and click 'Copy Fleet URL', then paste it here."
+      input: "text"
+      showCancelButton: true
+      showLoaderOnConfirm: true
+      confirmButtonText: 'Open'
+      preConfirm: (fleetUrl)->
+        swal.disableInput()
+        return new Promise (resolve, reject)->
+          Meteor.call "openWaitlist", fleetUrl, (er)->
+            swal.enableInput()
+            if er?
+              reject(er.reason)
+            else
+              resolve()
   "click .follower-name": (e)->
     e.preventDefault()
     showOwnerDetails @_id
@@ -127,31 +141,42 @@ Template.command.events
     swal
       title: "Reject from Waitlist"
       text: "You are rejecting #{char.name} from the waitlist."
-      type: "prompt"
-      promptPlaceholder: "Rejection reason"
-      promptDefaultValue: ""
+      inputPlaceholder: "Rejection reason"
       confirmButtonColor: "#DD6B55"
       confirmButtonText: "Reject"
-    , (reason)->
-      Meteor.call "deleteFromWaitlist", id, false, reason, (err)->
-        if err?
-          swal
-            title: "Can't Remove"
-            text: err.reason
-            type: "error"
-        else if reason? and reason.length
-          sendEvemail id, 'Hello, Incursion Pilot!', reason+rejectMail
+      input: "text"
+      showLoaderOnConfirm: true
+      preConfirm: (reason)->
+        swal.disableInput()
+        return new Promise (resolve, reject)->
+          Meteor.call "deleteFromWaitlist", id, false, reason, (er)->
+            swal.enableInput()
+            if er?
+              reject(er.reason)
+            else
+              if reason? and reason.length
+                sendEvemail id, 'Hello, Incursion Pilot!', reason+rejectMail
+              swal.close()
+              resolve()
   "click .sendInv": (e)->
     e.preventDefault()
     id = @_id
+    inp = swal
+      title: 'Inviting...'
+      text: 'Attempting to invite ' + @name + '...'
+      showConfirmButton: false
+      showCancelButton: false
+      allowOutsideClick: false
+    swal.showLoading()
+    showOwnerDetails id
     Meteor.call "deleteFromWaitlist", id, true, (err)->
+      swal.hideLoading()
+      swal.close()
       if err?
         swal
           title: "Can't Accept"
           text: err.reason
           type: "error"
-      else
-        showOwnerDetails id
   "click .setBoost": (e)->
     e.preventDefault()
     id = @_id
