@@ -128,6 +128,7 @@ Template.waitlist.events
       $("#addFitInput").val("")
   "click .setComment": (e)->
     e.preventDefault()
+    fitId = @fid
     swal
       title: "Comment"
       text: "Enter a fit comment."
@@ -138,7 +139,7 @@ Template.waitlist.events
       preConfirm: (text)->
         swal.disableInput()
         return new Promise (resolve, reject)->
-          Meteor.call "setComment", text, (er)->
+          Meteor.call "setComment", fitId, text, (er)->
             swal.enableInput()
             if er?
               reject(er.reason)

@@ -219,4 +219,29 @@ Meteor.methods({
     });
     updateCounts(waitlist._id);
   },
+  setComment: function(id: string, comment: string) {
+    check(comment, String);
+    check(id, String);
+    comment = comment.replace(/[^\w\s]/gi, '');
+    let character = Characters.findOne({
+      uid: this.userId
+    });
+    if (!character) {
+      throw new Meteor.Error("error", "The server does not know about your character.");
+    }
+    let fit = _.findWhere(character.fits, {
+      fid: id,
+    });
+    if (!fit) {
+      throw new Meteor.Error("error", "Can't find that fit in your fits.");
+    }
+    return Characters.update({
+      _id: character._id,
+      "fits.fid": id
+    }, {
+      $set: {
+        "fits.$.comment": comment
+      }
+    });
+  },
 });

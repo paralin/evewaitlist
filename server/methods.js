@@ -11,31 +11,6 @@ Meteor.methods({
     }
     return true;
   },
-  setComment: function(comment) {
-    var char, fit;
-    check(comment, String);
-    comment = comment.replace(/[^\w\s]/gi, '');
-    char = Characters.findOne({
-      uid: this.userId
-    });
-    if (char == null) {
-      throw new Meteor.Error("error", "The server does not know about your character.");
-    }
-    fit = _.findWhere(char.fits, {
-      fid: id
-    });
-    if (fit == null) {
-      throw new Meteor.Error("error", "Can't find that fit in your fits.");
-    }
-    return Characters.update({
-      _id: char._id,
-      "fits.fid": id
-    }, {
-      $set: {
-        "fits.$.comment": comment
-      }
-    });
-  },
   addFit: function(dna) {
     var char, fit, id;
     check(dna, String);
