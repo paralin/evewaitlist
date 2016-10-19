@@ -75,7 +75,7 @@ Meteor.methods({
       data: {
         clearOtherWaypoints: clearOthers,
         first: first,
-        solarSystem: {id: systemId},
+        solarSystem: {href: CREST_ENDPOINT + 'solarsystems/' + systemId + '/'},
       },
     });
   },
