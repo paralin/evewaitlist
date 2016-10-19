@@ -46,17 +46,19 @@ Template.admin.events
     swal
       title: "Set Custom System"
       text: "Enter the system name exactly below."
-      type: "prompt"
-      promptPlaceholder: "Amarr"
-      promptDefaultValue: ""
-    , (value)=>
-      return if !value? || value.length == 0
-      Meteor.call "setCustomSystem", value, (err)->
-        if err?
-          swal
-            title: "Invalid System"
-            text: err.reason
-            type: "error"
+      input: "text"
+      showCancelButton: true
+      showLoaderOnConfirm: true
+      confirmButtonText: 'Set System'
+      preConfirm: (value)->
+        swal.disableInput()
+        return new Promise (resolve, reject)->
+          Meteor.call "setCustomSystem", value, (er)->
+            swal.enableInput()
+            if er?
+              reject(er.reason)
+            else
+              resolve()
   "click .showshiptype": (e)->
     e.preventDefault()
     showOwnerDetails @shiptypeid

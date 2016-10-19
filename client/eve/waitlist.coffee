@@ -128,24 +128,19 @@ Template.waitlist.events
       $("#addFitInput").val("")
   "click .setComment": (e)->
     e.preventDefault()
-    $(".setComment").attr("disabled", true)
     swal
       title: "Comment"
-      type: "prompt"
       text: "Enter a fit comment."
-      promptPlaceholder: ""
-      promptDefaultValue: @comment
-    , (value)=>
-      Meteor.call "setComment", @fid, value, (err, res)->
-        $(".setComment").attr("disabled", false)
-        if err?
-          swal
-            title: "Can't Set Comment"
-            text: err.reason
-            type: "error"
-        else
-          swal
-            title: "Comment Set"
-            type: "success"
-            text: "You have set a comment on your fit."
-            delay: 1000
+      input: "text"
+      showCancelButton: true
+      showLoaderOnConfirm: true
+      confirmButtonText: 'Set Comment'
+      preConfirm: (text)->
+        swal.disableInput()
+        return new Promise (resolve, reject)->
+          Meteor.call "setComment", text, (er)->
+            swal.enableInput()
+            if er?
+              reject(er.reason)
+            else
+              resolve()
